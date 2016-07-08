@@ -2,13 +2,21 @@
 {% load staticfiles %}
 
 {% block content %}
-
+<style>
+    #canvas-wrap { position:relative; width:800px; height:600px }
+    #canvas-wrap canvas { position:absolute; top:0; left:0; z-index:0 }
+</style>
 <div class="container">
+  <h4> Dashboard </h4>
   <hr>
   <div class="row">
     <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-info-sign"></span> Dashboard </h3>
+      
         <!-- TODO: Add a canvas here-->
+        <div id="canvas-wrap">
+            <canvas width="800" height="600"></canvas>
+            <div id="overlay"></div>
+        </div>
     </div>
   </div> <!-- row -->
 </div>
