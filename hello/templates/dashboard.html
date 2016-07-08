@@ -20,10 +20,13 @@
     }
 
     .tile {
-        z-index: 3;
-        border: 1px solid #00ff92;
-        height: 100px;
-        width: 20px;
+    z-index: 3;
+    border: 1px solid #00ff92;
+    height: 90px;
+    width: 60px;
+    top: 27px;
+    left: 30px;
+    position: relative;
     }
 
     .tile-text {
@@ -44,6 +47,7 @@
         <div id="canvas-wrap">
             <canvas></canvas>
             <div id="wakeup" class="tile">
+                <img src="{% static 'lang-logo.png'%}">
                 <span class="tile-text">Wake Up</span>
             </div>
         </div>
