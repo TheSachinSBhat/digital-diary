@@ -4,7 +4,35 @@
 {% block content %}
 <style>
     #canvas-wrap { position:relative; width:800px; height:600px }
-    #canvas-wrap canvas { position:absolute; top:0; left:0; z-index:0 }
+
+    #canvas-wrap canvas 
+    { 
+        position:absolute; top:0; left:0;
+        border: 1px solid #c3c3c3;
+        z-index: -1;
+        width: 800px;
+        height: 500px;
+        background: rebeccapurple;
+    }
+
+    #wakeup {
+        background: #FFDE00;
+    }
+
+    .tile {
+        z-index: 3;
+        border: 1px solid #00ff92;
+        height: 100px;
+        width: 20px;
+    }
+
+    .tile-text {
+        position: absolute;
+        top: 27px;
+        left: 10px;
+        font-family: monospace;
+        font-size: larger;
+    }
 </style>
 <div class="container">
   <h4> Dashboard </h4>
@@ -14,8 +42,10 @@
       
         <!-- TODO: Add a canvas here-->
         <div id="canvas-wrap">
-            <canvas width="800" height="600"></canvas>
-            <div id="overlay"></div>
+            <canvas></canvas>
+            <div id="wakeup" class="tile">
+                <span class="tile-text">Wake Up</span>
+            </div>
         </div>
     </div>
   </div> <!-- row -->
