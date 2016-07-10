@@ -3,15 +3,18 @@
 
 {% block content %}
 <style>
-    #canvas-wrap { position:relative; width:800px; height:600px }
+    #canvas-wrap {
+        position:relative;
+        height:600px;
+        width:800px;
+    }
 
-    #canvas-wrap canvas 
-    { 
+    #canvas-wrap canvas {
         position:absolute; top:0; left:0;
         border: 1px solid #c3c3c3;
         z-index: -1;
-        width: 800px;
         height: 500px;
+        width: 800px;
         background: rebeccapurple;
     }
 
@@ -20,38 +23,81 @@
     }
 
     .tile {
-    z-index: 3;
-    border: 1px solid #00ff92;
-    height: 90px;
-    width: 60px;
-    top: 27px;
-    left: 30px;
-    position: relative;
+        z-index: 3;
+        border: 1px solid #00ff92;
+        height: 72px;
+        width: 160px;
+        top: 27px;
+        left: 30px;
+        position: relative;
+    }
+
+    .tile-icon-div{
+        width: 60px;
+        float: left;
+    }
+
+    .tile-icon {
+	    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAF5klE…9T1f+tW/rG5as2tA7NDKGwQMGCsYIgIHCPwTKJ7wH/AMVlykpTBnEwwAAAABJRU5ErkJggg==');
+    }
+
+    img.wakeup-image {
+        width: 66px;
+        height: 70px;
+        background-position: 0px 5px;
+    }
+
+    .tile-text-div{
+        width: 80px;
+        float: left;
     }
 
     .tile-text {
-        position: absolute;
-        top: 27px;
-        left: 10px;
+        position: relative;
+        top: 9px;
+        left: 20px;
+        height: 30px;
+        width: 60px;
+        display: block;
+        word-wrap: break-word;
+        white-space: nowrap;
         font-family: monospace;
         font-size: larger;
     }
+
+    .tile-text-main{
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .tile-text-sub{
+        font-size: 14px;
+    }
+
 </style>
 <div class="container">
   <h4> Dashboard </h4>
   <hr>
-  <div class="row">
-    <div class="col-md-6">
-      
-        <!-- TODO: Add a canvas here-->
-        <div id="canvas-wrap">
-            <canvas></canvas>
-            <div id="wakeup" class="tile">
-                <img src="{% static 'lang-logo.png'%}">
-                <span class="tile-text">Wake Up</span>
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Canvas that displays the Activity Visualizer -->
+            <div id="canvas-wrap">
+                <canvas></canvas>
+                <div id="wakeup" class="tile">
+                    <div class="tile-icon-div">
+                        <img class="tile-icon wakeup-image">
+                    </div>
+                    <div class="tile-text-div">
+                        <div class="">
+                            <span class="tile-text tile-text-main">Wake Up</span>
+                        </div>
+                        <div class="">
+                            <span class="tile-text tile-text-sub">6:00 am</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-  </div> <!-- row -->
 </div>
 {% endblock %}
