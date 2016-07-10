@@ -18,10 +18,6 @@
         background: rebeccapurple;
     }
 
-    #wakeup {
-        background: #FFDE00;
-    }
-
     .tile {
         z-index: 3;
         border: 1px solid #00ff92;
@@ -31,6 +27,7 @@
         left: 30px;
         margin-right: 30px;
         position: relative;
+        float: left;
     }
 
     .tile-icon-div{
@@ -38,11 +35,19 @@
         float: left;
     }
 
+    #wakeup {
+        background: #FFDE00;
+    }
+
     #wakeup img.tile-icon {
         background-image: url('/static/activities/wake-up.png');
         width: 66px;
         height: 70px;
         background-position: 0px 5px;
+    }
+
+    #sleep {
+        background: #939393;
     }
 
     #sleep img.tile-icon {
@@ -110,7 +115,7 @@
                             <span class="tile-text tile-text-main">Sleep</span>
                         </div>
                         <div class="">
-                            <span class="tile-text tile-text-sub">10:30 am</span>
+                            <span class="tile-text tile-text-sub">10:30 pm</span>
                         </div>
                     </div>
                 </div>
