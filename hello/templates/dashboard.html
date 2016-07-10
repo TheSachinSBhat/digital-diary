@@ -29,6 +29,7 @@
         width: 160px;
         top: 27px;
         left: 30px;
+        margin-right: 30px;
         position: relative;
     }
 
@@ -37,11 +38,15 @@
         float: left;
     }
 
-    .tile-icon {
-	    background-image: url('/static/png/wake-up.png');
+    #wakeup img.tile-icon {
+        background-image: url('/static/activities/wake-up.png');
+        width: 66px;
+        height: 70px;
+        background-position: 0px 5px;
     }
 
-    img.wakeup-image {
+    #sleep img.tile-icon {
+        background-image: url('/static/activities/sleep.png');
         width: 66px;
         height: 70px;
         background-position: 0px 5px;
@@ -85,7 +90,7 @@
                 <canvas></canvas>
                 <div id="wakeup" class="tile">
                     <div class="tile-icon-div">
-                        <img class="tile-icon wakeup-image">
+                        <img class="tile-icon">
                     </div>
                     <div class="tile-text-div">
                         <div class="">
@@ -93,6 +98,19 @@
                         </div>
                         <div class="">
                             <span class="tile-text tile-text-sub">6:00 am</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="sleep" class="tile">
+                    <div class="tile-icon-div">
+                        <img class="tile-icon">
+                    </div>
+                    <div class="tile-text-div">
+                        <div class="">
+                            <span class="tile-text tile-text-main">Sleep</span>
+                        </div>
+                        <div class="">
+                            <span class="tile-text tile-text-sub">10:30 am</span>
                         </div>
                     </div>
                 </div>
