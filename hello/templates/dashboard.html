@@ -3,6 +3,15 @@
 
 {% block content %}
 <style>
+
+    hr{
+        margin-bottom: 0px !important;
+    }
+
+    .row{
+        margin-top: 3px !important;
+    }
+
     #canvas-wrap {
         position:relative;
         height:600px;
@@ -16,6 +25,11 @@
         height: 500px;
         width: 800px;
         background: rebeccapurple;
+    }
+
+    .dashboard-section{
+        float: left;
+        width: 100%;
     }
 
     .tile {
@@ -75,20 +89,47 @@
         font-size: larger;
     }
 
-    .tile-text-main{
+    .tile-text-main {
         font-weight: bold;
         font-size: 18px;
     }
 
-    .tile-text-sub{
+    .tile-text-sub {
         font-size: 14px;
+    }
+
+    .dashboard-nav-button {
+        width: 60px;
+        float: left;
+        margin-right: 18px;
+        margin-left: 6px;
+    }
+
+    .dashboard-nav-button-text {
+        border: 1px solid rebeccapurple;
+    }
+
+    #nav-tiles h5 {
+        padding: 9px 10px 9px 12px;
+    }
+
+    #nav-location h5 {
+        padding: 9px 10px 9px 16px;
     }
 
 </style>
 <div class="container">
   <h4> Dashboard </h4>
   <hr>
-    <div class="row">
+    <div class="row dashboard-section">
+        <div id="nav-tiles" class="dashboard-nav-button">
+            <h5 class="dashboard-nav-button-text">Tiles</h5>
+        </div>
+        <div id="nav-location" class="dashboard-nav-button">
+            <h5 class="dashboard-nav-button-text">Location</h5>
+        </div>
+    </div>
+    <div class="row dashboard-section">
         <div class="col-md-6">
             <!-- Canvas that displays the Activity Visualizer -->
             <div id="canvas-wrap">
