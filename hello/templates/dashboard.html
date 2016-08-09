@@ -16,6 +16,7 @@
         position:relative;
         height:600px;
         width:800px;
+        float: left;
     }
 
     #canvas-wrap canvas {
@@ -25,6 +26,10 @@
         height: 500px;
         width: 800px;
         background: rebeccapurple;
+    }
+
+    #detailsSection{
+
     }
 
     .dashboard-section{
@@ -121,7 +126,7 @@
     }
 
 </style>
-<div class="container">
+<div class="container" ng-app="digitalDiary">
   <h4> Dashboard </h4>
   <hr>
     <div class="row dashboard-section">
@@ -167,7 +172,23 @@
                     </div>
                 </div>
             </div>
+            <div id="detailsSection">
+
+            </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+
+    /* Page load handler to initialize data */
+    $(document).ready(function () {
+        initializeCanvasTiles();
+    });
+
+    /* Initialize tiles on Canvas */
+    function initializeCanvasTiles() {
+        var canvasDiv = $("#canvas-wrap");
+    }
+
+</script>
 {% endblock %}
