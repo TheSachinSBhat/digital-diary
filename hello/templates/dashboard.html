@@ -178,12 +178,19 @@
         </div>
     </div>
 </div>
-<script id="theTmpl" type="text/x-jsrender">
-    <div>
-        <em>Name:</em>{:name}
-        {if showNickname && nickname}
-        (Goes by <em>{:nickname}</em>)
-        {/if}
+<script id="canvasTileTemplate" type="text/x-jsrender">
+    <div id="{:canvasTileId}" class="tile">
+        <div class="tile-icon-div">
+            <img class="tile-icon">
+        </div>
+        <div class="tile-text-div">
+            <div class="">
+                <span class="tile-text tile-text-main">{:tileMainText}</span>
+            </div>
+            <div class="">
+                <span class="tile-text tile-text-sub">{:tileSubText}</span>
+            </div>
+        </div>
     </div>
 </script>
 <script type="text/javascript">
@@ -197,22 +204,22 @@
     function initializeCanvasTiles() {
         var canvasDiv = $("#canvas-wrap");
 
-        var data = [
+        var canvasTileData = [
           {
-              "name": "Robert",
-              "nickname": "Bob",
-              "showNickname": true
+              "canvasTileId": "wakeup",
+              "tileMainText": "Wake Up",
+              "tileSubText": "6:00 am"
           },
           {
-              "name": "Susan",
-              "nickname": "Sue",
-              "showNickname": false
+              "name": "sleep",
+              "tileMainText": "Sleep",
+              "tileSubText": "10:30 pm"
           }
         ];
 
-        var template = $.templates("#theTmpl");
+        var canvasTileTemplate = $.templates("#canvasTileTemplate");
 
-        var htmlOutput = template.render(data);
+        var htmlOutput = canvasTileTemplate.render(canvasTileData);
 
         canvasDiv.append(htmlOutput);
     }
