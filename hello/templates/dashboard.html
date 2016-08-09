@@ -178,6 +178,14 @@
         </div>
     </div>
 </div>
+<script id="theTmpl" type="text/x-jsrender">
+    <div>
+        <em>Name:</em> {{:name}}
+        {{if showNickname && nickname}}
+        (Goes by <em>{{:nickname}}</em>)
+        {{/if}}
+    </div>
+</script>
 <script type="text/javascript">
 
     /* Page load handler to initialize data */
@@ -188,6 +196,25 @@
     /* Initialize tiles on Canvas */
     function initializeCanvasTiles() {
         var canvasDiv = $("#canvas-wrap");
+
+        var data = [
+          {
+              "name": "Robert",
+              "nickname": "Bob",
+              "showNickname": true
+          },
+          {
+              "name": "Susan",
+              "nickname": "Sue",
+              "showNickname": false
+          }
+        ];
+
+        var template = $.templates("#theTmpl");
+
+        var htmlOutput = template.render(data);
+
+        canvasDiv.append(htmlOutput);
     }
 
 </script>
