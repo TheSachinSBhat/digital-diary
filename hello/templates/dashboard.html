@@ -360,22 +360,65 @@
     var shownMeHandler = function (command) {
         $("#detailsSectionHeading").text("Show me...");
 
+        /* Display what the user said */
         var textToDisplay = userName + ': ' + command;
         $("#detailsSectionBody").text(textToDisplay);
     }
 
     var pingoHandler = function (command) {
-        $("#detailsSectionHeading").text("Pingo Listening...");
 
-        var textToDisplay = userName + ': ' + command;
+        /* Initialize Agent Context */
+        var agentContext = {};
+        agentContext.agentName = "Pingo";
+
+        /* Function level variables */
+        var textToDisplay = '';
+
+        /* Set the Detail Section Heading */
+        $("#detailsSectionHeading").text(agentContext.agentName + " Listening...");
+
+        /* Display what the user said */
+        textToDisplay = userName + ': ' + command;
+        $("#detailsSectionBody").text(textToDisplay);
+
+        /* Respond to the user */
+        textToDisplay = agentContext.agentName + ": " + interpretCommand(command, agentContext);
         $("#detailsSectionBody").text(textToDisplay);
     }
 
     var veronikaHandler = function (command) {
-        $("#detailsSectionHeading").text("Veronika Listening...");
 
-        var textToDisplay = userName + ': ' + command;
+        /* Initialize Agent Context */
+        var agentContext = {};
+        agentContext.agentName = "Veronika";
+
+        /* Function level variables */
+        var textToDisplay = '';
+
+        /* Set the Detail Section Heading */
+        $("#detailsSectionHeading").text(agentContext.agentName + " Listening...");
+
+        /* Display what the user said */
+        textToDisplay = userName + ': ' + command;
+        $("#detailsSectionBody").text(textToDisplay);
+
+        /* Respond to the user */
+        textToDisplay = agentContext.agentName + ": " + interpretCommand(command, agentContext);
         $("#detailsSectionBody").text(textToDisplay);
     }
+
+    /* Agent Language Interpretation Methods */
+
+    var interpretCommand = function (command, agentContext) {
+        var responseText = "I did not understand, could you repeat?";
+
+        /* Try to match phrases */
+        if (command.includes("who are you")) {
+            responseText = "I am " + agentContext.agentName + ", an Intelligent Personal Assistant.";
+        }
+
+        return responseText;
+    }
+
 </script>
 {% endblock %}
