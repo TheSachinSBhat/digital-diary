@@ -259,7 +259,10 @@
 
     /* Page load handler to initialize data */
     $(document).ready(function () {
+        /* Initialize tiles on Canvas */
         initializeCanvasTiles();
+        /* Initialize the Annyang Speech Recognition Library */
+        initializeAnnyang();
     });
 
     /* Initialize tiles on Canvas */
@@ -311,5 +314,23 @@
         canvasDiv.append(htmlOutput);
     }
 
+    /* Initialize the Annyang Speech Recognition Library */
+    function initializeAnnyang()
+    {
+        if (annyang) {
+            // Let's define our first command. First the text we expect, and then the function it should call
+            var commands = {
+                'show me *tag': function (tag) {
+                    alert(tag);
+                }
+            };
+
+            // Add our commands to annyang
+            annyang.addCommands(commands);
+
+            // Start listening. You can call this here, or attach this call to an event, button, etc.
+            annyang.start();
+        }
+    }
 </script>
 {% endblock %}
