@@ -339,7 +339,7 @@
         if (annyang) {
             // Let's define our first command. First the text we expect, and then the function it should call
             var commands = {
-                'show me *tag': shownMeHandler,
+                'show me *command': shownMeHandler,
                 'pingo *command': pingoHandler,
                 'veronika *command': veronikaHandler
             };
@@ -354,19 +354,19 @@
 
     /* Handlers for annyang commands */
 
-    var shownMeHandler = function (tag) {
-        $("detailsSectionHeading").text("Show me...");
-        $("detailsSectionBody").text(command);
+    var shownMeHandler = function (command) {
+        $("#detailsSectionHeading").text("Show me...");
+        $("#detailsSectionBody").text(command);
     }
 
     var pingoHandler = function (command) {
-        $("detailsSectionHeading").text("Pingo Listening...");
-        $("detailsSectionBody").text(command);
+        $("#detailsSectionHeading").text("Pingo Listening...");
+        $("#detailsSectionBody").text(command);
     }
 
     var veronikaHandler = function (command) {
-        $("detailsSectionHeading").text("Veronika Listening...");
-        $("detailsSectionBody").text(command);
+        $("#detailsSectionHeading").text("Veronika Listening...");
+        $("#detailsSectionBody").text(command);
     }
 </script>
 {% endblock %}
