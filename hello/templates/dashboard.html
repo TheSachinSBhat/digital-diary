@@ -14,8 +14,8 @@
 
     #canvas-wrap {
         position:relative;
-        height:600px;
-        width:800px;
+        height:500px;
+        width:850px;
         float: left;
     }
 
@@ -29,7 +29,23 @@
     }
 
     #detailsSection{
+        position: relative;
+        height: 500px;
+        width: 290px;
+        float: left;
+        background: beige;
+    }
 
+    #detailsSectionHeading{
+        margin-top: 10px;
+        margin-left: 10px;
+        font-size: 20px;
+    }
+
+    #detailsSectionBody{
+        margin-top: 20px;
+        margin-left: 20px;
+        font-size: 18px;
     }
 
     .dashboard-section{
@@ -201,7 +217,7 @@
         </div>
     </div>
     <div class="row dashboard-section">
-        <div class="col-md-6">
+        <div class="">
             <!-- Canvas that displays the Activity Visualizer -->
             <div id="canvas-wrap">
                 <canvas></canvas>
@@ -232,8 +248,10 @@
                     </div>
                 </div>-->
             </div>
+            <!-- Details Section besides the Canvas -->
             <div id="detailsSection">
-
+                <div id="detailsSectionHeading"></div>
+                <div id="detailsSectionBody"></div>
             </div>
         </div>
     </div>
@@ -259,10 +277,11 @@
 
     /* Page load handler to initialize data */
     $(document).ready(function () {
-        /* Initialize tiles on Canvas */
-        initializeCanvasTiles();
         /* Initialize the Annyang Speech Recognition Library */
         initializeAnnyang();
+
+        /* Initialize tiles on Canvas */
+        initializeCanvasTiles();
     });
 
     /* Initialize tiles on Canvas */
@@ -320,9 +339,9 @@
         if (annyang) {
             // Let's define our first command. First the text we expect, and then the function it should call
             var commands = {
-                'show me *tag': function (tag) {
-                    alert(tag);
-                }
+                'show me *tag': shownMeHandler,
+                'pingo *command': pingoHandler,
+                'veronika *command': veronikaHandler
             };
 
             // Add our commands to annyang
@@ -331,6 +350,23 @@
             // Start listening. You can call this here, or attach this call to an event, button, etc.
             annyang.start();
         }
+    }
+
+    /* Handlers for annyang commands */
+
+    var shownMeHandler = function (tag) {
+        $("detailsSectionHeading").text("Show me...");
+        $("detailsSectionBody").text(command);
+    }
+
+    var pingoHandler = function (command) {
+        $("detailsSectionHeading").text("Pingo Listening...");
+        $("detailsSectionBody").text(command);
+    }
+
+    var veronikaHandler = function (command) {
+        $("detailsSectionHeading").text("Veronika Listening...");
+        $("detailsSectionBody").text(command);
     }
 </script>
 {% endblock %}
