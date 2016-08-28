@@ -50,7 +50,6 @@
 
     .detailsSectionConversation{
         margin-top: 10px;
-        margin-left: 20px;
         font-size: 18px;
     }
 
@@ -423,12 +422,11 @@
     }
 
     var addConversationToDetailsSection = function (textToDisplay) {
+        /* Create a new Div with the text to display and append it to Details Section Body Div */
         var div = document.createElement('div');
         $(div).addClass("detailsSectionConversation")
             .html(textToDisplay)
             .appendTo($("#detailsSectionBody"))
-
-        //$("#detailsSectionBody").text(textToDisplay);
     }
 
     /* Clear conversations from the Details Section Div */
@@ -445,6 +443,10 @@
         /* Try to match phrases */
         if (command.includes("who are you")) {
             responseText = "I am " + agentContext.agentName + ", an Intelligent Personal Assistant.";
+        }
+
+        if (command.includes("say something")) {
+            responseText = "Blah Blah Blah... You see Garbage in... Garbage Out !!!";
         }
 
         return responseText;
