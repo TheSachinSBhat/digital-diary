@@ -375,6 +375,7 @@
         /* Initialize Agent Context */
         var agentContext = {};
         agentContext.agentName = "Pingo";
+        agentContext.agentAge = "6";
 
         /* Function level variables */
         var textToDisplay = '';
@@ -394,6 +395,7 @@
         /* Initialize Agent Context */
         var agentContext = {};
         agentContext.agentName = "Veronika";
+        agentContext.agentAge = "26";
 
         /* Function level variables */
         var textToDisplay = '';
@@ -445,8 +447,28 @@
             responseText = "I am " + agentContext.agentName + ", an Intelligent Personal Assistant.";
         }
 
+        if (command.includes("what is your age")) {
+            switch (agentContext.agentName) {
+                case "Pingo":
+                    responseText = "I am " + agentContext.agentAge + ", years old.";
+                    break;
+                case "Veronika":
+                    responseText = "I am " + agentContext.agentAge + ", years young.";
+            }
+        }
+
         if (command.includes("say something")) {
             responseText = "Blah Blah Blah... You see Garbage in... Garbage Out !!!";
+        }
+
+        if (command.includes("sing a song")) {
+            switch (agentContext.agentName) {
+                case "Pingo":
+                    responseText = "Ring-a-ring o' roses, A pocket full of posies, A-tishoo! A-tishoo! We all fall down";
+                    break;
+                case "Veronika":
+                    responseText = "Posche Posche Paradesi Nenu Foreign Nunchi Vachesaanu ...Ringa Ringa Ringa Ringa Ringa Ringa Ringa Ringa Reeee";
+            }
         }
 
         return responseText;
