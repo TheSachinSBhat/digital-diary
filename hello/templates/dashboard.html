@@ -48,6 +48,12 @@
         font-size: 18px;
     }
 
+    .detailsSectionConversation{
+        margin-top: 10px;
+        margin-left: 20px;
+        font-size: 18px;
+    }
+
     .dashboard-section{
         float: left;
         width: 100%;
@@ -377,13 +383,11 @@
         /* Set the Detail Section Heading */
         $("#detailsSectionHeading").text(agentContext.agentName + " Listening...");
 
-        /* Display what the user said */
-        textToDisplay = userName + ': ' + command;
-        $("#detailsSectionBody").text(textToDisplay);
+        /* Clear Conversations from the Details Section Div */
+        clearConversations();
 
-        /* Respond to the user */
-        textToDisplay = agentContext.agentName + ": " + interpretCommand(command, agentContext);
-        $("#detailsSectionBody").text(textToDisplay);
+        /* Initiate conversation with User */
+        initiateConversation(command, agentContext);
     }
 
     var veronikaHandler = function (command) {
@@ -398,13 +402,39 @@
         /* Set the Detail Section Heading */
         $("#detailsSectionHeading").text(agentContext.agentName + " Listening...");
 
+        /* Clear Conversations from the Details Section Div */
+        clearConversations();
+
+        /* Initiate conversation with User */
+        initiateConversation(command, agentContext);
+    }
+
+    /* Agent Conversation Methods */
+
+    /* Initiate conversation with User */
+    var initiateConversation = function (command, agentContext) {
         /* Display what the user said */
         textToDisplay = userName + ': ' + command;
-        $("#detailsSectionBody").text(textToDisplay);
+        addConversationToDetailsSection(textToDisplay);
 
         /* Respond to the user */
         textToDisplay = agentContext.agentName + ": " + interpretCommand(command, agentContext);
-        $("#detailsSectionBody").text(textToDisplay);
+        addConversationToDetailsSection(textToDisplay);
+    }
+
+    var addConversationToDetailsSection = function (textToDisplay) {
+        var div = document.createElement('div');
+        $(div).addClass("detailsSectionConversation")
+            .html(textToDisplay)
+            .appendTo($("#detailsSectionBody"))
+
+        //$("#detailsSectionBody").text(textToDisplay);
+    }
+
+    /* Clear conversations from the Details Section Div */
+    var clearConversations = function () {
+        /* Clear the contents of the Section Body Div */
+        $("#detailsSectionBody").empty();
     }
 
     /* Agent Language Interpretation Methods */
