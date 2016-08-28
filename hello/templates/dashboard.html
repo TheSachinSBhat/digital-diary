@@ -275,6 +275,9 @@
 </script>
 <script type="text/javascript">
 
+    /* Global Page Variables */
+    var userName = 'Sachin';
+
     /* Page load handler to initialize data */
     $(document).ready(function () {
         /* Initialize the Annyang Speech Recognition Library */
@@ -356,17 +359,23 @@
 
     var shownMeHandler = function (command) {
         $("#detailsSectionHeading").text("Show me...");
-        $("#detailsSectionBody").text(command);
+
+        var textToDisplay = userName + ': ' + command;
+        $("#detailsSectionBody").text(textToDisplay);
     }
 
     var pingoHandler = function (command) {
         $("#detailsSectionHeading").text("Pingo Listening...");
-        $("#detailsSectionBody").text(command);
+
+        var textToDisplay = userName + ': ' + command;
+        $("#detailsSectionBody").text(textToDisplay);
     }
 
     var veronikaHandler = function (command) {
         $("#detailsSectionHeading").text("Veronika Listening...");
-        $("#detailsSectionBody").text(command);
+
+        var textToDisplay = userName + ': ' + command;
+        $("#detailsSectionBody").text(textToDisplay);
     }
 </script>
 {% endblock %}
