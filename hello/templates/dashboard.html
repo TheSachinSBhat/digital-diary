@@ -72,8 +72,9 @@
     }
 
     #chatWindowTextArea{
-        visibility: hidden;
-        margin: 10px
+        margin: 15px 15px 10px 20px;
+        width: 250px;
+        height: 84px;
     }
 
     .dashboard-section{
@@ -285,8 +286,7 @@
         <div id="chatWindow">
             <textarea id="chatWindowTextArea"> </textarea>
         </div>
-        <div id="chatWindowStrip">
-        </div>
+        <div id="chatWindowStrip"> Click here to chat! </div>
     </div>
 </div>
 <script id="canvasTileTemplate" type="text/x-jsrender">
@@ -324,9 +324,16 @@
     });
 
     /* Initialize the chat window */
-    var initializeChatWindow  = function () {
+    var initializeChatWindow = function () {
+        /* Handler for Chat Window Strip Click event. Triggered whenever user clicks on the Chat Window Strip Div. */
         $("#chatWindowStrip").click(function () {
             $("#chatWindow").toggle();
+        });
+        /* Handler for Input Text area. Triggered whenever user changes the input text. */
+        $("chatWindowTextArea").bind('keypress keyup keydown blur', function () {
+            debugger;
+            var inputText = $("chatWindowTextArea").text();
+            veronikaHandler(inputText);
         });
     }
 
