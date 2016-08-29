@@ -53,6 +53,19 @@
         font-size: 18px;
     }
 
+    #chatWindowStrip{
+        position: fixed;
+        width: 290px;
+        height: 35px;
+        background-color: chartreuse;
+        margin-top: 450px;
+        margin-left: 850px;
+    }
+
+    #chatWindowTextArea{
+        visibility: hidden;
+    }
+
     .dashboard-section{
         float: left;
         width: 100%;
@@ -259,6 +272,11 @@
                 <div id="detailsSectionBody"></div>
             </div>
         </div>
+        <div id="chatWindow">
+            <textarea id="chatWindowTextArea"> </textarea>
+        </div>
+        <div id="chatWindowStrip">
+        </div>
     </div>
 </div>
 <script id="canvasTileTemplate" type="text/x-jsrender">
@@ -290,7 +308,17 @@
 
         /* Initialize tiles on Canvas */
         initializeCanvasTiles();
+
+        /* Initialize the chat window */
+        initializeChatWindow();
     });
+
+    /* Initialize the chat window */
+    var initializeChatWindow  = function () {
+        $("#chatWindowStrip").click(function () {
+            $("#chatWindowTextArea").toggle();
+        });
+    }
 
     /* Initialize tiles on Canvas */
     function initializeCanvasTiles() {
