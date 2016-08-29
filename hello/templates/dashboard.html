@@ -332,7 +332,7 @@
         /* Handler for Input Text area. Triggered whenever user changes the input text. */
         $("#chatWindowTextArea").bind('keypress keyup keydown blur', function () {
             debugger;
-            var inputText = $("#chatWindowTextArea").text();
+            var inputText = $("#chatWindowTextArea").val();
             veronikaHandler(inputText);
         });
     }
