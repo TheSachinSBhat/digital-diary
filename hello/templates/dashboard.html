@@ -53,6 +53,15 @@
         font-size: 18px;
     }
 
+    #chatWindow{
+        position: fixed;
+        width: 290px;
+        height: 105px;
+        background-color: chartreuse;
+        margin-top: 350px;
+        margin-left: 850px;
+    }
+
     #chatWindowStrip{
         position: fixed;
         width: 290px;
@@ -64,6 +73,7 @@
 
     #chatWindowTextArea{
         visibility: hidden;
+        margin: 10px
     }
 
     .dashboard-section{
@@ -316,7 +326,7 @@
     /* Initialize the chat window */
     var initializeChatWindow  = function () {
         $("#chatWindowStrip").click(function () {
-            $("#chatWindowTextArea").toggle();
+            $("#chatWindow").toggle();
         });
     }
 
