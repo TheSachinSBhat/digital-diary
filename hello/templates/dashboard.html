@@ -612,6 +612,8 @@
         if (command.includes("i am going to sleep") || command.includes("i will be sleeping") || command.includes("i am about to sleep") || command.includes("i am feeling sleepy")) {
             /* Update the Canvas Tile Data with the the new Sleep Tile */
             addActivityToCanvasTileData(TILE_CODES.Sleep, currentTimeInAmPmFormat);
+
+            responseText = "Good Night... Sweet Dreams!!!";
         }
 
         return responseText;
