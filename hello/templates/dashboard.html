@@ -530,6 +530,9 @@
     var interpretCommand = function (command, agentContext) {
         var responseText = "I did not understand, could you repeat?";
 
+        /* Convert all characters from command to lower case to ensure detection is correct at all times */
+        command = command.toLowerCase();
+
         /* Date Time related variables */
         var currentdate = new Date();
         var datetime = "Last Sync: " + currentdate.getDate() + "/"
