@@ -458,15 +458,19 @@
 
     var defaultHandler = function (command) {
 
+        /* Initialize Agent Context */
+        var agentContext = {};
+        agentContext.agentName = "Agent";
+        agentContext.agentAge = "No Age";
+
         /* Set the Detail Section Heading */
-        $("#detailsSectionHeading").text("Default Handler Listening...");
+        $("#detailsSectionHeading").text("Agent Listening...");
 
         /* Clear Conversations from the Details Section Div */
         clearConversations();
 
-        /* Display what the user said */
-        textToDisplay = userName + ': ' + command;
-        addConversationToDetailsSection(textToDisplay);
+        /* Initiate conversation with User */
+        initiateConversation(command, agentContext);
     }
 
     /* Agent Conversation Methods */
@@ -513,11 +517,25 @@
                     break;
                 case "Veronika":
                     responseText = "I am " + agentContext.agentAge + ", years young.";
+                    break;
+                case "Agent":
+                default:
+                    responseText = "I am ageless, death less";
+                    break;
             }
         }
 
         if (command.includes("say something")) {
-            responseText = "Blah Blah Blah... You see Garbage in... Garbage Out !!!";
+            switch (agentContext.agentName) {
+                case "Pingo":
+                case "Veronika":
+                    responseText = "Blah Blah Blah... You see Garbage in... Garbage Out !!!";
+                    break;
+                case "Agent":
+                default:
+                    responseText = "The world that you see is a big illusion! The current moment will pass away!!!";
+                    break;
+            }
         }
 
         if (command.includes("sing a song")) {
@@ -527,10 +545,42 @@
                     break;
                 case "Veronika":
                     responseText = "Posche Posche Paradesi Nenu Foreign Nunchi Vachesaanu ...Ringa Ringa Ringa Ringa Ringa Ringa Ringa Ringa Reeee";
+                    break;
+                case "Agent":
+                default:
+                    responseText = "This is a song from an Agent who has never heard a song before...";
+                    break;
             }
         }
 
+        if (command.includes("what is the time") || command.includes("what is the time now") || command.includes("what time is it")) {
+
+            var currentdate = new Date();
+            var datetime = "Last Sync: " + currentdate.getDate() + "/"
+                            + (currentdate.getMonth() + 1) + "/"
+                            + currentdate.getFullYear() + " @ "
+                            + currentdate.getHours() + ":"
+                            + currentdate.getMinutes() + ":"
+                            + currentdate.getSeconds();
+
+            responseText = formatAMPM(currentdate);
+        }
+
         return responseText;
+    }
+
+    /* Generic Utility Functions */
+
+    /* Format given date to AM/PM format */
+    var formatAMPM = function(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
     }
 
 </script>
