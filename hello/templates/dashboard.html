@@ -308,8 +308,59 @@
 </script>
 <script type="text/javascript">
 
+    /* Application Constants */
+    var TILE_CODES = {
+        Wakeup: { canvasTileId: "wakeup", tileMainText: "Wake Up", tileSubText: "" },
+        Toilet: { canvasTileId: "toilet", tileMainText: "Toilet", tileSubText: "" },
+        BrushTeeth: { canvasTileId: "brushTeeth", tileMainText: "Brush Teeth", tileSubText: "" },
+        Meditate: { canvasTileId: "meditate", tileMainText: "Meditate", tileSubText: "" },
+        Bath: { canvasTileId: "bath", tileMainText: "Bath", tileSubText: "" },
+        Breakfast: { canvasTileId: "breakfast", tileMainText: "Breakfast", tileSubText: "" },
+        Sleep: { canvasTileId: "sleep", tileMainText: "Sleep", tileSubText: "" },
+    };
+
     /* Global Page Variables */
     var userName = 'Sachin';
+
+    var canvasTileData = [
+      {
+          "canvasTileId": "wakeup",
+          "tileMainText": "Wake Up",
+          "tileSubText": "6:00 am"
+      },
+      {
+          "canvasTileId": "toilet",
+          "tileMainText": "Toilet",
+          "tileSubText": "6:05 am"
+      },
+      {
+          "canvasTileId": "brushTeeth",
+          "tileMainText": "Brush Teeth",
+          "tileSubText": "6:15 am"
+      },
+      {
+          "canvasTileId": "meditate",
+          "tileMainText": "Meditate",
+          "tileSubText": "6:30 am"
+      },
+      {
+          "canvasTileId": "bath",
+          "tileMainText": "Bath",
+          "tileSubText": "6:45 am"
+      },
+      {
+          "canvasTileId": "breakfast",
+          "tileMainText": "Breakfast",
+          "tileSubText": "7:30 am"
+      },
+      {
+          "canvasTileId": "sleep",
+          "tileMainText": "Sleep",
+          "tileSubText": "10:30 pm"
+      }
+    ];
+
+    /* Page specific funtions related to Canvas Rendering */
 
     /* Page load handler to initialize data */
     $(document).ready(function () {
@@ -317,7 +368,7 @@
         initializeAnnyang();
 
         /* Initialize tiles on Canvas */
-        initializeCanvasTiles();
+        renderCanvasTiles();
 
         /* Initialize the chat window */
         initializeChatWindow();
@@ -337,47 +388,9 @@
         });
     }
 
-    /* Initialize tiles on Canvas */
-    function initializeCanvasTiles() {
+    /* Render tiles on Canvas */
+    var renderCanvasTiles = function () {
         var canvasDiv = $("#canvas-wrap");
-
-        var canvasTileData = [
-          {
-              "canvasTileId": "wakeup",
-              "tileMainText": "Wake Up",
-              "tileSubText": "6:00 am"
-          },
-          {
-              "canvasTileId": "toilet",
-              "tileMainText": "Toilet",
-              "tileSubText": "6:05 am"
-          },
-          {
-              "canvasTileId": "brushTeeth",
-              "tileMainText": "Brush Teeth",
-              "tileSubText": "6:15 am"
-          },
-          {
-              "canvasTileId": "meditate",
-              "tileMainText": "Meditate",
-              "tileSubText": "6:30 am"
-          },
-          {
-              "canvasTileId": "bath",
-              "tileMainText": "Bath",
-              "tileSubText": "6:45 am"
-          },
-          {
-              "canvasTileId": "breakfast",
-              "tileMainText": "Breakfast",
-              "tileSubText": "7:30 am"
-          },
-          {
-              "canvasTileId": "sleep",
-              "tileMainText": "Sleep",
-              "tileSubText": "10:30 pm"
-          }
-        ];
 
         var canvasTileTemplate = $.templates("#canvasTileTemplate");
 
@@ -386,8 +399,20 @@
         canvasDiv.append(htmlOutput);
     }
 
+    /* Add Activity to Canvas Tile Data */
+    var addActivityToCanvasTileData = function (activityType, time) {
+        canvasTileData.push({
+            "canvasTileId": activityType.canvasTileId,
+            "tileMainText": activityType.tileMainText,
+            "tileSubText": time
+        });
+
+        /* Re-render Canvas Tiles */
+        renderCanvasTiles();
+    }
+
     /* Initialize the Annyang Speech Recognition Library */
-    function initializeAnnyang()
+    var initializeAnnyang = function ()
     {
         if (annyang) {
             // Let's define our first command. First the text we expect, and then the function it should call
@@ -505,6 +530,17 @@
     var interpretCommand = function (command, agentContext) {
         var responseText = "I did not understand, could you repeat?";
 
+        /* Date Time related variables */
+        var currentdate = new Date();
+        var datetime = "Last Sync: " + currentdate.getDate() + "/"
+                        + (currentdate.getMonth() + 1) + "/"
+                        + currentdate.getFullYear() + " @ "
+                        + currentdate.getHours() + ":"
+                        + currentdate.getMinutes() + ":"
+                        + currentdate.getSeconds();
+
+        currentTimeInAmPmFormat = formatAMPM(currentdate);
+
         /* Try to match phrases */
         if (command.includes("who are you")) {
             responseText = "I am " + agentContext.agentName + ", an Intelligent Personal Assistant.";
@@ -555,15 +591,13 @@
 
         if (command.includes("what is the time") || command.includes("what is the time now") || command.includes("what time is it")) {
 
-            var currentdate = new Date();
-            var datetime = "Last Sync: " + currentdate.getDate() + "/"
-                            + (currentdate.getMonth() + 1) + "/"
-                            + currentdate.getFullYear() + " @ "
-                            + currentdate.getHours() + ":"
-                            + currentdate.getMinutes() + ":"
-                            + currentdate.getSeconds();
+            responseText = currentTimeInAmPmFormat;
+        }
 
-            responseText = formatAMPM(currentdate);
+        /* Commands affecting the Canvas Tiles */
+        if (command.includes("i am going to sleep") || command.includes("i will be sleeping") || command.includes("i am about to sleep") || command.includes("i am feeling sleepy")) {
+            /* Update the Canvas Tile Data with the the new Sleep Tile */
+            addActivityToCanvasTileData(TILE_CODES.Sleep, currentTimeInAmPmFormat);
         }
 
         return responseText;
