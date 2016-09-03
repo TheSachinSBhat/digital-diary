@@ -394,7 +394,8 @@
             var commands = {
                 'show me *command': shownMeHandler,
                 'pingo *command': pingoHandler,
-                'veronika *command': veronikaHandler
+                'veronika *command': veronikaHandler,
+                '*command': defaultHandler
             };
 
             // Add our commands to annyang
@@ -453,6 +454,19 @@
 
         /* Initiate conversation with User */
         initiateConversation(command, agentContext);
+    }
+
+    var defaultHandler = function (command) {
+
+        /* Set the Detail Section Heading */
+        $("#detailsSectionHeading").text("Default Handler Listening...");
+
+        /* Clear Conversations from the Details Section Div */
+        clearConversations();
+
+        /* Display what the user said */
+        textToDisplay = userName + ': ' + command;
+        addConversationToDetailsSection(textToDisplay);
     }
 
     /* Agent Conversation Methods */
