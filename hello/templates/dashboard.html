@@ -388,6 +388,12 @@
         });
     }
 
+    /* Clear Canvas tiles */
+    var clearCanvasTiles = function () {
+        /* Remove all Tiles from the Canvas */
+        $(".tile").remove()
+    }
+
     /* Render tiles on Canvas */
     var renderCanvasTiles = function () {
         var canvasDiv = $("#canvas-wrap");
@@ -401,6 +407,11 @@
 
     /* Add Activity to Canvas Tile Data */
     var addActivityToCanvasTileData = function (activityType, time) {
+
+        /* Clear existing tiles from Canvas */
+        clearCanvasTiles();
+
+        /* Append the new Activity to the Canvas Tile Data */
         canvasTileData.push({
             "canvasTileId": activityType.canvasTileId,
             "tileMainText": activityType.tileMainText,
