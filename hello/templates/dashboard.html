@@ -325,8 +325,12 @@
         Wakeup: { canvasTileId: "wakeup", tileMainText: "Wake Up", tileSubText: "" },
         Toilet: { canvasTileId: "toilet", tileMainText: "Toilet", tileSubText: "" },
         BrushTeeth: { canvasTileId: "brushTeeth", tileMainText: "Brush Teeth", tileSubText: "" },
+        Kapalbhati: { canvasTileId: "meditate", tileMainText: "Kapal Bhati", tileSubText: "" },
+        Pranayam: { canvasTileId: "meditate", tileMainText: "Pranayam", tileSubText: "" },
         Meditate: { canvasTileId: "meditate", tileMainText: "Meditate", tileSubText: "" },
         Bath: { canvasTileId: "bath", tileMainText: "Bath", tileSubText: "" },
+        Suryanamaskar: { canvasTileId: "meditate", tileMainText: "Suryanamaskar", tileSubText: "" },
+        Shavasan: { canvasTileId: "meditate", tileMainText: "Shavasan", tileSubText: "" },
         Breakfast: { canvasTileId: "breakfast", tileMainText: "Breakfast", tileSubText: "" },
         Sleep: { canvasTileId: "sleep", tileMainText: "Sleep", tileSubText: "" },
     };
@@ -571,6 +575,8 @@
         currentTimeInAmPmFormat = formatAMPM(currentdate);
 
         /* Try to match phrases */
+
+        /* Agent Personality Queries */
         if (command.includes("who are you")) {
             responseText = "I am " + agentContext.agentName + ", an Intelligent Personal Assistant.";
         }
@@ -590,6 +596,8 @@
             }
         }
 
+
+        /* Generic Agent Communication Queries */
         if (command.includes("say something")) {
             switch (agentContext.agentName) {
                 case "Pingo":
@@ -618,12 +626,78 @@
             }
         }
 
+
+        /* General Informational Queries */
         if (command.includes("what is the time") || command.includes("what is the time now") || command.includes("what time is it")) {
 
             responseText = currentTimeInAmPmFormat;
         }
 
         /* Commands affecting the Canvas Tiles */
+
+        if (command.includes("i woke up") || command.includes("i woke up just now")) {
+            /* Update the Canvas Tile Data with the the new Wake Up Tile */
+            addActivityToCanvasTileData(TILE_CODES.Wakeup, currentTimeInAmPmFormat);
+
+            responseText = "Good Morning... Have a great day!!!";
+        }
+
+        if (command.includes("i went to toilet") || command.includes("i went to toilet just now")) {
+            /* Update the Canvas Tile Data with the the new Toilet Tile */
+            addActivityToCanvasTileData(TILE_CODES.Toilet, currentTimeInAmPmFormat);
+
+            responseText = "Hope you are feeling lighter and fresh now!!!";
+        }
+
+        if (command.includes("i brushed my teeth") || command.includes("i brushed my teeth just now")) {
+            /* Update the Canvas Tile Data with the the new Brush Teeth Tile */
+            addActivityToCanvasTileData(TILE_CODES.BrushTeeth, currentTimeInAmPmFormat);
+
+            responseText = "Great... say cheese!!!";
+        }
+
+        if (command.includes("i did kapalbhati") || command.includes("i did kapalbhati just now")) {
+            /* Update the Canvas Tile Data with the the new Kapal Bhati Tile */
+            addActivityToCanvasTileData(TILE_CODES.Kapalbhati, currentTimeInAmPmFormat);
+
+            responseText = "Great... so you are ready for Pranayam!!!";
+        }
+
+        if (command.includes("i did pranayam") || command.includes("i did pranayam just now")) {
+            /* Update the Canvas Tile Data with the the new Pranayam Tile */
+            addActivityToCanvasTileData(TILE_CODES.Pranayam, currentTimeInAmPmFormat);
+
+            responseText = "Great... so you are ready for Meditation!!!";
+        }
+
+        if (command.includes("i did meditation") || command.includes("i did meditation just now")) {
+            /* Update the Canvas Tile Data with the the new Pranayam Tile */
+            addActivityToCanvasTileData(TILE_CODES.Meditate, currentTimeInAmPmFormat);
+
+            responseText = "Great... have a great day ahead!!!";
+        }
+
+        if (command.includes("i took bath") || command.includes("i finished bathing")) {
+            /* Update the Canvas Tile Data with the the new Bathing Tile */
+            addActivityToCanvasTileData(TILE_CODES.Bath, currentTimeInAmPmFormat);
+
+            responseText = "Great... so ready for Suryanamaskar!!!";
+        }
+
+        if (command.includes("i did surya namaskar") || command.includes("i finished surya namaskar")) {
+            /* Update the Canvas Tile Data with the the new Suryanamaskar Tile */
+            addActivityToCanvasTileData(TILE_CODES.Suryanamaskar, currentTimeInAmPmFormat);
+
+            responseText = "Great... so ready for Shavasan!!!";
+        }
+
+        if (command.includes("i did shavasan") || command.includes("i finished shavasan")) {
+            /* Update the Canvas Tile Data with the the new Suryanamaskar Tile */
+            addActivityToCanvasTileData(TILE_CODES.Suryanamaskar, currentTimeInAmPmFormat);
+
+            responseText = "Great... so ready for a great day ahead!!!";
+        }
+
         if (command.includes("i am going to sleep") || command.includes("i will be sleeping") || command.includes("i am about to sleep") || command.includes("i am feeling sleepy")) {
             /* Update the Canvas Tile Data with the the new Sleep Tile */
             addActivityToCanvasTileData(TILE_CODES.Sleep, currentTimeInAmPmFormat);
