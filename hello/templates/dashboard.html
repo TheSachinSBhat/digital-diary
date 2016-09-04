@@ -72,9 +72,18 @@
     }
 
     #chatWindowTextArea{
-        margin: 15px 15px 10px 20px;
-        width: 250px;
+        margin: 15px 5px 10px 9px;
+        width: 210px;
         height: 84px;
+        float: left;
+    }
+
+    #chatWindowSubmitButton{
+        background-color: #f2dede;
+        margin: 40px 15px 30px 0px;
+        width: 50px;
+        height: 34px;
+        float: right;
     }
 
     .dashboard-section{
@@ -284,7 +293,10 @@
             </div>
         </div>
         <div id="chatWindow">
-            <textarea id="chatWindowTextArea"> </textarea>
+            <div id="chatWindowWrapper">
+                <textarea id="chatWindowTextArea"> </textarea>
+                <button id="chatWindowSubmitButton">Send</button>
+            </div>
         </div>
         <div id="chatWindowStrip"> Click here to chat! </div>
     </div>
@@ -380,9 +392,10 @@
         $("#chatWindowStrip").click(function () {
             $("#chatWindow").toggle();
         });
-        /* Handler for Input Text area. Triggered whenever user changes the input text. */
-        $("#chatWindowTextArea").bind('keypress keyup keydown blur', function () {
-            debugger;
+
+        /* Handler for Chat Window Submit Button. Triggered whenever user clicks on the submit button. */
+        $("#chatWindowSubmitButton").click(function () {
+            /* Get the Text from the chat window's Text Area */
             var inputText = $("#chatWindowTextArea").val();
 
             /* Use the default Agent Handler for Chat Conversation */
