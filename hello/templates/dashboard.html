@@ -384,7 +384,9 @@
         $("#chatWindowTextArea").bind('keypress keyup keydown blur', function () {
             debugger;
             var inputText = $("#chatWindowTextArea").val();
-            veronikaHandler(inputText);
+
+            /* Use the default Agent Handler for Chat Conversation */
+            defaultHandler(inputText);
         });
     }
 
