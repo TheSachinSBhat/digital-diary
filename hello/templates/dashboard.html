@@ -242,6 +242,7 @@
 </style>
 <div class="container" ng-app="digitalDiary">
   <h4> Dashboard </h4>
+  <div id="dashboardCurrentDate"></div>
   <hr>
     <div class="row dashboard-section">
         <div id="nav-tiles" class="dashboard-nav-button">
@@ -338,6 +339,8 @@
     /* Global Page Variables */
     var userName = 'Sachin';
 
+    var currentDate = getCurrentDate();
+
     var canvasTileData = [
       {
           "canvasTileId": "wakeup",
@@ -383,6 +386,9 @@
         /* Initialize the Annyang Speech Recognition Library */
         initializeAnnyang();
 
+        /* Update the Current Date on the Dashboard Header */
+        updateCurrentDateOnDashboardHeader();
+
         /* Initialize tiles on Canvas */
         renderCanvasTiles();
 
@@ -405,6 +411,12 @@
             /* Use the default Agent Handler for Chat Conversation */
             defaultHandler(inputText);
         });
+    }
+
+    /* Update the Current Date on the Dashboard Header */
+    var updateCurrentDateOnDashboardHeader = function () {
+        /* Update the Current Date in the Dashboard Current Date Div */
+        $("#dashboardCurrentDate").text(currentDate);
     }
 
     /* Clear Canvas tiles */
@@ -720,6 +732,20 @@
         minutes = minutes < 10 ? '0' + minutes : minutes;
         var strTime = hours + ':' + minutes + ' ' + ampm;
         return strTime;
+    }
+
+    /* Get Current Date Formatted in DD MMM YYYY Format */
+    var getCurrentDate = function(){
+
+        var MONTH_NAMES = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+
+        var d = new Date();
+        var current_date = d.getDate();
+        var current_month = d.getMonth();
+        var current_year = d.getFullYear();
+        var currentDate = (curr_date + " " + MONTH_NAMES[curr_month] + " " + curr_year);
+
+        return currentDate;
     }
 
 </script>
