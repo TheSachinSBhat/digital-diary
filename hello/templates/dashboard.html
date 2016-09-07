@@ -339,7 +339,7 @@
     /* Global Page Variables */
     var userName = 'Sachin';
 
-    var currentDate = getCurrentDate;
+    var currentDate;
 
     var canvasTileData = [
       {
@@ -415,6 +415,10 @@
 
     /* Update the Current Date on the Dashboard Header */
     var updateCurrentDateOnDashboardHeader = function () {
+
+        /* Update the Current Date Page Variable with the Current Date */
+        currentDate = getCurrentDate();
+
         /* Update the Current Date in the Dashboard Current Date Div */
         $("#dashboardCurrentDate").text(currentDate);
     }
