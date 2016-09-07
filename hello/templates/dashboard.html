@@ -62,7 +62,7 @@
         width: 290px;
         height: 105px;
         background-color: chartreuse;
-        margin-top: 350px;
+        margin-top: 321px;
         margin-left: 850px;
     }
 
@@ -71,7 +71,7 @@
         width: 290px;
         height: 35px;
         background-color: chartreuse;
-        margin-top: 450px;
+        margin-top: 421px;
         margin-left: 850px;
     }
 
@@ -80,6 +80,7 @@
         width: 210px;
         height: 84px;
         float: left;
+        resize: none;
     }
 
     #chatWindowSubmitButton{
@@ -414,6 +415,9 @@
 
             /* Use the default Agent Handler for Chat Conversation */
             defaultHandler(inputText);
+
+            /* Clear the text from the chatWindowTextArea */
+            $("#chatWindowTextArea").val('');
         });
     }
 
