@@ -339,7 +339,7 @@
     /* Global Page Variables */
     var userName = 'Sachin';
 
-    var currentDate = getCurrentDate();
+    var currentDate = getCurrentDate;
 
     var canvasTileData = [
       {
@@ -383,7 +383,6 @@
 
     /* Page load handler to initialize data */
     $(document).ready(function () {
-        debugger;
         /* Initialize the Annyang Speech Recognition Library */
         initializeAnnyang();
 
@@ -737,7 +736,6 @@
 
     /* Get Current Date Formatted in DD MMM YYYY Format */
     var getCurrentDate = function () {
-        debugger;
 
         var MONTH_NAMES = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
 
