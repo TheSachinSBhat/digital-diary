@@ -18,9 +18,10 @@
 
     #canvas-wrap {
         position:relative;
-        height:500px;
+        height:405px;
         width:850px;
         float: left;
+        overflow-y: auto;
     }
 
     #canvas-wrap canvas {
@@ -446,6 +447,30 @@
         var htmlOutput = canvasTileTemplate.render(canvasTileData);
 
         canvasDiv.append(htmlOutput);
+
+
+        var scaleFactor = 1.0;
+
+        var numberOfTilesOnCanvas = canvasTileData.length;
+
+        //if (numberOfTilesOnCanvas > 10 && numberOfTilesOnCanvas < 20)
+        //{
+        //    scaleFactor = 0.9;
+        //}
+
+        /* Scale Down Tiles when their count increases */
+        scaleDownTileSize(scaleFactor);
+    }
+
+    var scaleDownTileSize = function (scaleFactor) {
+        /* Scale Down Tiles when their count increases */
+        $('.tile').css({
+            '-webkit-transform': 'scale(' + scaleFactor + ')',
+            '-moz-transform': 'scale(' + scaleFactor + ')',
+            '-ms-transform': 'scale(' + scaleFactor + ')',
+            '-o-transform': 'scale(' + scaleFactor + ')',
+            'transform': 'scale(' + scaleFactor + ')'
+        });
     }
 
     /* Add Activity to Canvas Tile Data */
