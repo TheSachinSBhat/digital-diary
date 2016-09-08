@@ -447,11 +447,11 @@
         var canvasTileData = null;
 
         if (userDataJson) {
-            if (userDailyActivities) {
-                if (userDailyActivities[current_year]) {
-                    if (userDailyActivities[current_year][current_month]) {
-                        if (userDailyActivities[current_year][current_month][current_date]) {
-                            canvasTileData = userDailyActivities[current_year][current_month][current_date].canvasTileData;
+            if (userDataJson.userDailyActivities) {
+                if (userDataJson.userDailyActivities[current_year]) {
+                    if (userDataJson.userDailyActivities[current_year][current_month]) {
+                        if (userDataJson.userDailyActivities[current_year][current_month][current_date]) {
+                            canvasTileData = userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData;
                         }
                     }
                 }
