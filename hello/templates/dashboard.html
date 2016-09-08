@@ -395,6 +395,9 @@
         /* Update the Current Date on the Dashboard Header */
         updateCurrentDateOnDashboardHeader();
 
+        /* Update the Canvas Tile Data based for the current date */
+        canvasTileData = retrieveCanvasTileDataForGivenDate(currentDate);
+
         /* Initialize tiles on Canvas */
         renderCanvasTiles();
 
@@ -426,10 +429,36 @@
     var updateCurrentDateOnDashboardHeader = function () {
 
         /* Update the Current Date Page Variable with the Current Date */
-        currentDate = getCurrentDate();
+        currentDate = new Date();
+        currentDateInDDMMMYYYYFormat = formatDateInDDMMMYYYYFormat(currentDate);
 
         /* Update the Current Date in the Dashboard Current Date Div */
-        $("#dashboardCurrentDate").text(currentDate);
+        $("#dashboardCurrentDate").text(currentDateInDDMMMYYYYFormat);
+    }
+
+    /* Retrieve the Canvas Tile Data based for the given date */
+    var retrieveCanvasTileDataForGivenDate = function (currentDate) {
+        var userDataJson = retrieveUserDataJson();
+
+        var current_date = currentDate.getDate();
+        var current_month = currentDate.getMonth();
+        var current_year = currentDate.getFullYear();
+
+        var canvasTileData = null;
+
+        if (userDataJson) {
+            if (userDailyActivities) {
+                if (userDailyActivities[current_year]) {
+                    if (userDailyActivities[current_year][current_month]) {
+                        if (userDailyActivities[current_year][current_month][current_date]) {
+                            canvasTileData = userDailyActivities[current_year][current_month][current_date].canvasTileData;
+                        }
+                    }
+                }
+            }
+        }
+
+        return canvasTileData;
     }
 
     /* Clear Canvas tiles */
@@ -757,6 +786,64 @@
         return responseText;
     }
 
+    /* Data API Methods */
+    var retrieveUserDataJson = function () {
+
+        var userDataJson = {
+            userDetails: {
+                userName: "Sachin Bhat"
+            },
+            userDailyActivities: {
+                2016: {
+                    0: {
+                        6: {
+                            canvasTileData: [
+                             {
+                                 "canvasTileId": "wakeup",
+                                 "tileMainText": "Wake Up",
+                                 "tileSubText": "6:00 am"
+                             },
+                             {
+                                 "canvasTileId": "toilet",
+                                 "tileMainText": "Toilet",
+                                 "tileSubText": "6:05 am"
+                             },
+                             {
+                                 "canvasTileId": "brushTeeth",
+                                 "tileMainText": "Brush Teeth",
+                                 "tileSubText": "6:15 am"
+                             },
+                             {
+                                 "canvasTileId": "meditate",
+                                 "tileMainText": "Meditate",
+                                 "tileSubText": "6:30 am"
+                             },
+                             {
+                                 "canvasTileId": "bath",
+                                 "tileMainText": "Bath",
+                                 "tileSubText": "6:45 am"
+                             },
+                             {
+                                 "canvasTileId": "breakfast",
+                                 "tileMainText": "Breakfast",
+                                 "tileSubText": "7:30 am"
+                             },
+                             {
+                                 "canvasTileId": "sleep",
+                                 "tileMainText": "Sleep",
+                                 "tileSubText": "10:30 pm"
+                             }
+                            ]
+                        }
+                    }
+                }
+            },
+        };
+
+        return userDataJson;
+    }
+
+
     /* Generic Utility Functions */
 
     /* Format given date to AM/PM format */
@@ -771,15 +858,14 @@
         return strTime;
     }
 
-    /* Get Current Date Formatted in DD MMM YYYY Format */
-    var getCurrentDate = function () {
+    /* Format given date in DD MMM YYYY Format */
+    var formatDateInDDMMMYYYYFormat = function (date) {
 
         var MONTH_NAMES = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
 
-        var d = new Date();
-        var current_date = d.getDate();
-        var current_month = d.getMonth();
-        var current_year = d.getFullYear();
+        var current_date = date.getDate();
+        var current_month = date.getMonth();
+        var current_year = date.getFullYear();
         var currentDateValue = (current_date + " " + MONTH_NAMES[current_month] + " " + current_year);
 
         return currentDateValue;
