@@ -473,22 +473,24 @@
 
         var canvasTileTemplate = $.templates("#canvasTileTemplate");
 
-        var htmlOutput = canvasTileTemplate.render(canvasTileData);
+        if (canvasTileData) {
+            var htmlOutput = canvasTileTemplate.render(canvasTileData);
 
-        canvasDiv.append(htmlOutput);
+            canvasDiv.append(htmlOutput);
 
 
-        var scaleFactor = 1.0;
+            var scaleFactor = 1.0;
 
-        var numberOfTilesOnCanvas = canvasTileData.length;
+            var numberOfTilesOnCanvas = canvasTileData.length;
 
-        //if (numberOfTilesOnCanvas > 10 && numberOfTilesOnCanvas < 20)
-        //{
-        //    scaleFactor = 0.9;
-        //}
+            //if (numberOfTilesOnCanvas > 10 && numberOfTilesOnCanvas < 20)
+            //{
+            //    scaleFactor = 0.9;
+            //}
 
-        /* Scale Down Tiles when their count increases */
-        scaleDownTileSize(scaleFactor);
+            /* Scale Down Tiles when their count increases */
+            scaleDownTileSize(scaleFactor);
+        }
     }
 
     var scaleDownTileSize = function (scaleFactor) {
