@@ -398,6 +398,11 @@
         /* Update the Canvas Tile Data based for the current date */
         canvasTileData = retrieveCanvasTileDataForGivenDate(currentDate);
 
+        /* Handle null scenarios for canvas tile data */
+        if (canvasTileData === null) {
+            canvasTileData = [];
+        }
+
         /* Initialize tiles on Canvas */
         renderCanvasTiles();
 
@@ -444,14 +449,16 @@
         var current_month = currentDate.getMonth();
         var current_year = currentDate.getFullYear();
 
-        var canvasTileData = null;
+        var canvasTileData = [];
 
         if (userDataJson) {
             if (userDataJson.userDailyActivities) {
                 if (userDataJson.userDailyActivities[current_year]) {
                     if (userDataJson.userDailyActivities[current_year][current_month]) {
                         if (userDataJson.userDailyActivities[current_year][current_month][current_date]) {
-                            canvasTileData = userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData;
+                            if (userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData) {
+                                canvasTileData = userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData;
+                            }
                         }
                     }
                 }
@@ -509,6 +516,11 @@
 
         /* Clear existing tiles from Canvas */
         clearCanvasTiles();
+
+        /* Handle null scenarios for canvas tile data */
+        if (canvasTileData === null) {
+            canvasTileData = [];
+        }
 
         /* Append the new Activity to the Canvas Tile Data */
         canvasTileData.push({
