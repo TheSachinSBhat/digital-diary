@@ -16,6 +16,24 @@
         font-size: 24px;
     }
 
+    .previousArrow{
+        background-image url('/static/activities/left-arrow.png');
+        width: 66px;
+        height: 66px;
+        background-position: 1px 5px;
+    }
+
+    .nextArrow{
+        background-image url('/static/activities/right-arrow.png');
+        width: 66px;
+        height: 66px;
+        background-position: 1px 5px;
+    }
+
+    .dashboardHeaderArrow{
+        float: left;
+    }
+
     #canvas-wrap {
         position:relative;
         height:405px;
@@ -245,11 +263,20 @@
         padding: 9px 16px 9px 16px;
     }
 
+
+
 </style>
 <div class="container" ng-app="digitalDiary">
-  <h4> Dashboard </h4>
-  <div id="dashboardCurrentDate"></div>
+    <h4> Dashboard </h4>
+</div>
+<div class="row dashboard-section">
+    <div class="dashboardHeaderArrow previousArrow"></div>
+    <div id="dashboardCurrentDate"></div>
+    <div class="dashboardHeaderArrow nextArrow"></div>
+</div>
+<div class="row dashboard-section">
   <hr>
+</div>
     <div class="row dashboard-section">
         <div id="nav-tiles" class="dashboard-nav-button">
             <h5 class="dashboard-nav-button-text">Tiles</h5>
