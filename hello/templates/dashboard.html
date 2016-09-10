@@ -293,9 +293,9 @@
     <h4> Dashboard </h4>
 </div>
 <div class="container">
-    <div class="dashboardHeaderArrow previousArrow"></div>
+    <div id="previousDateArrow" class="dashboardHeaderArrow previousArrow"></div>
     <div id="dashboardCurrentDate"></div>
-    <div class="dashboardHeaderArrow nextArrow"></div>
+    <div id="nextDateArrow" class="dashboardHeaderArrow nextArrow"></div>
 </div>
 <div class="container">
   <hr>
@@ -412,22 +412,31 @@
         /* Update the Current Date Page Variable with the Current Date */
         currentDate = new Date();
 
-        /* Update the Current Date on the Dashboard Header */
-        updateCurrentDateOnDashboardHeader(currentDate);
-
-        /* Update the Canvas Tile Data based for the current date */
-        canvasTileData = retrieveCanvasTileDataForGivenDate(currentDate);
-
-        /* Handle null scenarios for canvas tile data */
-        if (canvasTileData == null) {
-            canvasTileData = [];
-        }
-
-        /* Initialize tiles on Canvas */
-        renderCanvasTiles();
+        /* Update the Dashboard Date and Canvas Tiles for current Date */
+        updateDashboardDateAndCanvasTilesForGivenDate(currentDate);
 
         /* Initialize the chat window */
         initializeChatWindow();
+    });
+
+    /* Click Handler for Previous Date Arrow */
+    $("#previousDateArrow").on("click", function () {
+        /* Subtract one day from the current date */
+        var numberOfDaysToSubtract = 1;
+        currentDate.setDate(currentDate.getDate() - numberOfDaysToSubtract);
+
+        /* Update the Dashboard Date and Canvas Tiles for new current Date */
+        updateDashboardDateAndCanvasTilesForGivenDate(currentDate);
+    });
+
+    /* Click Handler for Next Date Arrow */
+    $("#nextDateArrow").on("click", function () {
+        /* Add one day to the current date */
+        var numberOfDaysToAdd = 1;
+        currentDate.setDate(currentDate.getDate() + numberOfDaysToAdd);
+
+        /* Update the Dashboard Date and Canvas Tiles for new current Date */
+        updateDashboardDateAndCanvasTilesForGivenDate(currentDate);
     });
 
     /* Initialize the chat window */
@@ -461,6 +470,24 @@
 
         /* Update the Current Date in the Dashboard Current Date Div */
         $("#dashboardCurrentDate").text(currentDateInDDMMMYYYYFormat);
+    }
+
+    /* Update the Dashboard Date and Canvas Tiles for given Date */
+    var updateDashboardDateAndCanvasTilesForGivenDate = function (currentDate) {
+
+        /* Update the Current Date on the Dashboard Header */
+        updateCurrentDateOnDashboardHeader(currentDate);
+
+        /* Update the Canvas Tile Data based for the current date */
+        canvasTileData = retrieveCanvasTileDataForGivenDate(currentDate);
+
+        /* Handle null scenarios for canvas tile data */
+        if (canvasTileData == null) {
+            canvasTileData = [];
+        }
+
+        /* Initialize tiles on Canvas */
+        renderCanvasTiles();
     }
 
     /* Retrieve the Canvas Tile Data for the given date */
