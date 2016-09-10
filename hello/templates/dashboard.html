@@ -421,6 +421,10 @@
 
     /* Click Handler for Previous Date Arrow */
     $("#previousDateArrow").on("click", function () {
+
+        /* Save the Canvas Tile Data for the given date */
+        saveCanvasTileDataForGivenDate(currentDate, canvasTileData);
+
         /* Subtract one day from the current date */
         var numberOfDaysToSubtract = 1;
         currentDate.setDate(currentDate.getDate() - numberOfDaysToSubtract);
@@ -431,6 +435,10 @@
 
     /* Click Handler for Next Date Arrow */
     $("#nextDateArrow").on("click", function () {
+
+        /* Save the Canvas Tile Data for the given date */
+        saveCanvasTileDataForGivenDate(currentDate, canvasTileData);
+
         /* Add one day to the current date */
         var numberOfDaysToAdd = 1;
         currentDate.setDate(currentDate.getDate() + numberOfDaysToAdd);
@@ -461,9 +469,6 @@
 
     /* Update the Current Date on the Dashboard Header */
     var updateCurrentDateOnDashboardHeader = function (currentDate) {
-
-        /* Save the Canvas Tile Data for the given date */
-        saveCanvasTileDataForGivenDate(currentDate, canvasTileData);
 
         /* Format current date in DD MMM YYYY Format */
         currentDateInDDMMMYYYYFormat = formatDateInDDMMMYYYYFormat(currentDate);
