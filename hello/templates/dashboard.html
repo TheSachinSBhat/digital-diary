@@ -419,7 +419,7 @@
         canvasTileData = retrieveCanvasTileDataForGivenDate(currentDate);
 
         /* Handle null scenarios for canvas tile data */
-        if (canvasTileData === null) {
+        if (canvasTileData == null) {
             canvasTileData = [];
         }
 
@@ -499,29 +499,29 @@
         var current_year = currentDate.getFullYear();
 
         /* Handle Null Checks for every variable of userDataJson */
-        if (userDataJson === null) {
+        if (userDataJson == null) {
             userDataJson = {};
         }
 
-        if (userDataJson.userDailyActivities === null) {
+        if (userDataJson.userDailyActivities == null) {
             userDataJson.userDailyActivities = {};
         }
 
-        if (userDataJson.userDailyActivities[current_year] === null) {
+        if (userDataJson.userDailyActivities[current_year] == null) {
             userDataJson.userDailyActivities[current_year] = {};
         }
 
 
-        if (userDataJson.userDailyActivities[current_year][current_month] === null) {
+        if (userDataJson.userDailyActivities[current_year][current_month] == null) {
             userDataJson.userDailyActivities[current_year][current_month] = {};
         }
 
-        if (userDataJson.userDailyActivities[current_year][current_month][current_date] === null) {
+        if (userDataJson.userDailyActivities[current_year][current_month][current_date] == null) {
             userDataJson.userDailyActivities[current_year][current_month][current_date] = {};
         }
 
 
-        if (userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData === null) {
+        if (userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData == null) {
             userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData = [];
         }
 
