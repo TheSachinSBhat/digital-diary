@@ -19,17 +19,42 @@
 
     .previousArrow{
         background-image: url('/static/activities/arrow.png');
+        margin-right: 5px;
+    }
+
+    .previousArrow:hover{
+        background-image: url('/static/activities/arrow-hover.png');
+        margin-right: 5px;
+    }
+
+    .previousArrow:active{
+        background-image: url('/static/activities/arrow-clicked.png');
+        margin-right: 5px;
     }
 
     .nextArrow{
         background-image: url('/static/activities/arrow.png');
         transform: rotate(180deg);
+        margin-left: 5px;
+    }
+
+    .nextArrow:hover{
+        background-image: url('/static/activities/arrow-hover.png');
+        transform: rotate(180deg);
+        margin-left: 5px;
+    }
+
+    .nextArrow:active{
+        background-image: url('/static/activities/arrow-clicked.png');
+        transform: rotate(180deg);
+        margin-left: 5px;
     }
 
     .dashboardHeaderArrow{
         float: left;
         width: 24px;
         height: 24px;
+        margin-top: 5px;
     }
 
     #canvas-wrap {
