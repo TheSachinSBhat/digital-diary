@@ -400,6 +400,8 @@
 
     var canvasTileData = [];
 
+    var userDataJson = {};
+
     /* Page specific funtions related to Canvas Rendering */
 
     /* Page load handler to initialize data */
@@ -407,8 +409,11 @@
         /* Initialize the Annyang Speech Recognition Library */
         initializeAnnyang();
 
+        /* Update the Current Date Page Variable with the Current Date */
+        currentDate = new Date();
+
         /* Update the Current Date on the Dashboard Header */
-        updateCurrentDateOnDashboardHeader();
+        updateCurrentDateOnDashboardHeader(currentDate);
 
         /* Update the Canvas Tile Data based for the current date */
         canvasTileData = retrieveCanvasTileDataForGivenDate(currentDate);
@@ -446,19 +451,21 @@
     }
 
     /* Update the Current Date on the Dashboard Header */
-    var updateCurrentDateOnDashboardHeader = function () {
+    var updateCurrentDateOnDashboardHeader = function (currentDate) {
 
-        /* Update the Current Date Page Variable with the Current Date */
-        currentDate = new Date();
+        /* Save the Canvas Tile Data for the given date */
+        var saveCanvasTileDataForGivenDate(currentDate, canvasTileData);
+
+        /* Format current date in DD MMM YYYY Format */
         currentDateInDDMMMYYYYFormat = formatDateInDDMMMYYYYFormat(currentDate);
 
         /* Update the Current Date in the Dashboard Current Date Div */
         $("#dashboardCurrentDate").text(currentDateInDDMMMYYYYFormat);
     }
 
-    /* Retrieve the Canvas Tile Data based for the given date */
+    /* Retrieve the Canvas Tile Data for the given date */
     var retrieveCanvasTileDataForGivenDate = function (currentDate) {
-        var userDataJson = retrieveUserDataJson();
+        userDataJson = retrieveUserDataJson();
 
         var current_date = currentDate.getDate();
         var current_month = currentDate.getMonth();
@@ -481,6 +488,48 @@
         }
 
         return canvasTileData;
+    }
+
+    /* Save the Canvas Tile Data for the given date */
+    var saveCanvasTileDataForGivenDate = function (currentDate, canvasTileData) {
+        //userDataJson = retrieveUserDataJson();
+
+        var current_date = currentDate.getDate();
+        var current_month = currentDate.getMonth();
+        var current_year = currentDate.getFullYear();
+
+        /* Handle Null Checks for every variable of userDataJson */
+        if (userDataJson === null) {
+            userDataJson = {};
+        }
+
+        if (userDataJson.userDailyActivities === null) {
+            userDataJson.userDailyActivities = {};
+        }
+
+        if (userDataJson.userDailyActivities[current_year] === null) {
+            userDataJson.userDailyActivities[current_year] = {};
+        }
+
+
+        if (userDataJson.userDailyActivities[current_year][current_month] === null) {
+            userDataJson.userDailyActivities[current_year][current_month] = {};
+        }
+
+        if (userDataJson.userDailyActivities[current_year][current_month][current_date] === null) {
+            userDataJson.userDailyActivities[current_year][current_month][current_date] = {};
+        }
+
+
+        if (userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData === null) {
+            userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData = [];
+        }
+
+        /* Update the value of canvasTileData in the relevant location of userDailyActivities dictionary */
+        userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData = canvasTileData;
+
+        /* Save the current state of Canvas Tile Data back to server */
+        saveUserDataJson(userDataJson);
     }
 
     /* Clear Canvas tiles */
@@ -816,60 +865,67 @@
     }
 
     /* Data API Methods */
-    var retrieveUserDataJson = function () {
 
-        var userDataJson = {
-            userDetails: {
-                userName: "Sachin Bhat"
-            },
-            userDailyActivities: {
-                2016: {
-                    0: {
-                        6: {
-                            canvasTileData: [
-                             {
-                                 "canvasTileId": "wakeup",
-                                 "tileMainText": "Wake Up",
-                                 "tileSubText": "6:00 am"
-                             },
-                             {
-                                 "canvasTileId": "toilet",
-                                 "tileMainText": "Toilet",
-                                 "tileSubText": "6:05 am"
-                             },
-                             {
-                                 "canvasTileId": "brushTeeth",
-                                 "tileMainText": "Brush Teeth",
-                                 "tileSubText": "6:15 am"
-                             },
-                             {
-                                 "canvasTileId": "meditate",
-                                 "tileMainText": "Meditate",
-                                 "tileSubText": "6:30 am"
-                             },
-                             {
-                                 "canvasTileId": "bath",
-                                 "tileMainText": "Bath",
-                                 "tileSubText": "6:45 am"
-                             },
-                             {
-                                 "canvasTileId": "breakfast",
-                                 "tileMainText": "Breakfast",
-                                 "tileSubText": "7:30 am"
-                             },
-                             {
-                                 "canvasTileId": "sleep",
-                                 "tileMainText": "Sleep",
-                                 "tileSubText": "10:30 pm"
-                             }
-                            ]
-                        }
+    /* Represents the server-side User Data Json, which would be stored in a Data Store */
+    var serverSide_UserDataJson = {
+        userDetails: {
+            userName: "Sachin Bhat"
+        },
+        userDailyActivities: {
+            2016: {
+                0: {
+                    6: {
+                        canvasTileData: [
+                         {
+                             "canvasTileId": "wakeup",
+                             "tileMainText": "Wake Up",
+                             "tileSubText": "6:00 am"
+                         },
+                         {
+                             "canvasTileId": "toilet",
+                             "tileMainText": "Toilet",
+                             "tileSubText": "6:05 am"
+                         },
+                         {
+                             "canvasTileId": "brushTeeth",
+                             "tileMainText": "Brush Teeth",
+                             "tileSubText": "6:15 am"
+                         },
+                         {
+                             "canvasTileId": "meditate",
+                             "tileMainText": "Meditate",
+                             "tileSubText": "6:30 am"
+                         },
+                         {
+                             "canvasTileId": "bath",
+                             "tileMainText": "Bath",
+                             "tileSubText": "6:45 am"
+                         },
+                         {
+                             "canvasTileId": "breakfast",
+                             "tileMainText": "Breakfast",
+                             "tileSubText": "7:30 am"
+                         },
+                         {
+                             "canvasTileId": "sleep",
+                             "tileMainText": "Sleep",
+                             "tileSubText": "10:30 pm"
+                         }
+                        ]
                     }
                 }
-            },
-        };
+            }
+        },
+    };
 
-        return userDataJson;
+    var retrieveUserDataJson = function () {
+        /* TODO: Replace with actual Data Store API Call */
+        return serverSide_UserDataJson;
+    }
+
+    var saveUserDataJson = function (userDataJson) {
+        /* TODO: Replace with actual Data Store API Call */
+        serverSide_UserDataJson = userDataJson;
     }
 
 
