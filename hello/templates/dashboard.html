@@ -455,7 +455,10 @@
 
     /* Clear out the existing canvasTileData */
     var clearOutCanvasTileData = function () {
+        /* Clear the Canvas Tile Data */
         canvasTileData = [];
+        /* Remove activity tiles from the Canvas Wrap Div */
+        $("#canvas-wrap .tile").remove()
     }
 
     /* Initialize the chat window */
