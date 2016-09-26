@@ -74,6 +74,15 @@
         background: rebeccapurple;
     }
 
+    #mini-map{
+        position: absolute;
+        height: 120px;
+        width: 210px;
+        background: #825b5b;
+        margin-top: 270px;
+        margin-left: 30px;
+    }
+
     #detailsSection{
         position: relative;
         height: 500px;
@@ -344,6 +353,7 @@
                     </div>
                 </div>-->
             </div>
+            <div id="mini-map"></div>
             <!-- Details Section besides the Canvas -->
             <div id="detailsSection">
                 <div id="detailsSectionHeading"></div>
@@ -415,9 +425,31 @@
         /* Update the Dashboard Date and Canvas Tiles for current Date */
         updateDashboardDateAndCanvasTilesForGivenDate(currentDate);
 
+        /* Initialize the Mini-map for the Canvas Tiles */
+        initializeMiniMap();
+
         /* Initialize the chat window */
         initializeChatWindow();
     });
+
+    /* Initialize the Mini-map for the Canvas Tiles */
+    var initializeMiniMap = function () {
+        $('#mini-map').fracs('outline', {
+            crop: true,
+            styles: [{
+                selector: '.small-box',
+                strokeWidth: 'auto',
+                strokeStyle: 'auto',
+                fillStyle: 'auto'
+            }],
+            viewportStyle: {
+                fillStyle: 'rgba(29,119,194,0.3)'
+            },
+            viewportDragStyle: {
+                fillStyle: 'rgba(29,119,194,0.4)'
+            }
+        }, $('#canvas-wrap'));
+    }
 
     /* Click Handler for Previous Date Arrow */
     $("#previousDateArrow").on("click", function () {
