@@ -427,9 +427,6 @@
         /* Update the Dashboard Date and Canvas Tiles for current Date */
         updateDashboardDateAndCanvasTilesForGivenDate(currentDate);
 
-        /* Initialize the Mini-map for the Canvas Tiles */
-        initializeMiniMap();
-
         /* Initialize the chat window */
         initializeChatWindow();
     });
@@ -542,6 +539,9 @@
 
         /* Initialize tiles on Canvas */
         renderCanvasTiles();
+
+        /* Initialize the Mini-map for the Canvas Tiles */
+        initializeMiniMap();
     }
 
     /* Retrieve the Canvas Tile Data for the given date */
