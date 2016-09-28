@@ -5,6 +5,7 @@
 <style>
 
     hr{
+        margin-top: 0px !important;
         margin-bottom: 0px !important;
     }
 
@@ -87,7 +88,7 @@
 
     #detailsSection{
         position: relative;
-        height: 500px;
+        height: 405px;
         width: 290px;
         float: left;
         background: beige;
@@ -112,20 +113,19 @@
 
     #chatWindow{
         position: fixed;
-        width: 290px;
+        width: 292px;
         height: 105px;
         background-color: chartreuse;
-        margin-top: 321px;
-        margin-left: 850px;
+        margin-top: -105px;
+        margin-left: 946px;
     }
 
     #chatWindowStrip{
         position: fixed;
-        width: 290px;
-        height: 35px;
+        width: 292px;
+        height: 27px;
         background-color: chartreuse;
-        margin-top: 421px;
-        margin-left: 850px;
+        margin-left: 946px;
     }
 
     #chatWindowTextArea{
@@ -363,15 +363,15 @@
                 <div id="detailsSectionBody"></div>
             </div>
         </div>
-        <div id="chatWindow">
-            <div id="chatWindowWrapper">
-                <textarea id="chatWindowTextArea"> </textarea>
-                <button id="chatWindowSubmitButton">Send</button>
-            </div>
-        </div>
-        <div id="chatWindowStrip"> Click here to chat! </div>
     </div>
 </div>
+<div id="chatWindow">
+    <div id="chatWindowWrapper">
+        <textarea id="chatWindowTextArea"> </textarea>
+        <button id="chatWindowSubmitButton">Send</button>
+    </div>
+</div>
+<div id="chatWindowStrip"> Click here to chat! </div>
 <script id="canvasTileTemplate" type="text/x-jsrender">
     {% verbatim %}
     <div id="{{:canvasTileId}}" class="tile">
