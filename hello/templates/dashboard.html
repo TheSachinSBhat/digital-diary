@@ -60,7 +60,7 @@
 
     #canvas-wrap {
         position:relative;
-        height:405px;
+        height:calc(405px + 27px);
         width:850px;
         float: left;
         overflow-y: auto;
@@ -112,20 +112,19 @@
     }
 
     #chatWindow{
-        position: fixed;
-        width: 292px;
+        position: absolute;
+        width: 290px;
         height: 105px;
         background-color: chartreuse;
-        margin-top: -105px;
-        margin-left: 946px;
+        margin-top: 157px;
     }
 
     #chatWindowStrip{
-        position: fixed;
-        width: 292px;
+        position: absolute;
+        width: 290px;
         height: 27px;
         background-color: chartreuse;
-        margin-left: 946px;
+        margin-top: 262px;
     }
 
     #chatWindowTextArea{
@@ -361,14 +360,14 @@
             <div id="detailsSection">
                 <div id="detailsSectionHeading"></div>
                 <div id="detailsSectionBody"></div>
+                <div id="chatWindow">
+                    <div id="chatWindowWrapper">
+                        <textarea id="chatWindowTextArea"> </textarea>
+                        <button id="chatWindowSubmitButton">Send</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<div id="chatWindow">
-    <div id="chatWindowWrapper">
-        <textarea id="chatWindowTextArea"> </textarea>
-        <button id="chatWindowSubmitButton">Send</button>
     </div>
 </div>
 <div id="chatWindowStrip"> Click here to chat! </div>
