@@ -500,6 +500,10 @@
             $("#chatWindow").toggle();
         });
 
+        /* Welcome the user */
+        textToDisplay = "Agent" + ": " + "Welcome to the Digital Diary Agent Chat Interface";
+        addConversationToDetailsSection(textToDisplay);
+
         /* Handler for Chat Window Submit Button. Triggered whenever user clicks on the submit button. */
         $("#chatWindowSubmitButton").click(function () {
             /* Get the Text from the chat window's Text Area */
@@ -510,10 +514,6 @@
 
             /* Clear the text from the chatWindowTextArea */
             $("#chatWindowTextArea").val('');
-
-            /* Welcome the user */
-            textToDisplay = "Agent" + ": " + "Welcome to the Digital Diary Agent Chat Interface";
-            addConversationToDetailsSection(textToDisplay);
         });
     }
 
