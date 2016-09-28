@@ -510,6 +510,10 @@
 
             /* Clear the text from the chatWindowTextArea */
             $("#chatWindowTextArea").val('');
+
+            /* Welcome the user */
+            textToDisplay = "Agent" + ": " + "Welcome to the Digital Diary Agent Chat Interface";
+            addConversationToDetailsSection(textToDisplay);
         });
     }
 
