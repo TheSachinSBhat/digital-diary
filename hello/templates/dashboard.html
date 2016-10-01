@@ -39,6 +39,10 @@
         margin-left: 5px;
     }
 
+    #side-nav-button-icon.collapse {
+        transform: rotate(180deg) translate(5px,0px);
+    }
+
     #dashboardCurrentDate {
         font-size: 24px;
         float: left;
@@ -548,6 +552,17 @@
         $("#side-nav-toggle-button-div").click(function () {
             /* Toggle the visibility of the Side Nav Panel */
             $("#side-nav-panel").toggle();
+
+            /* If expanded, collapse it */
+            if ($("#side-nav-button-icon").hasClass("expand")) {
+                $("#side-nav-button-icon").removeClass("expand");
+                $("#side-nav-button-icon").addClass("collapse");
+            }
+            /* If collapsed, expand it */
+            else if ($("#side-nav-button-icon").hasClass("collapse")) {
+                $("#side-nav-button-icon").removeClass("collapse");
+                $("#side-nav-button-icon").addClass("expand");
+            }
         });
     }
 
