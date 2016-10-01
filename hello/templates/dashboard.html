@@ -39,10 +39,6 @@
         margin-left: 5px;
     }
 
-    #side-nav-button-icon.collapse {
-        transform: rotate(540deg);
-    }
-
     #dashboardCurrentDate {
         font-size: 24px;
         float: left;
@@ -557,11 +553,17 @@
             if ($("#side-nav-button-icon").hasClass("expand")) {
                 $("#side-nav-button-icon").removeClass("expand");
                 $("#side-nav-button-icon").addClass("collapse");
+
+                /* Rotate the Icon to make it look collapsed */
+                $("#side-nav-button-icon").css("transform", "rotateX(540deg)");
             }
             /* If collapsed, expand it */
             else if ($("#side-nav-button-icon").hasClass("collapse")) {
                 $("#side-nav-button-icon").removeClass("collapse");
                 $("#side-nav-button-icon").addClass("expand");
+
+                /* Bring back the Icon state to make it look expanded */
+                $("#side-nav-button-icon").css("transform", "rotateX(0deg)");
             }
         });
     }
