@@ -3,17 +3,17 @@
 
 {% block content %}
 <style>
-
-    hr{
+    hr {
         margin-top: 0px !important;
         margin-bottom: 0px !important;
     }
 
-    .row{
+    .row {
         margin-top: 3px !important;
     }
 
-    #side-nav-header{
+    #side-nav-header {
+        position: fixed;
         height: 40px;
         width: 90px;
         margin-left: 2px;
@@ -22,7 +22,7 @@
         border-width: 1px;
     }
 
-    #side-nav-button-div{
+    #side-nav-button-div {
         height: 25px;
         width: 25px;
         background-color: deeppink;
@@ -31,76 +31,84 @@
         position: absolute;
     }
 
-    #side-nav-button-icon{
+    #side-nav-button-icon {
         color: yellow;
         font-size: 21px;
         margin-left: 5px;
     }
 
-    #dashboardCurrentDate{
+    #dashboardCurrentDate {
         font-size: 24px;
         float: left;
     }
 
-    .previousArrow{
+    .previousArrow {
         background-image: url('/static/activities/arrow.png');
         margin-right: 5px;
     }
 
-    .previousArrow:hover{
-        background-image: url('/static/activities/arrow-hover.png');
-        margin-right: 5px;
-    }
+        .previousArrow:hover {
+            background-image: url('/static/activities/arrow-hover.png');
+            margin-right: 5px;
+        }
 
-    .previousArrow:active{
-        background-image: url('/static/activities/arrow-clicked.png');
-        margin-right: 5px;
-    }
+        .previousArrow:active {
+            background-image: url('/static/activities/arrow-clicked.png');
+            margin-right: 5px;
+        }
 
-    .nextArrow{
+    .nextArrow {
         background-image: url('/static/activities/arrow.png');
         transform: rotate(180deg);
         margin-left: 5px;
     }
 
-    .nextArrow:hover{
-        background-image: url('/static/activities/arrow-hover.png');
-        transform: rotate(180deg);
-        margin-left: 5px;
-    }
+        .nextArrow:hover {
+            background-image: url('/static/activities/arrow-hover.png');
+            transform: rotate(180deg);
+            margin-left: 5px;
+        }
 
-    .nextArrow:active{
-        background-image: url('/static/activities/arrow-clicked.png');
-        transform: rotate(180deg);
-        margin-left: 5px;
-    }
+        .nextArrow:active {
+            background-image: url('/static/activities/arrow-clicked.png');
+            transform: rotate(180deg);
+            margin-left: 5px;
+        }
 
-    .dashboardHeaderArrow{
+    .dashboardHeaderArrow {
         float: left;
         width: 24px;
         height: 24px;
         margin-top: 5px;
     }
 
+    #dashboard-content {
+        position: absolute;
+        z-index: -1;
+        margin-left: 90px;
+    }
+
     #canvas-wrap {
-        position:relative;
-        height:calc(405px + 27px);
-        width:850px;
+        position: relative;
+        height: calc(405px + 27px);
+        width: 850px;
         float: left;
         overflow-y: auto;
         background: rebeccapurple;
     }
 
-    #canvas-wrap canvas {
-        position:absolute; top:0; left:0;
-        border: 1px solid #c3c3c3;
-        z-index: -1;
-        height: 432px;
-        width: 833px;
-        background: rebeccapurple;
-    }
+        #canvas-wrap canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 1px solid #c3c3c3;
+            z-index: -1;
+            height: 432px;
+            width: 833px;
+            background: rebeccapurple;
+        }
 
-    #mini-map{
+    #mini-map {
         position: absolute;
         height: 120px;
         width: 210px;
@@ -111,7 +119,7 @@
         cursor: pointer;
     }
 
-    #detailsSection{
+    #detailsSection {
         position: relative;
         height: 405px;
         width: 290px;
@@ -119,32 +127,32 @@
         background: beige;
     }
 
-    #detailsSectionHeading{
+    #detailsSectionHeading {
         margin-top: 10px;
         margin-left: 10px;
         font-size: 20px;
     }
 
-    #detailsSectionBody{
+    #detailsSectionBody {
         margin-top: 20px;
         margin-left: 20px;
         font-size: 18px;
         height: 242px;
     }
 
-    .detailsSectionConversation{
+    .detailsSectionConversation {
         margin-top: 10px;
         font-size: 18px;
     }
 
-    #chatWindow{
+    #chatWindow {
         position: absolute;
         width: 290px;
         height: 105px;
         background-color: chartreuse;
     }
 
-    #chatWindowStrip{
+    #chatWindowStrip {
         position: absolute;
         width: 290px;
         height: 27px;
@@ -152,7 +160,7 @@
         margin-top: 105px;
     }
 
-    #chatWindowTextArea{
+    #chatWindowTextArea {
         margin: 15px 5px 10px 9px;
         width: 210px;
         height: 84px;
@@ -160,7 +168,7 @@
         resize: none;
     }
 
-    #chatWindowSubmitButton{
+    #chatWindowSubmitButton {
         background-color: #f2dede;
         margin: 40px 15px 30px 0px;
         width: 50px;
@@ -168,7 +176,7 @@
         float: right;
     }
 
-    .dashboard-section{
+    .dashboard-section {
         float: left;
         width: 100%;
     }
@@ -187,7 +195,7 @@
         float: left;
     }
 
-    .tile-icon-div{
+    .tile-icon-div {
         width: 60px;
         float: left;
     }
@@ -196,83 +204,83 @@
         background: #FFDE00;
     }
 
-    #wakeup img.tile-icon {
-        background-image: url('/static/activities/wake-up.png');
-        width: 66px;
-        height: 66px;
-        background-position: 1px 5px;
-    }
+        #wakeup img.tile-icon {
+            background-image: url('/static/activities/wake-up.png');
+            width: 66px;
+            height: 66px;
+            background-position: 1px 5px;
+        }
 
     #toilet {
         background: #dff0d8;
     }
 
-    #toilet img.tile-icon {
-        background-image: url('/static/activities/toilet.png');
-        width: 66px;
-        height: 66px;
-        background-position: 1px 1px;
-    }
+        #toilet img.tile-icon {
+            background-image: url('/static/activities/toilet.png');
+            width: 66px;
+            height: 66px;
+            background-position: 1px 1px;
+        }
 
     #brushTeeth {
         background: #ccc;
         width: 200px !important;
     }
 
-    #brushTeeth img.tile-icon {
-        background-image: url('/static/activities/brush-teeth.png');
-        width: 66px;
-        height: 66px;
-        background-position: 1px 1px;
-    }
+        #brushTeeth img.tile-icon {
+            background-image: url('/static/activities/brush-teeth.png');
+            width: 66px;
+            height: 66px;
+            background-position: 1px 1px;
+        }
 
     #meditate {
         background: #d81bda;
         width: 180px !important;
     }
 
-    #meditate img.tile-icon {
-        background-image: url('/static/activities/meditate.png');
-        width: 66px;
-        height: 66px;
-        background-position: 1px 1px;
-    }
+        #meditate img.tile-icon {
+            background-image: url('/static/activities/meditate.png');
+            width: 66px;
+            height: 66px;
+            background-position: 1px 1px;
+        }
 
     #bath {
         background: #5abcec;
     }
 
-    #bath img.tile-icon {
-        background-image: url('/static/activities/bath.png');
-        width: 66px;
-        height: 66px;
-        background-position: 0px 1px;
-    }
+        #bath img.tile-icon {
+            background-image: url('/static/activities/bath.png');
+            width: 66px;
+            height: 66px;
+            background-position: 0px 1px;
+        }
 
     #breakfast {
         background: #ffa700;
         width: 180px !important;
     }
 
-    #breakfast img.tile-icon {
-        background-image: url('/static/activities/breakfast.png');
-        width: 66px;
-        height: 66px;
-        background-position: 1px 1px;
-    }
+        #breakfast img.tile-icon {
+            background-image: url('/static/activities/breakfast.png');
+            width: 66px;
+            height: 66px;
+            background-position: 1px 1px;
+        }
 
     #sleep {
         background: #939393;
     }
 
-    #sleep img.tile-icon {
-        background-image: url('/static/activities/sleep.png');
-        width: 66px;
-        height: 66px;
-        background-position: 1px 12px;
-    }
+        #sleep img.tile-icon {
+            background-image: url('/static/activities/sleep.png');
+            width: 66px;
+            height: 66px;
+            background-position: 1px 12px;
+        }
 
-    .tile-text-div{
+    .tile-text-div {
         width: 80px;
         float: left;
     }
@@ -321,12 +329,74 @@
         padding: 9px 16px 9px 16px;
     }
 
+    #side-nav-panel {
+        width: 180px;
+        height: auto;
+        background: white;
+        position: fixed;
+        margin-top: 40px;
+        /* margin-left: -1px; */
+        /* z-index: 2; */
+        padding: 6px;
+        border: deeppink;
+        border-style: solid;
+        border-width: 1px;
+    }
 
+    .side-nav-item{
+        background: yellow;
+        /* text-align: center; */
+        width: 160px;
+        height: 25px;
+        padding: 3px;
+    }
+
+    .side-nav-item-inner-wrapper{
+        /* padding: 3px; */
+        margin-left: 6px;
+        align-items: center;
+    }
+
+    .side-nav-item-icon{
+        /* width: 10px; */
+        position: relative !important;
+        float: left;
+        width: 20px;
+        height: 20px;
+        /* margin-left: 2px; */
+        /* margin-top: 2px; */
+        background: white;
+    }
+
+    .side-nav-item-text{
+        position: relative;
+        float: left;
+        width: 120px;
+        background: white;
+    }
 
 </style>
 <div id="side-nav-header">
     <div id="side-nav-button-div">
         <div id="side-nav-button-icon" class="expand">V</div>
+        <div id="side-nav-panel">
+            <div class="side-nav-item">
+                <div class="side-nav-item-inner-wrapper">
+                    <div class="side-nav-item-icon">
+                        <div class="glyphicon glyphicon-home"></div>
+                    </div>
+                    <div class="side-nav-item-text">My Dashboard</div>
+                </div>
+            </div>
+            <div class="side-nav-item">
+                <div class="side-nav-item-inner-wrapper">
+                    <div class="side-nav-item-icon">
+                        <div class="glyphicon glyphicon-home"></div>
+                    </div>
+                    <div class="side-nav-item-text">My Dashboard</div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="container">
@@ -341,7 +411,7 @@
         <hr>
     </div>
 </div>
-<div class="container">
+<div id="dashboard-content" class="container">
     <div class="row dashboard-section">
         <div id="nav-tiles" class="dashboard-nav-button">
             <h5 class="dashboard-nav-button-text">Tiles</h5>
@@ -477,7 +547,7 @@
             viewportDragStyle: {
                 fillStyle: 'rgba(255,255,0,0.4)'
             }
-            }, $('#canvas-wrap'));
+        }, $('#canvas-wrap'));
         //});
     }
 
@@ -715,8 +785,7 @@
     }
 
     /* Initialize the Annyang Speech Recognition Library */
-    var initializeAnnyang = function ()
-    {
+    var initializeAnnyang = function () {
         if (annyang) {
             // Let's define our first command. First the text we expect, and then the function it should call
             var commands = {
@@ -1049,7 +1118,7 @@
     /* Generic Utility Functions */
 
     /* Format given date to AM/PM format */
-    var formatAMPM = function(date) {
+    var formatAMPM = function (date) {
         var hours = date.getHours();
         var minutes = date.getMinutes();
         var ampm = hours >= 12 ? 'pm' : 'am';
