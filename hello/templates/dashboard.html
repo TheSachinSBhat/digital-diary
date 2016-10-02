@@ -357,6 +357,7 @@
         width: 160px;
         height: 25px;
         padding: 3px;
+        cursor: pointer;
     }
 
     .side-nav-item-inner-wrapper{
@@ -565,6 +566,11 @@
                 /* Bring back the Icon state to make it look expanded */
                 $("#side-nav-button-icon").css("transform", "rotateX(0deg)");
             }
+        });
+
+        /* Handler for Side Nav Item Div click event. Triggered whenever user clicks on the Side Nav Item Div. */
+        $(".side-nav-item").click(function (event) {
+            debugger;
         });
     }
 
