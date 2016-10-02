@@ -865,15 +865,16 @@
         if (groupData) {
             /* Generate the Nav Group Div */
             var sideNavGroupTemplate = $.templates("#sideNavGroupTemplate");
-            var sideNavGroupDiv = sideNavGroupTemplate.render(groupData);
+            var sideNavGroupHtml = sideNavGroupTemplate.render(groupData);
+            var sideNavGroupDiv = $(sideNavGroupHtml);
 
             if (sideNavItemData) {
                 /* Generate the Nav Items Div */
                 var sideNavItemTemplate = $.templates("#sideNavItemTemplate");
-                var sideNavItemDiv = sideNavItemTemplate.render(sideNavItemData);
+                var sideNavItemHtml = sideNavItemTemplate.render(sideNavItemData);
 
                 /* Append Nav Items to the Nav Group */
-                $(sideNavGroupDiv).append(sideNavItemDiv);
+                $(sideNavGroupDiv).append(sideNavItemHtml);
             }
 
             /* Append Nav Group to the Side Panel Div */
