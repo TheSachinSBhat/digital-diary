@@ -351,6 +351,16 @@
         display: none;
     }
 
+    .side-nav-group{
+        width: 160px;
+        height: 100%;
+    }
+
+    .side-nav-group-header{
+        width: 160px;
+        height: 21px;
+    }
+
     .side-nav-item{
         background: yellow;
         /* text-align: center; */
@@ -864,6 +874,12 @@
         ];
 
         renderSideNavGroup(groupData);
+
+        /* Intentionally make the group header null to test this scenario */
+        groupData.groupHeaderData = null;
+
+        renderSideNavGroup(groupData);
+
     }
 
     /* Render side nav items on Side Nav Panel */
@@ -891,20 +907,32 @@
         var groupHeaderData = groupData.groupHeaderData;
         var sideNavItemData = groupData.sideNavItemData;
 
-        if (groupHeaderData) {
+        /* If both Group Header and Nav Items exists, render along with the Header */
+        if (groupHeaderData && sideNavItemData) {
             /* Generate the Nav Group Div */
             var sideNavGroupTemplate = $.templates("#sideNavGroupTemplate");
             var sideNavGroupHtml = sideNavGroupTemplate.render(groupHeaderData);
             var sideNavGroupDiv = $(sideNavGroupHtml);
 
-            if (sideNavItemData) {
-                /* Generate the Nav Items Div */
-                var sideNavItemTemplate = $.templates("#sideNavItemTemplate");
-                var sideNavItemHtml = sideNavItemTemplate.render(sideNavItemData);
+            /* Generate the Nav Items Div */
+            var sideNavItemTemplate = $.templates("#sideNavItemTemplate");
+            var sideNavItemHtml = sideNavItemTemplate.render(sideNavItemData);
 
-                /* Append Nav Items to the Nav Group */
-                $(sideNavGroupDiv).append(sideNavItemHtml);
-            }
+            /* Append Nav Items to the Nav Group */
+            $(sideNavGroupDiv).append(sideNavItemHtml);
+
+            /* Append Nav Group to the Side Panel Div */
+            sideNavPanel.append(sideNavGroupDiv);
+        }
+
+        /* If Group Header is absent, render the Nav Items directly */
+        if ((groupHeaderData == null) && sideNavItemData) {
+            /* Generate the Nav Items Div */
+            var sideNavItemTemplate = $.templates("#sideNavItemTemplate");
+            var sideNavItemHtml = sideNavItemTemplate.render(sideNavItemData);
+
+            /* Append Nav Items to the Nav Group without the header */
+            var sideNavGroupDiv = $(sideNavItemHtml);
 
             /* Append Nav Group to the Side Panel Div */
             sideNavPanel.append(sideNavGroupDiv);
