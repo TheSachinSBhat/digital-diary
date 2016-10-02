@@ -390,7 +390,7 @@
         <div id="side-nav-button-icon" class="expand">V</div>
     </div>
     <div id="side-nav-panel">
-        <div class="side-nav-item">
+        <div id="myDashboard" class="side-nav-item">
             <div class="side-nav-item-inner-wrapper">
                 <div class="side-nav-item-icon">
                     <div class="glyphicon glyphicon-home"></div>
@@ -398,12 +398,12 @@
                 <div class="side-nav-item-text">My Dashboard</div>
             </div>
         </div>
-        <div class="side-nav-item">
+        <div id="dailyActivities" class="side-nav-item">
             <div class="side-nav-item-inner-wrapper">
                 <div class="side-nav-item-icon">
                     <div class="glyphicon glyphicon-home"></div>
                 </div>
-                <div class="side-nav-item-text">My Dashboard</div>
+                <div class="side-nav-item-text">Daily Activities</div>
             </div>
         </div>
     </div>
@@ -571,6 +571,15 @@
         /* Handler for Side Nav Item Div click event. Triggered whenever user clicks on the Side Nav Item Div. */
         $(".side-nav-item").click(function (event) {
             debugger;
+            if (event) {
+                if (event.currentTarget) {
+                    var currentNavItem = event.currentTarget;
+
+                    if (currentNavItem.id) {
+                        alert(currentNavItem.id);
+                    }
+                }
+            }
         });
     }
 
