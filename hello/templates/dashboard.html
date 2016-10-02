@@ -497,6 +497,16 @@
     </div>
     {% endverbatim %}
 </script>
+<script id="sideNavItemTemplate" type="text/x-jsrender">
+    <div id="{{:navItemId}}" class="side-nav-item">
+            <div class="side-nav-item-inner-wrapper">
+                <div class="side-nav-item-icon">
+                    <div class="glyphicon glyphicon-home"></div>
+                </div>
+                <div class="side-nav-item-text">{{:navItemText}}</div>
+            </div>
+        </div>
+</script>
 <script type="text/javascript">
 
     /* Application Constants */
@@ -520,6 +530,17 @@
     var currentDate;
 
     var canvasTileData = [];
+
+    var sideNavItemData = [
+        {
+            "navItemId": "myDashboard",
+            "navItemText": "My Dashboard"
+        },
+        {
+            "navItemId": "dailyActivities",
+            "navItemText": "Daily Activities"
+        }
+    ];
 
     var userDataJson = {};
 
@@ -545,6 +566,9 @@
 
     /* Initialize the Side Navigation Panel */
     var initializeSideNavigationPanel = function () {
+        /* Render side nav items on Side Nav Panel */
+        renderSideNavItems();
+
         /* Handler for Side Nav Toggle Button Div click event. Triggered whenever user clicks on the Side Nav Toggle Button Div. */
         $("#side-nav-toggle-button-div").click(function () {
             /* Toggle the visibility of the Side Nav Panel */
@@ -802,6 +826,20 @@
             scaleDownTileSize(scaleFactor);
         }
     }
+
+    /* Render side nav items on Side Nav Panel */
+    var renderSideNavItems = function () {
+        var sideNavPanel = $("#side-nav-panel");
+
+        var sideNavItemTemplate = $.templates("#sideNavItemTemplate");
+
+        if (sideNavItemData) {
+            var htmlOutput = sideNavItemTemplate.render(sideNavItemData);
+
+            sideNavPanel.append(htmlOutput);
+        }
+    }
+
 
     var scaleDownTileSize = function (scaleFactor) {
         /* Scale Down Tiles when their count increases */
