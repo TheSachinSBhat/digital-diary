@@ -366,7 +366,7 @@
         align-items: center;
     }
 
-    .side-nav-item-icon{
+    .side-nav-item-icon, .side-nav-group-icon {
         /* width: 10px; */
         position: relative !important;
         float: left;
@@ -377,7 +377,7 @@
         background: white;
     }
 
-    .side-nav-item-text{
+    .side-nav-item-text, .side-nav-group-text{
         position: relative;
         float: left;
         width: 120px;
@@ -497,6 +497,18 @@
     </div>
     {% endverbatim %}
 </script>
+<script id="sideNavGroupTemplate" type="text/x-jsrender">
+    {% verbatim %}
+    <div class="side-nav-group">
+        <div class="side-nav-group-header">
+            <div class="side-nav-group-icon">
+                <div class="glyphicon glyphicon-home"></div>
+            </div>
+            <div class="side-nav-group-text">{{:navGroupHeaderText}}</div>
+        </div>
+    </div>
+    {% endverbatim %}
+</script>
 <script id="sideNavItemTemplate" type="text/x-jsrender">
     {% verbatim %}
     <div id="{{:navItemId}}" class="side-nav-item">
@@ -533,16 +545,16 @@
 
     var canvasTileData = [];
 
-    var sideNavItemData = [
-        {
-            "navItemId": "myDashboard",
-            "navItemText": "My Dashboard"
-        },
-        {
-            "navItemId": "dailyActivities",
-            "navItemText": "Daily Activities"
-        }
-    ];
+    //var sideNavItemData = [
+    //    {
+    //        "navItemId": "myDashboard",
+    //        "navItemText": "My Dashboard"
+    //    },
+    //    {
+    //        "navItemId": "dailyActivities",
+    //        "navItemText": "Daily Activities"
+    //    }
+    //];
 
     var userDataJson = {};
 
@@ -833,12 +845,39 @@
     var renderSideNavItems = function () {
         var sideNavPanel = $("#side-nav-panel");
 
-        var sideNavItemTemplate = $.templates("#sideNavItemTemplate");
+        var groupData = [
+            {
+                "navGroupHeaderText": "Group 1"
+            }
+        ];
 
-        if (sideNavItemData) {
-            var htmlOutput = sideNavItemTemplate.render(sideNavItemData);
+        var sideNavItemData = [
+            {
+                "navItemId": "myDashboard",
+                "navItemText": "My Dashboard"
+            },
+            {
+                "navItemId": "dailyActivities",
+                "navItemText": "Daily Activities"
+            }
+        ];
 
-            sideNavPanel.append(htmlOutput);
+        if (groupData) {
+            /* Generate the Nav Group Div */
+            var sideNavGroupTemplate = $.templates("#sideNavGroupTemplate");
+            var sideNavGroupDiv = sideNavGroupTemplate.render(groupData);
+
+            if (sideNavItemData) {
+                /* Generate the Nav Items Div */
+                var sideNavItemTemplate = $.templates("#sideNavItemTemplate");
+                var sideNavItemDiv = sideNavItemTemplate.render(sideNavItemData);
+
+                /* Append Nav Items to the Nav Group */
+                sideNavGroupDiv.append(sideNavItemDiv);
+            }
+
+            /* Append Nav Group to the Side Panel Div */
+            sideNavPanel.append(sideNavGroupDiv);
         }
     }
 
