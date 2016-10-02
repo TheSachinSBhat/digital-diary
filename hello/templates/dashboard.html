@@ -843,15 +843,16 @@
 
     /* Render side nav items on Side Nav Panel */
     var renderSideNavItems = function () {
-        var sideNavPanel = $("#side-nav-panel");
 
-        var groupData = [
+        var groupData = [];
+
+        groupData.groupHeaderData = [
             {
                 "navGroupHeaderText": "Group 1"
             }
         ];
 
-        var sideNavItemData = [
+        groupData.sideNavItemData = [
             {
                 "navItemId": "myDashboard",
                 "navItemText": "My Dashboard"
@@ -862,10 +863,38 @@
             }
         ];
 
-        if (groupData) {
+        renderSideNavGroup(groupData);
+    }
+
+    /* Render side nav items on Side Nav Panel */
+    var renderSideNavGroup = function (groupData) {
+        var sideNavPanel = $("#side-nav-panel");
+
+        //var groupHeaderData = [
+        //    {
+        //        "navGroupHeaderText": "Group 1"
+        //    }
+        //];
+
+        //var sideNavItemData = [
+        //    {
+        //        "navItemId": "myDashboard",
+        //        "navItemText": "My Dashboard"
+        //    },
+        //    {
+        //        "navItemId": "dailyActivities",
+        //        "navItemText": "Daily Activities"
+        //    }
+        //];
+
+        // TODO: Handle null conditions
+        var groupHeaderData = groupData.groupHeaderData;
+        var sideNavItemData = groupData.sideNavItemData;
+
+        if (groupHeaderData) {
             /* Generate the Nav Group Div */
             var sideNavGroupTemplate = $.templates("#sideNavGroupTemplate");
-            var sideNavGroupHtml = sideNavGroupTemplate.render(groupData);
+            var sideNavGroupHtml = sideNavGroupTemplate.render(groupHeaderData);
             var sideNavGroupDiv = $(sideNavGroupHtml);
 
             if (sideNavItemData) {
