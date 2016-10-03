@@ -854,31 +854,63 @@
     /* Render side nav items on Side Nav Panel */
     var renderSideNavItems = function () {
 
-        var groupData = [];
-
-        groupData.groupHeaderData = [
+        var groupData = [
             {
-                "navGroupHeaderText": "Group 1"
-            }
-        ];
-
-        groupData.sideNavItemData = [
-            {
-                "navItemId": "myDashboard",
-                "navItemText": "My Dashboard"
+                "groupHeaderData": [{
+                    "navGroupHeaderText": "Group 1"
+                }],
+                "sideNavItemData": [
+                    {
+                        "navItemId": "myDashboard",
+                        "navItemText": "My Dashboard"
+                    },
+                    {
+                        "navItemId": "dailyActivities",
+                        "navItemText": "Daily Activities"
+                    }
+                ]
             },
             {
-                "navItemId": "dailyActivities",
-                "navItemText": "Daily Activities"
+                "sideNavItemData": [
+                    {
+                        "navItemId": "myDashboard",
+                        "navItemText": "My Dashboard"
+                    },
+                    {
+                        "navItemId": "dailyActivities",
+                        "navItemText": "Daily Activities"
+                    }
+                ]
             }
         ];
 
-        renderSideNavGroup(groupData);
+        //groupData.groupHeaderData = [
+        //    {
+        //        "navGroupHeaderText": "Group 1"
+        //    }
+        //];
+
+        //groupData.sideNavItemData = [
+        //    {
+        //        "navItemId": "myDashboard",
+        //        "navItemText": "My Dashboard"
+        //    },
+        //    {
+        //        "navItemId": "dailyActivities",
+        //        "navItemText": "Daily Activities"
+        //    }
+        //];
+
+        $.each(groupData, function (index, data) {
+            /* Render each side nav group onto the Side Panel Div */
+            renderSideNavGroup(data);
+        });
+        
 
         /* Intentionally make the group header null to test this scenario */
-        groupData.groupHeaderData = null;
+        //groupData.groupHeaderData = null;
 
-        renderSideNavGroup(groupData);
+        //renderSideNavGroup(groupData);
 
     }
 
