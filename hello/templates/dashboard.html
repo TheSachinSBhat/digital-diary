@@ -907,6 +907,8 @@
         var groupHeaderData = groupData.groupHeaderData;
         var sideNavItemData = groupData.sideNavItemData;
 
+        var groupHeaderDataWasNull = false;
+
         /* If Group Header is absent, provide empty data */
         if (groupHeaderData == null) {
             groupHeaderData = [
@@ -914,6 +916,7 @@
                     "navGroupHeaderText": ""
                 }
             ];
+            groupHeaderDataWasNull = true;
         }
 
         /* If both Group Header and Nav Items exists, render along with the Header */
@@ -937,7 +940,7 @@
         }
 
         /* If Group Header is absent, make the header invisible */
-        if (groupHeaderData == null) {
+        if (groupHeaderDataWasNull == null) {
             sideNavGroupDiv.find(".side-nav-group-header").css("visibility", "hidden");
         }
     }
