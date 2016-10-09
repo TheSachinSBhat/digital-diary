@@ -357,17 +357,17 @@
         display: none;
     }
 
-    .side-nav-group{
+    .side-nav-group {
         width: 160px;
         height: 100%;
     }
 
-    .side-nav-group-header{
+    .side-nav-group-header {
         width: 160px;
         height: 21px;
     }
 
-    .side-nav-item{
+    .side-nav-item {
         /*background: yellow;*/
         /* text-align: center; */
         width: 160px;
@@ -376,7 +376,7 @@
         cursor: pointer;
     }
 
-    .side-nav-item-inner-wrapper{
+    .side-nav-item-inner-wrapper {
         /* padding: 3px; */
         margin-left: 6px;
         align-items: center;
@@ -393,13 +393,12 @@
         background: white;
     }
 
-    .side-nav-item-text, .side-nav-group-text{
+    .side-nav-item-text, .side-nav-group-text {
         position: relative;
         float: left;
         width: 120px;
         background: white;
     }
-
 </style>
 <div id="side-nav-header">
     <div id="side-nav-toggle-button-div">
@@ -424,66 +423,8 @@
         </div>-->
     </div>
 </div>
-<div class="container">
-    <div class="row dashboard-section">
-        <div id="previousDateArrow" class="dashboardHeaderArrow previousArrow"></div>
-        <div id="dashboardCurrentDate"></div>
-        <div id="nextDateArrow" class="dashboardHeaderArrow nextArrow"></div>
-    </div>
-</div>
-<div class="container">
-    <div class="row dashboard-section">
-        <hr>
-    </div>
-</div>
-<!-- Current Dashaboard Content based on the option selected by used from the Navigation Menu -->
-<div id="dashboard-content" class="container">
-    <div class="row dashboard-section">
-        <div id="nav-tiles" class="dashboard-nav-button">
-            <h5 class="dashboard-nav-button-text">Tiles</h5>
-        </div>
-        <div id="nav-timeline" class="dashboard-nav-button">
-            <h5 class="dashboard-nav-button-text">Timeline</h5>
-        </div>
-        <div id="nav-location" class="dashboard-nav-button">
-            <h5 class="dashboard-nav-button-text">Location</h5>
-        </div>
-    </div>
-    <div class="row dashboard-section">
-        <div class="">
-            <!-- Canvas that displays the Activity Visualizer -->
-            <div id="canvas-wrap">
-                <canvas></canvas>
-                <!--<div id="wakeup" class="tile">
-                    <div class="tile-icon-div">
-                        <img class="tile-icon">
-                    </div>
-                    <div class="tile-text-div">
-                        <div class="">
-                            <span class="tile-text tile-text-main">Wake Up</span>
-                        </div>
-                        <div class="">
-                            <span class="tile-text tile-text-sub">6:00 am</span>
-                        </div>
-                    </div>
-                </div>
-                <div id="sleep" class="tile">
-                    <div class="tile-icon-div">
-                        <img class="tile-icon">
-                    </div>
-                    <div class="tile-text-div">
-                        <div class="">
-                            <span class="tile-text tile-text-main">Sleep</span>
-                        </div>
-                        <div class="">
-                            <span class="tile-text tile-text-sub">10:30 pm</span>
-                        </div>
-                    </div>
-                </div>-->
-            </div>
-            <div id="mini-map"></div>
-        </div>
-    </div>
+<!-- Page Content Div that displays content based on the currentNavItemId -->
+<div id="page-content">
 </div>
 <!-- Chat Section  -->
 <div id="chatSection">
@@ -530,13 +471,79 @@
 <script id="sideNavItemTemplate" type="text/x-jsrender">
     {% verbatim %}
     <div id="{{:navItemId}}" class="side-nav-item">
-            <div class="side-nav-item-inner-wrapper">
-                <div class="side-nav-item-icon">
-                    <div class="glyphicon glyphicon-home"></div>
-                </div>
-                <div class="side-nav-item-text">{{:navItemText}}</div>
+        <div class="side-nav-item-inner-wrapper">
+            <div class="side-nav-item-icon">
+                <div class="glyphicon glyphicon-home"></div>
+            </div>
+            <div class="side-nav-item-text">{{:navItemText}}</div>
+        </div>
+    </div>
+    {% endverbatim %}
+</script>
+<!-- Page Content Templates -->
+<script id="dailyActivitiesTemplate" type="text/x-jsrender">
+    {% verbatim %}
+    <div class="container">
+        <div class="row dashboard-section">
+            <div id="previousDateArrow" class="dashboardHeaderArrow previousArrow"></div>
+            <div id="dashboardCurrentDate"></div>
+            <div id="nextDateArrow" class="dashboardHeaderArrow nextArrow"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row dashboard-section">
+            <hr>
+        </div>
+    </div>
+    <!-- Current Dashaboard Content based on the option selected by used from the Navigation Menu -->
+    <div id="dashboard-content" class="container">
+        <div class="row dashboard-section">
+            <div id="nav-tiles" class="dashboard-nav-button">
+                <h5 class="dashboard-nav-button-text">Tiles</h5>
+            </div>
+            <div id="nav-timeline" class="dashboard-nav-button">
+                <h5 class="dashboard-nav-button-text">Timeline</h5>
+            </div>
+            <div id="nav-location" class="dashboard-nav-button">
+                <h5 class="dashboard-nav-button-text">Location</h5>
             </div>
         </div>
+        <div class="row dashboard-section">
+            <div class="">
+                <!-- Canvas that displays the Activity Visualizer -->
+                <div id="canvas-wrap">
+                    <canvas></canvas>
+                    <!--<div id="wakeup" class="tile">
+                        <div class="tile-icon-div">
+                            <img class="tile-icon">
+                        </div>
+                        <div class="tile-text-div">
+                            <div class="">
+                                <span class="tile-text tile-text-main">Wake Up</span>
+                            </div>
+                            <div class="">
+                                <span class="tile-text tile-text-sub">6:00 am</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="sleep" class="tile">
+                        <div class="tile-icon-div">
+                            <img class="tile-icon">
+                        </div>
+                        <div class="tile-text-div">
+                            <div class="">
+                                <span class="tile-text tile-text-main">Sleep</span>
+                            </div>
+                            <div class="">
+                                <span class="tile-text tile-text-sub">10:30 pm</span>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+                <div id="mini-map"></div>
+            </div>
+        </div>
+    </div>
     {% endverbatim %}
 </script>
 <script type="text/javascript">
@@ -635,6 +642,7 @@
 
                     if (currentNavItem.id) {
                         //alert(currentNavItem.id);
+                        updatedDashboardContent(currentNavItem.id, event);
                     }
                 }
             }
@@ -788,6 +796,33 @@
         /* If Group Header is absent, make the header invisible */
         if (groupHeaderDataWasNull) {
             sideNavGroupDiv.find(".side-nav-group-header").css("visibility", "hidden");
+        }
+    }
+
+    /* Update the Dashboard Content Section based on the Navigation Menu selected by the user */
+    var updatedDashboardContent = function (currentNavItemIdentifier, event) {
+        currentNavItemId = currentNavItemIdentifier;
+
+        switch (currentNavItemId) {
+            case "dailyActivities":
+                /* Render the Daily Activities Template into the Dashboard Content Div  */
+                var pageContentDiv = $("#page-content");
+
+                /* Obtain the Html content of the Daily Activities */
+                var dailyActivitiesTemplate = $.templates("#dailyActivitiesTemplate");
+                var dailyActivitiesHtml = dailyActivitiesTemplate.render();
+
+                /* Clear the contents of the Page Content Div */
+                pageContentDiv.empty();
+
+                /* Inject the Daily Activities Html Content into the Page Content Div */
+                pageContentDiv.append(dailyActivitiesHtml);
+
+                /* Update the Dashboard Date and Canvas Tiles for current Date */
+                updateDashboardDateAndCanvasTilesForGivenDate(currentDate);
+                break;
+            default:
+                // TODO: Add a simple div indicating event.currentTarget.innerText
         }
     }
 
