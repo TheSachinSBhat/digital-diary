@@ -121,7 +121,7 @@
         cursor: pointer;
     }
 
-    #detailsSection {
+    #chatSection {
         position: relative;
         height: 405px;
         width: 290px;
@@ -129,20 +129,20 @@
         background: beige;
     }
 
-    #detailsSectionHeading {
+    #chatSectionHeading {
         margin-top: 10px;
         margin-left: 10px;
         font-size: 20px;
     }
 
-    #detailsSectionBody {
+    #chatSectionBody {
         margin-top: 20px;
         margin-left: 20px;
         font-size: 18px;
         height: 242px;
     }
 
-    .detailsSectionConversation {
+    .chatSectionConversation {
         margin-top: 10px;
         font-size: 18px;
     }
@@ -362,7 +362,7 @@
     }
 
     .side-nav-item{
-        background: yellow;
+        /*background: yellow;*/
         /* text-align: center; */
         width: 160px;
         height: 25px;
@@ -475,10 +475,10 @@
                 </div>-->
             </div>
             <div id="mini-map"></div>
-            <!-- Details Section besides the Canvas -->
-            <div id="detailsSection">
-                <div id="detailsSectionHeading"></div>
-                <div id="detailsSectionBody"></div>
+            <!-- Chat Section besides the Canvas -->
+            <div id="chatSection">
+                <div id="chatSectionHeading"></div>
+                <div id="chatSectionBody"></div>
                 <div id="chatWindow">
                     <div id="chatWindowWrapper">
                         <textarea id="chatWindowTextArea"> </textarea>
@@ -555,6 +555,8 @@
 
     var canvasTileData = [];
 
+    var currentNavItemId;
+
     //var sideNavItemData = [
     //    {
     //        "navItemId": "myDashboard",
@@ -567,8 +569,6 @@
     //];
 
     var userDataJson = {};
-
-    /* Page specific funtions related to Canvas Rendering */
 
     /* Page load handler to initialize data */
     $(document).ready(function () {
@@ -588,6 +588,8 @@
         initializeSideNavigationPanel();
     });
 
+    /* Side Nav Methods */
+
     /* Initialize the Side Navigation Panel */
     var initializeSideNavigationPanel = function () {
         /* Render side nav items on Side Nav Panel */
@@ -606,7 +608,7 @@
                 /* Rotate the Icon to make it look collapsed */
                 $("#side-nav-button-icon").css("transform", "rotateX(540deg)");
             }
-            /* If collapsed, expand it */
+                /* If collapsed, expand it */
             else if ($("#side-nav-button-icon").hasClass("collapse")) {
                 $("#side-nav-button-icon").removeClass("collapse");
                 $("#side-nav-button-icon").addClass("expand");
@@ -624,231 +626,11 @@
                     var currentNavItem = event.currentTarget;
 
                     if (currentNavItem.id) {
-                        alert(currentNavItem.id);
+                        //alert(currentNavItem.id);
                     }
                 }
             }
         });
-    }
-
-    /* Initialize the Mini-map for the Canvas Tiles */
-    var initializeMiniMap = function () {
-        $('#mini-map').fracs('outline', {
-            crop: true,
-            styles: [{
-                selector: '.tile',
-                strokeWidth: 'auto',
-                strokeStyle: 'auto',
-                fillStyle: 'auto'
-            }],
-            viewportStyle: {
-                fillStyle: 'rgba(255,255,0,0.3)'
-            },
-            viewportDragStyle: {
-                fillStyle: 'rgba(255,255,0,0.4)'
-            }
-        }, $('#canvas-wrap'));
-        //});
-    }
-
-    /* Click Handler for Previous Date Arrow */
-    $("#previousDateArrow").on("click", function () {
-
-        /* Save the Canvas Tile Data for the given date */
-        saveCanvasTileDataForGivenDate(currentDate, canvasTileData);
-
-        /* Clear out the existing canvasTileData */
-        clearOutCanvasTileData();
-
-        /* Subtract one day from the current date */
-        var numberOfDaysToSubtract = 1;
-        currentDate.setDate(currentDate.getDate() - numberOfDaysToSubtract);
-
-        /* Update the Dashboard Date and Canvas Tiles for new current Date */
-        updateDashboardDateAndCanvasTilesForGivenDate(currentDate);
-    });
-
-    /* Click Handler for Next Date Arrow */
-    $("#nextDateArrow").on("click", function () {
-
-        /* Save the Canvas Tile Data for the given date */
-        saveCanvasTileDataForGivenDate(currentDate, canvasTileData);
-
-        /* Clear out the existing canvasTileData */
-        clearOutCanvasTileData();
-
-        /* Add one day to the current date */
-        var numberOfDaysToAdd = 1;
-        currentDate.setDate(currentDate.getDate() + numberOfDaysToAdd);
-
-        /* Update the Dashboard Date and Canvas Tiles for new current Date */
-        updateDashboardDateAndCanvasTilesForGivenDate(currentDate);
-    });
-
-    /* Clear out the existing canvasTileData */
-    var clearOutCanvasTileData = function () {
-        /* Clear the Canvas Tile Data */
-        canvasTileData = [];
-        /* Remove activity tiles from the Canvas Wrap Div */
-        $("#canvas-wrap .tile").remove()
-    }
-
-    /* Initialize the chat window */
-    var initializeChatWindow = function () {
-        /* Handler for Chat Window Strip Click event. Triggered whenever user clicks on the Chat Window Strip Div. */
-        $("#chatWindowStrip").click(function () {
-            $("#chatWindow").toggle();
-        });
-
-        /* Welcome the user */
-        $("#detailsSectionHeading").text("Agent Chat Interface");
-
-        textToDisplay = "Agent" + ": " + "Welcome to the Digital Diary Agent Chat Interface";
-        addConversationToDetailsSection(textToDisplay);
-
-        /* Handler for Chat Window Submit Button. Triggered whenever user clicks on the submit button. */
-        $("#chatWindowSubmitButton").click(function () {
-            /* Get the Text from the chat window's Text Area */
-            var inputText = $("#chatWindowTextArea").val();
-
-            /* Use the default Agent Handler for Chat Conversation */
-            defaultHandler(inputText);
-
-            /* Clear the text from the chatWindowTextArea */
-            $("#chatWindowTextArea").val('');
-        });
-    }
-
-    /* Update the Current Date on the Dashboard Header */
-    var updateCurrentDateOnDashboardHeader = function (currentDate) {
-
-        /* Format current date in DD MMM YYYY Format */
-        currentDateInDDMMMYYYYFormat = formatDateInDDMMMYYYYFormat(currentDate);
-
-        /* Update the Current Date in the Dashboard Current Date Div */
-        $("#dashboardCurrentDate").text(currentDateInDDMMMYYYYFormat);
-    }
-
-    /* Update the Dashboard Date and Canvas Tiles for given Date */
-    var updateDashboardDateAndCanvasTilesForGivenDate = function (currentDate) {
-
-        /* Update the Current Date on the Dashboard Header */
-        updateCurrentDateOnDashboardHeader(currentDate);
-
-        /* Update the Canvas Tile Data based for the current date */
-        canvasTileData = retrieveCanvasTileDataForGivenDate(currentDate);
-
-        /* Handle null scenarios for canvas tile data */
-        if (canvasTileData == null) {
-            canvasTileData = [];
-        }
-
-        /* Initialize tiles on Canvas */
-        renderCanvasTiles();
-
-        /* Initialize the Mini-map for the Canvas Tiles */
-        initializeMiniMap();
-    }
-
-    /* Retrieve the Canvas Tile Data for the given date */
-    var retrieveCanvasTileDataForGivenDate = function (currentDate) {
-        userDataJson = retrieveUserDataJson();
-
-        var current_date = currentDate.getDate();
-        var current_month = currentDate.getMonth();
-        var current_year = currentDate.getFullYear();
-
-        var canvasTileData = [];
-
-        if (userDataJson) {
-            if (userDataJson.userDailyActivities) {
-                if (userDataJson.userDailyActivities[current_year]) {
-                    if (userDataJson.userDailyActivities[current_year][current_month]) {
-                        if (userDataJson.userDailyActivities[current_year][current_month][current_date]) {
-                            if (userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData) {
-                                canvasTileData = userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return canvasTileData;
-    }
-
-    /* Save the Canvas Tile Data for the given date */
-    var saveCanvasTileDataForGivenDate = function (currentDate, canvasTileData) {
-        //userDataJson = retrieveUserDataJson();
-
-        var current_date = currentDate.getDate();
-        var current_month = currentDate.getMonth();
-        var current_year = currentDate.getFullYear();
-
-        /* Handle Null Checks for every variable of userDataJson */
-        if (userDataJson == null) {
-            userDataJson = {};
-        }
-
-        if (userDataJson.userDailyActivities == null) {
-            userDataJson.userDailyActivities = {};
-        }
-
-        if (userDataJson.userDailyActivities[current_year] == null) {
-            userDataJson.userDailyActivities[current_year] = {};
-        }
-
-
-        if (userDataJson.userDailyActivities[current_year][current_month] == null) {
-            userDataJson.userDailyActivities[current_year][current_month] = {};
-        }
-
-        if (userDataJson.userDailyActivities[current_year][current_month][current_date] == null) {
-            userDataJson.userDailyActivities[current_year][current_month][current_date] = {};
-        }
-
-
-        if (userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData == null) {
-            userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData = [];
-        }
-
-        /* Update the value of canvasTileData in the relevant location of userDailyActivities dictionary */
-        userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData = canvasTileData;
-
-        /* Save the current state of Canvas Tile Data back to server */
-        saveUserDataJson(userDataJson);
-    }
-
-    /* Clear Canvas tiles */
-    var clearCanvasTiles = function () {
-        /* Remove all Tiles from the Canvas */
-        $(".tile").remove()
-    }
-
-    /* Render tiles on Canvas */
-    var renderCanvasTiles = function () {
-        var canvasDiv = $("#canvas-wrap");
-
-        var canvasTileTemplate = $.templates("#canvasTileTemplate");
-
-        if (canvasTileData) {
-            var htmlOutput = canvasTileTemplate.render(canvasTileData);
-
-            canvasDiv.append(htmlOutput);
-
-
-            var scaleFactor = 1.0;
-
-            var numberOfTilesOnCanvas = canvasTileData.length;
-
-            //if (numberOfTilesOnCanvas > 10 && numberOfTilesOnCanvas < 20)
-            //{
-            //    scaleFactor = 0.9;
-            //}
-
-            /* Scale Down Tiles when their count increases */
-            scaleDownTileSize(scaleFactor);
-        }
     }
 
     /* Render side nav items on Side Nav Panel */
@@ -1001,6 +783,227 @@
         }
     }
 
+    /* Page specific funtions related to Canvas Rendering */
+
+    /* Initialize the Mini-map for the Canvas Tiles */
+    var initializeMiniMap = function () {
+        $('#mini-map').fracs('outline', {
+            crop: true,
+            styles: [{
+                selector: '.tile',
+                strokeWidth: 'auto',
+                strokeStyle: 'auto',
+                fillStyle: 'auto'
+            }],
+            viewportStyle: {
+                fillStyle: 'rgba(255,255,0,0.3)'
+            },
+            viewportDragStyle: {
+                fillStyle: 'rgba(255,255,0,0.4)'
+            }
+        }, $('#canvas-wrap'));
+        //});
+    }
+
+    /* Click Handler for Previous Date Arrow */
+    $("#previousDateArrow").on("click", function () {
+
+        /* Save the Canvas Tile Data for the given date */
+        saveCanvasTileDataForGivenDate(currentDate, canvasTileData);
+
+        /* Clear out the existing canvasTileData */
+        clearOutCanvasTileData();
+
+        /* Subtract one day from the current date */
+        var numberOfDaysToSubtract = 1;
+        currentDate.setDate(currentDate.getDate() - numberOfDaysToSubtract);
+
+        /* Update the Dashboard Date and Canvas Tiles for new current Date */
+        updateDashboardDateAndCanvasTilesForGivenDate(currentDate);
+    });
+
+    /* Click Handler for Next Date Arrow */
+    $("#nextDateArrow").on("click", function () {
+
+        /* Save the Canvas Tile Data for the given date */
+        saveCanvasTileDataForGivenDate(currentDate, canvasTileData);
+
+        /* Clear out the existing canvasTileData */
+        clearOutCanvasTileData();
+
+        /* Add one day to the current date */
+        var numberOfDaysToAdd = 1;
+        currentDate.setDate(currentDate.getDate() + numberOfDaysToAdd);
+
+        /* Update the Dashboard Date and Canvas Tiles for new current Date */
+        updateDashboardDateAndCanvasTilesForGivenDate(currentDate);
+    });
+
+    /* Clear out the existing canvasTileData */
+    var clearOutCanvasTileData = function () {
+        /* Clear the Canvas Tile Data */
+        canvasTileData = [];
+        /* Remove activity tiles from the Canvas Wrap Div */
+        $("#canvas-wrap .tile").remove()
+    }
+
+    /* Initialize the chat window */
+    var initializeChatWindow = function () {
+        /* Handler for Chat Window Strip Click event. Triggered whenever user clicks on the Chat Window Strip Div. */
+        $("#chatWindowStrip").click(function () {
+            $("#chatWindow").toggle();
+        });
+
+        /* Welcome the user */
+        $("#chatSectionHeading").text("Agent Chat Interface");
+
+        textToDisplay = "Agent" + ": " + "Welcome to the Digital Diary Agent Chat Interface";
+        addConversationToChatSection(textToDisplay);
+
+        /* Handler for Chat Window Submit Button. Triggered whenever user clicks on the submit button. */
+        $("#chatWindowSubmitButton").click(function () {
+            /* Get the Text from the chat window's Text Area */
+            var inputText = $("#chatWindowTextArea").val();
+
+            /* Use the default Agent Handler for Chat Conversation */
+            defaultHandler(inputText);
+
+            /* Clear the text from the chatWindowTextArea */
+            $("#chatWindowTextArea").val('');
+        });
+    }
+
+    /* Update the Current Date on the Dashboard Header */
+    var updateCurrentDateOnDashboardHeader = function (currentDate) {
+
+        /* Format current date in DD MMM YYYY Format */
+        currentDateInDDMMMYYYYFormat = formatDateInDDMMMYYYYFormat(currentDate);
+
+        /* Update the Current Date in the Dashboard Current Date Div */
+        $("#dashboardCurrentDate").text(currentDateInDDMMMYYYYFormat);
+    }
+
+    /* Update the Dashboard Date and Canvas Tiles for given Date */
+    var updateDashboardDateAndCanvasTilesForGivenDate = function (currentDate) {
+
+        /* Update the Current Date on the Dashboard Header */
+        updateCurrentDateOnDashboardHeader(currentDate);
+
+        /* Update the Canvas Tile Data based for the current date */
+        canvasTileData = retrieveCanvasTileDataForGivenDate(currentDate);
+
+        /* Handle null scenarios for canvas tile data */
+        if (canvasTileData == null) {
+            canvasTileData = [];
+        }
+
+        /* Initialize tiles on Canvas */
+        renderCanvasTiles();
+
+        /* Initialize the Mini-map for the Canvas Tiles */
+        initializeMiniMap();
+    }
+
+    /* Retrieve the Canvas Tile Data for the given date */
+    var retrieveCanvasTileDataForGivenDate = function (currentDate) {
+        userDataJson = retrieveUserDataJson();
+
+        var current_date = currentDate.getDate();
+        var current_month = currentDate.getMonth();
+        var current_year = currentDate.getFullYear();
+
+        var canvasTileData = [];
+
+        if (userDataJson) {
+            if (userDataJson.userDailyActivities) {
+                if (userDataJson.userDailyActivities[current_year]) {
+                    if (userDataJson.userDailyActivities[current_year][current_month]) {
+                        if (userDataJson.userDailyActivities[current_year][current_month][current_date]) {
+                            if (userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData) {
+                                canvasTileData = userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return canvasTileData;
+    }
+
+    /* Save the Canvas Tile Data for the given date */
+    var saveCanvasTileDataForGivenDate = function (currentDate, canvasTileData) {
+        //userDataJson = retrieveUserDataJson();
+
+        var current_date = currentDate.getDate();
+        var current_month = currentDate.getMonth();
+        var current_year = currentDate.getFullYear();
+
+        /* Handle Null Checks for every variable of userDataJson */
+        if (userDataJson == null) {
+            userDataJson = {};
+        }
+
+        if (userDataJson.userDailyActivities == null) {
+            userDataJson.userDailyActivities = {};
+        }
+
+        if (userDataJson.userDailyActivities[current_year] == null) {
+            userDataJson.userDailyActivities[current_year] = {};
+        }
+
+
+        if (userDataJson.userDailyActivities[current_year][current_month] == null) {
+            userDataJson.userDailyActivities[current_year][current_month] = {};
+        }
+
+        if (userDataJson.userDailyActivities[current_year][current_month][current_date] == null) {
+            userDataJson.userDailyActivities[current_year][current_month][current_date] = {};
+        }
+
+
+        if (userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData == null) {
+            userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData = [];
+        }
+
+        /* Update the value of canvasTileData in the relevant location of userDailyActivities dictionary */
+        userDataJson.userDailyActivities[current_year][current_month][current_date].canvasTileData = canvasTileData;
+
+        /* Save the current state of Canvas Tile Data back to server */
+        saveUserDataJson(userDataJson);
+    }
+
+    /* Clear Canvas tiles */
+    var clearCanvasTiles = function () {
+        /* Remove all Tiles from the Canvas */
+        $(".tile").remove()
+    }
+
+    /* Render tiles on Canvas */
+    var renderCanvasTiles = function () {
+        var canvasDiv = $("#canvas-wrap");
+
+        var canvasTileTemplate = $.templates("#canvasTileTemplate");
+
+        if (canvasTileData) {
+            var htmlOutput = canvasTileTemplate.render(canvasTileData);
+
+            canvasDiv.append(htmlOutput);
+
+
+            var scaleFactor = 1.0;
+
+            var numberOfTilesOnCanvas = canvasTileData.length;
+
+            //if (numberOfTilesOnCanvas > 10 && numberOfTilesOnCanvas < 20)
+            //{
+            //    scaleFactor = 0.9;
+            //}
+
+            /* Scale Down Tiles when their count increases */
+            scaleDownTileSize(scaleFactor);
+        }
+    }
 
     var scaleDownTileSize = function (scaleFactor) {
         /* Scale Down Tiles when their count increases */
@@ -1035,6 +1038,9 @@
         renderCanvasTiles();
     }
 
+
+    /* Annyang Methods */
+
     /* Initialize the Annyang Speech Recognition Library */
     var initializeAnnyang = function () {
         if (annyang) {
@@ -1057,11 +1063,11 @@
     /* Handlers for annyang commands */
 
     var shownMeHandler = function (command) {
-        $("#detailsSectionHeading").text("Show me...");
+        $("#chatSectionHeading").text("Show me...");
 
         /* Display what the user said */
         var textToDisplay = userName + ': ' + command;
-        $("#detailsSectionBody").text(textToDisplay);
+        $("#chatSectionBody").text(textToDisplay);
     }
 
     var pingoHandler = function (command) {
@@ -1074,10 +1080,10 @@
         /* Function level variables */
         var textToDisplay = '';
 
-        /* Set the Detail Section Heading */
-        $("#detailsSectionHeading").text(agentContext.agentName + " Listening...");
+        /* Set the Chat Section Heading */
+        $("#chatSectionHeading").text(agentContext.agentName + " Listening...");
 
-        /* Clear Conversations from the Details Section Div */
+        /* Clear Conversations from the Chat Section Div */
         clearConversations();
 
         /* Initiate conversation with User */
@@ -1094,10 +1100,10 @@
         /* Function level variables */
         var textToDisplay = '';
 
-        /* Set the Detail Section Heading */
-        $("#detailsSectionHeading").text(agentContext.agentName + " Listening...");
+        /* Set the Chat Section Heading */
+        $("#chatSectionHeading").text(agentContext.agentName + " Listening...");
 
-        /* Clear Conversations from the Details Section Div */
+        /* Clear Conversations from the Chat Section Div */
         clearConversations();
 
         /* Initiate conversation with User */
@@ -1111,10 +1117,10 @@
         agentContext.agentName = "Agent";
         agentContext.agentAge = "No Age";
 
-        /* Set the Detail Section Heading */
-        $("#detailsSectionHeading").text("Agent Listening...");
+        /* Set the Chat Section Heading */
+        $("#chatSectionHeading").text("Agent Listening...");
 
-        /* Clear Conversations from the Details Section Div */
+        /* Clear Conversations from the Chat Section Div */
         clearConversations();
 
         /* Initiate conversation with User */
@@ -1127,25 +1133,25 @@
     var initiateConversation = function (command, agentContext) {
         /* Display what the user said */
         textToDisplay = userName + ': ' + command;
-        addConversationToDetailsSection(textToDisplay);
+        addConversationToChatSection(textToDisplay);
 
         /* Respond to the user */
         textToDisplay = agentContext.agentName + ": " + interpretCommand(command, agentContext);
-        addConversationToDetailsSection(textToDisplay);
+        addConversationToChatSection(textToDisplay);
     }
 
-    var addConversationToDetailsSection = function (textToDisplay) {
-        /* Create a new Div with the text to display and append it to Details Section Body Div */
+    var addConversationToChatSection = function (textToDisplay) {
+        /* Create a new Div with the text to display and append it to Chat Section Body Div */
         var div = document.createElement('div');
-        $(div).addClass("detailsSectionConversation")
+        $(div).addClass("chatSectionConversation")
             .html(textToDisplay)
-            .appendTo($("#detailsSectionBody"))
+            .appendTo($("#chatSectionBody"))
     }
 
-    /* Clear conversations from the Details Section Div */
+    /* Clear conversations from the Chat Section Div */
     var clearConversations = function () {
         /* Clear the contents of the Section Body Div */
-        $("#detailsSectionBody").empty();
+        $("#chatSectionBody").empty();
     }
 
     /* Agent Language Interpretation Methods */
