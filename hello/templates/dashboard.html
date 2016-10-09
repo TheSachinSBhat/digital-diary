@@ -828,8 +828,11 @@
                 break;
             default:
                 /* Represents the data containing Default Content */
-                var defaultContentData = [];
-                defaultContentData.pageContentHeaderText = event.currentTarget.innerText;
+                var defaultContentData = [
+                    {
+                        "pageContentHeaderText": event.currentTarget.innerText
+                    }
+                ];
 
                 /* Obtain the Html content of the Default Page Content Template */
                 var defaultPageContentTemplate = $.templates("#defaultPageContentTemplate");
