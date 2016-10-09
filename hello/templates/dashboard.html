@@ -129,13 +129,14 @@
         bottom: 30px;
         right: 50px;
         background: beige;
+        /* Keep it invisible by default */
+        display: none;
     }
 
     #chatSectionHeading {
         margin-top: 10px;
         margin-left: 10px;
         font-size: 20px;
-        display: none;
     }
 
     #chatSectionBody {
@@ -143,7 +144,6 @@
         margin-left: 20px;
         font-size: 18px;
         height: 242px;
-        display: none;
     }
 
     .chatSectionConversation {
@@ -152,13 +152,11 @@
     }
 
     #chatWindow {
-        position: absolute;
+        position: fixed;
         width: 290px;
         height: 105px;
         bottom: 30px;
         background-color: chartreuse;
-        /* Keep it invisible by default */
-        display: none;
     }
 
     #chatWindowStrip {
@@ -166,6 +164,8 @@
         width: 290px;
         height: 27px;
         bottom: 3px;
+        float: right;
+        right: 50px;
         background-color: chartreuse;
         margin-top: 105px;
         /* Change the cursor to pointer on hover */
@@ -495,8 +495,9 @@
             <button id="chatWindowSubmitButton">Send</button>
         </div>
     </div>
-    <div id="chatWindowStrip"> Click here to chat! </div>
 </div>
+<!-- Make the Chat Window Strip independent of the Chat Section -->
+<div id="chatWindowStrip"> Click here to chat! </div>
 <script id="canvasTileTemplate" type="text/x-jsrender">
     {% verbatim %}
     <div id="{{:canvasTileId}}" class="tile">
@@ -858,10 +859,8 @@
     var initializeChatWindow = function () {
         /* Handler for Chat Window Strip Click event. Triggered whenever user clicks on the Chat Window Strip Div. */
         $("#chatWindowStrip").click(function () {
-            /* Toggle the visibility of Chat Section Heading, Chat Section Body and Chat Window */
-            $("#chatSectionHeading").toggle();
-            $("#chatSectionBody").toggle();
-            $("#chatWindow").toggle();
+            /* Toggle the visibility of Chat Section */
+            $("#chatSection").toggle();
         });
 
         /* Welcome the user */
