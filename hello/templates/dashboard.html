@@ -122,10 +122,12 @@
     }
 
     #chatSection {
-        position: relative;
+        position: fixed;
         height: 405px;
         width: 290px;
-        float: left;
+        float: right;
+        bottom: 30px;
+        right: 50px;
         background: beige;
     }
 
@@ -157,9 +159,10 @@
     }
 
     #chatWindowStrip {
-        position: absolute;
+        position: fixed;
         width: 290px;
         height: 27px;
+        bottom: 3px;
         background-color: chartreuse;
         margin-top: 105px;
         /* Change the cursor to pointer on hover */
@@ -430,6 +433,7 @@
         <hr>
     </div>
 </div>
+<!-- Current Dashaboard Content based on the option selected by used from the Navigation Menu -->
 <div id="dashboard-content" class="container">
     <div class="row dashboard-section">
         <div id="nav-tiles" class="dashboard-nav-button">
@@ -475,20 +479,20 @@
                 </div>-->
             </div>
             <div id="mini-map"></div>
-            <!-- Chat Section besides the Canvas -->
-            <div id="chatSection">
-                <div id="chatSectionHeading"></div>
-                <div id="chatSectionBody"></div>
-                <div id="chatWindow">
-                    <div id="chatWindowWrapper">
-                        <textarea id="chatWindowTextArea"> </textarea>
-                        <button id="chatWindowSubmitButton">Send</button>
-                    </div>
-                </div>
-                <div id="chatWindowStrip"> Click here to chat! </div>
-            </div>
         </div>
     </div>
+</div>
+<!-- Chat Section  -->
+<div id="chatSection">
+    <div id="chatSectionHeading"></div>
+    <div id="chatSectionBody"></div>
+    <div id="chatWindow">
+        <div id="chatWindowWrapper">
+            <textarea id="chatWindowTextArea"> </textarea>
+            <button id="chatWindowSubmitButton">Send</button>
+        </div>
+    </div>
+    <div id="chatWindowStrip"> Click here to chat! </div>
 </div>
 <script id="canvasTileTemplate" type="text/x-jsrender">
     {% verbatim %}
@@ -851,6 +855,9 @@
     var initializeChatWindow = function () {
         /* Handler for Chat Window Strip Click event. Triggered whenever user clicks on the Chat Window Strip Div. */
         $("#chatWindowStrip").click(function () {
+            /* Toggle the visibility of Chat Section Heading, Chat Section Body and Chat Window */
+            $("#chatSectionHeading").toggle();
+            $("#chatSectionBody").toggle();
             $("#chatWindow").toggle();
         });
 
