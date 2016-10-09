@@ -399,6 +399,11 @@
         width: 120px;
         background: white;
     }
+
+    #page-content-header{
+        font-size: 24px;
+    }
+
 </style>
 <div id="side-nav-header">
     <div id="side-nav-toggle-button-div">
@@ -544,6 +549,11 @@
             </div>
         </div>
     </div>
+    {% endverbatim %}
+</script>
+<script id="defaultPageContentTemplate" type="text/x-jsrender">
+    {% verbatim %}
+    <div id="page-content-header" class="container">{{:pageContentHeaderText}}</div>
     {% endverbatim %}
 </script>
 <script type="text/javascript">
@@ -799,12 +809,10 @@
     /* Update the Dashboard Content Section based on the Navigation Menu selected by the user */
     var updatedDashboardContent = function (currentNavItemIdentifier, event) {
         currentNavItemId = currentNavItemIdentifier;
+        var pageContentDiv = $("#page-content");
 
         switch (currentNavItemId) {
             case "dailyActivities":
-                /* Render the Daily Activities Template into the Dashboard Content Div  */
-                var pageContentDiv = $("#page-content");
-
                 /* Obtain the Html content of the Daily Activities */
                 var dailyActivitiesTemplate = $.templates("#dailyActivitiesTemplate");
                 var dailyActivitiesHtml = dailyActivitiesTemplate.render();
@@ -819,7 +827,19 @@
                 updateDashboardDateAndCanvasTilesForGivenDate(currentDate);
                 break;
             default:
-                // TODO: Add a simple div indicating event.currentTarget.innerText
+                /* Represents the data containing Default Content */
+                var defaultContentData = [];
+                defaultContentData.pageContentHeaderText = event.currentTarget.innerText;
+
+                /* Obtain the Html content of the Default Page Content Template */
+                var defaultPageContentTemplate = $.templates("#defaultPageContentTemplate");
+                var defaultContentHtml = defaultPageContentTemplate.render(defaultContentData);
+
+                /* Clear the contents of the Page Content Div */
+                pageContentDiv.empty();
+
+                /* Inject the Default Page Content into the Page Content Div */
+                pageContentDiv.append(defaultContentHtml);
         }
     }
 
