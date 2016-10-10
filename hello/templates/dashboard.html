@@ -623,13 +623,21 @@
         });
 
         /* Click Handler for all elements of body except for the Side Nav Panel and its children */
-        $("body").on('click', ':not(#side-nav-panel)', ':not(.side-nav-group)', ':not(.side-nav-group-icon)', ':not(.side-nav-group-text)',
-            ':not(.side-nav-item)', ':not(.side-nav-item-inner-wrapper)', ':not(.side-nav-item-icon)', ':not(.side-nav-item-text)', ':not(.side-nav-group-header)',
-            function () {
-            var sidePanelVisible = $("#side-nav-panel:visible");
-            if (sidePanelVisible) {
-                toggleSideNavPanelVisibility();
-            }
+        //$("body").on('click', ':not(#side-nav-panel)', ':not(.side-nav-group)', ':not(.side-nav-group-icon)', ':not(.side-nav-group-text)',
+        //    ':not(.side-nav-item)', ':not(.side-nav-item-inner-wrapper)', ':not(.side-nav-item-icon)', ':not(.side-nav-item-text)', ':not(.side-nav-group-header)',
+        //    function () {
+        //    var sidePanelVisible = $("#side-nav-panel:visible");
+        //    if (sidePanelVisible) {
+        //        toggleSideNavPanelVisibility();
+        //    }
+        //    });
+
+        $(document.body).click(function () {
+            toggleSideNavPanelVisibility();
+        });
+
+        $("#side-nav-panel").click(function (e) {
+            e.stopPropagation(); // this stops the event from bubbling up to the body
         });
 
         /* Handler for Side Nav Item Div click event. Triggered whenever user clicks on the Side Nav Item Div. */
