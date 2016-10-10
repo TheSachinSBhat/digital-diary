@@ -633,7 +633,10 @@
         //    });
 
         $(document.body).click(function () {
-            toggleSideNavPanelVisibility();
+            var sidePanelVisible = $("#side-nav-panel:visible");
+            if (sidePanelVisible) {
+                toggleSideNavPanelVisibility();
+            }
         });
 
         $("#side-nav-panel").click(function (e) {
