@@ -830,14 +830,28 @@
         currentNavItemId = currentNavItemIdentifier;
         var pageContentDiv = $("#page-content");
 
+        /* Represents the data containing Default Content */
+        var defaultContentData = [
+            {
+                "pageContentHeaderText": event.currentTarget.innerText
+            }
+        ];
+
+        /* Obtain the Html content of the Default Page Content Template */
+        var defaultPageContentTemplate = $.templates("#defaultPageContentTemplate");
+        var defaultContentHtml = defaultPageContentTemplate.render(defaultContentData);
+
+        /* Clear the contents of the Page Content Div */
+        pageContentDiv.empty();
+
+        /* Inject the Default Page Content into the Page Content Div */
+        pageContentDiv.append(defaultContentHtml);
+
         switch (currentNavItemId) {
             case "dailyActivities":
                 /* Obtain the Html content of the Daily Activities */
                 var dailyActivitiesTemplate = $.templates("#dailyActivitiesTemplate");
                 var dailyActivitiesHtml = dailyActivitiesTemplate.render();
-
-                /* Clear the contents of the Page Content Div */
-                pageContentDiv.empty();
 
                 /* Inject the Daily Activities Html Content into the Page Content Div */
                 pageContentDiv.append(dailyActivitiesHtml);
@@ -845,23 +859,6 @@
                 /* Update the Dashboard Date and Canvas Tiles for current Date */
                 updateDashboardDateAndCanvasTilesForGivenDate(currentDate);
                 break;
-            default:
-                /* Represents the data containing Default Content */
-                var defaultContentData = [
-                    {
-                        "pageContentHeaderText": event.currentTarget.innerText
-                    }
-                ];
-
-                /* Obtain the Html content of the Default Page Content Template */
-                var defaultPageContentTemplate = $.templates("#defaultPageContentTemplate");
-                var defaultContentHtml = defaultPageContentTemplate.render(defaultContentData);
-
-                /* Clear the contents of the Page Content Div */
-                pageContentDiv.empty();
-
-                /* Inject the Default Page Content into the Page Content Div */
-                pageContentDiv.append(defaultContentHtml);
         }
     }
 
