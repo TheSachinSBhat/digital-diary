@@ -636,7 +636,7 @@
             var eventId = event.target.id;
             var eventClass = event.target.class;
 
-            if (eventId.includes("side-nav") || eventClass.includes("side-nav")) {
+            if ((eventId && eventClass) && (eventId.includes("side-nav") || eventClass.includes("side-nav"))) {
                 return;
             } else {
                 var sidePanelVisible = $("#side-nav-panel:visible");
