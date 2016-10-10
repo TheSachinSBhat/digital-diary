@@ -633,9 +633,16 @@
         //    });
 
         $(document.body).click(function (event) {
-            var sidePanelVisible = $("#side-nav-panel:visible");
-            if (sidePanelVisible) {
-                toggleSideNavPanelVisibility();
+            var eventId = event.target.id;
+            var eventClass = event.target.class;
+
+            if (eventId.contains("side-nav") || eventClass.contains("side-nav")) {
+                return;
+            } else {
+                var sidePanelVisible = $("#side-nav-panel:visible");
+                if (sidePanelVisible) {
+                    toggleSideNavPanelVisibility();
+                }
             }
         });
 
