@@ -641,8 +641,8 @@
             } else if(eventClass && eventClass.includes("side-nav")){
                 return;
             } else {
-                var sidePanelVisible = $("#side-nav-panel:visible");
-                if (sidePanelVisible) {
+                var sidePanel = $("#side-nav-panel:visible");
+                if (sidePanel.length > 0) {
                     toggleSideNavPanelVisibility();
                 }
             }
