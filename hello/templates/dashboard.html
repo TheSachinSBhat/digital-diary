@@ -619,25 +619,12 @@
 
         /* Handler for Side Nav Toggle Button Div click event. Triggered whenever user clicks on the Side Nav Toggle Button Div. */
         $("#side-nav-toggle-button-div").click(function () {
-            /* Toggle the visibility of the Side Nav Panel */
-            $("#side-nav-panel").toggle();
+            toggleSideNavPanelVisibility();
+        });
 
-            /* If expanded, collapse it */
-            if ($("#side-nav-button-icon").hasClass("expand")) {
-                $("#side-nav-button-icon").removeClass("expand");
-                $("#side-nav-button-icon").addClass("collapse");
-
-                /* Rotate the Icon to make it look collapsed */
-                $("#side-nav-button-icon").css("transform", "rotateX(540deg)");
-            }
-                /* If collapsed, expand it */
-            else if ($("#side-nav-button-icon").hasClass("collapse")) {
-                $("#side-nav-button-icon").removeClass("collapse");
-                $("#side-nav-button-icon").addClass("expand");
-
-                /* Bring back the Icon state to make it look expanded */
-                $("#side-nav-button-icon").css("transform", "rotateX(0deg)");
-            }
+        /* Focus Out Handler for Side Nav Panel */
+        $("#side-nav-panel").focusout(function () {
+            toggleSideNavPanelVisibility();
         });
 
         /* Handler for Side Nav Item Div click event. Triggered whenever user clicks on the Side Nav Item Div. */
@@ -654,6 +641,29 @@
                 }
             }
         });
+    }
+
+    /* Toggle the visibility of the Side Nav Panel */
+    var toggleSideNavPanelVisibility = function() {
+        /* Toggle the visibility of the Side Nav Panel */
+        $("#side-nav-panel").toggle();
+
+        /* If expanded, collapse it */
+        if ($("#side-nav-button-icon").hasClass("expand")) {
+            $("#side-nav-button-icon").removeClass("expand");
+            $("#side-nav-button-icon").addClass("collapse");
+
+            /* Rotate the Icon to make it look collapsed */
+            $("#side-nav-button-icon").css("transform", "rotateX(540deg)");
+        }
+            /* If collapsed, expand it */
+        else if ($("#side-nav-button-icon").hasClass("collapse")) {
+            $("#side-nav-button-icon").removeClass("collapse");
+            $("#side-nav-button-icon").addClass("expand");
+
+            /* Bring back the Icon state to make it look expanded */
+            $("#side-nav-button-icon").css("transform", "rotateX(0deg)");
+        }
     }
 
     /* Render side nav items on Side Nav Panel */
