@@ -1510,6 +1510,11 @@
         var jqxhr = $.get(kbUrl, function (data) {
             alert("success");
         })
+        .then(function (response) {
+                return response;
+            }, function (response) {
+                alert("Error finding contacts.");
+            })
         .done(function (data) {
             alert("second success");
         })
