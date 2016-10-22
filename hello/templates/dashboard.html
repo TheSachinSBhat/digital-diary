@@ -1507,23 +1507,35 @@
         $.get(kbUrl, function (data) {
             alert( "Load was performed." );
         });
-        var jqxhr = $.get("https://sleepy-citadel-45065.herokuapp.com/contacts/580b5f63a3dff911008d94f0", function (data) {
-            alert("success");
-        })
-        .then(function (response) {
-                return response;
-            }, function (response) {
-                alert("Error finding contacts.");
-            })
-        .done(function (data) {
-            alert("second success");
-        })
-        .fail(function (error, status) {
-            alert("error");
-        })
-        .always(function () {
-            alert("finished");
-        });
+        //var jqxhr = $.get("https://sleepy-citadel-45065.herokuapp.com/contacts/580b5f63a3dff911008d94f0", function (data) {
+        //    alert("success");
+        //})
+        //.then(function (response) {
+        //        return response;
+        //    }, function (response) {
+        //        alert("Error finding contacts.");
+        //    })
+        //.done(function (data) {
+        //    alert("second success");
+        //})
+        //.fail(function (error, status) {
+        //    alert("error");
+        //})
+        //.always(function () {
+        //    alert("finished");
+        //});
+
+
+        var jqxhr = $.ajax(kbUrl)
+          .done(function (data) {
+              alert("success");
+          })
+          .fail(function (error, status) {
+              alert("error");
+          })
+          .always(function () {
+              alert("complete");
+          });
     }
 
     /* Generic Utility Functions */
