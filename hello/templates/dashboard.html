@@ -882,6 +882,8 @@
         /* Inject the Default Page Content into the Page Content Div */
         pageContentDiv.append(defaultContentHtml);
 
+        /* Update the Dasboard Content based on the current Nav Item Id */
+        // TODO: Replace hard-coded values with Constants
         switch (currentNavItemId) {
             case "dailyActivities":
                 /* Obtain the Html content of the Daily Activities */
@@ -893,6 +895,10 @@
 
                 /* Update the Dashboard Date and Canvas Tiles for current Date */
                 updateDashboardDateAndCanvasTilesForGivenDate(currentDate);
+                break;
+            case "contacts":
+                /* Get data from KB for all contacts */
+                getDataFromKB();
                 break;
         }
     }
@@ -1492,6 +1498,16 @@
         serverSide_UserDataJson = userDataJson;
     }
 
+    /* jQuery Methods for getting data from KB */
+
+    /* Get data from KB for the given entity */
+    var getDataFromKB = function () {
+        // TODO: separate out into kbBaseUrl, entity, id
+        var kbUrl = "https://sleepy-citadel-45065.herokuapp.com/contacts/580b5f63a3dff911008d94f0";
+        $.get(kbUrl, function (data) {
+            alert( "Load was performed." );
+        });
+    }
 
     /* Generic Utility Functions */
 
