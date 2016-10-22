@@ -1507,6 +1507,18 @@
         $.get(kbUrl, function (data) {
             alert( "Load was performed." );
         });
+        var jqxhr = $.get(kbUrl, function (data) {
+            alert("success");
+        })
+        .done(function (data) {
+            alert("second success");
+        })
+        .fail(function (error, status) {
+            alert("error");
+        })
+        .always(function () {
+            alert("finished");
+        });
     }
 
     /* Generic Utility Functions */
