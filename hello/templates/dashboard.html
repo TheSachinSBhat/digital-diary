@@ -1299,6 +1299,10 @@
         IBMWatson: { }
     };
 
+    var WIT_INTENT = {
+        Wakeup: { value:'Wakeup'},
+    };
+
     var currentCommandInterpretationMethod = COMMAND_INTERPRETATION_METHOD.WitApi;
 
     var interpretCommand = function (command, agentContext) {
@@ -1320,18 +1324,77 @@
     /* Wit.ai based command interpreter */
     var witCommandInterpreter = function (command, agentContext)
     {
-        $.ajax({
+        sendRequestToWit(command)
+                    .done(function (data) {
+                        console.log("getDataFromKB: success");
+                        // TODO: Inject Contacts content into the Page Content Div
+                        return interpretWitCommandResponse(data);
+                    })
+                    .fail(function (error, status) {
+                        console.log("getDataFromKB: error");
+                    })
+                    .always(function () {
+                        console.log("getDataFromKB: complete");
+                    });
+    }
+
+    var sendRequestToWit = function (command)
+    {
+        var promise = $.ajax({
             url: 'https://api.wit.ai/message',
             data: {
                 'q': command,
                 'access_token': 'QDY6TXTZUGM7QXCHYRMVTZS756ULBIC2'
             },
             dataType: 'jsonp',
-            method: 'GET',
-            success: function (response) {
-                console.log("success!", response);
-            }
+            method: 'GET'
         });
+        return promise;
+    }
+
+    var interpretWitCommandResponse = function (response)
+    {
+        var responseText = "I did not understand, could you repeat?";
+
+        /* Date Time related variables */
+        var currentdate = new Date();
+        var datetime = "Last Sync: " + currentdate.getDate() + "/"
+                        + (currentdate.getMonth() + 1) + "/"
+                        + currentdate.getFullYear() + " @ "
+                        + currentdate.getHours() + ":"
+                        + currentdate.getMinutes() + ":"
+                        + currentdate.getSeconds();
+
+        currentTimeInAmPmFormat = formatAMPM(currentdate);
+
+        var entities = response.entities;
+        if (entities)
+        {
+            var intent = entities.intent;
+
+            if(intent)
+            {
+                var firstIntent = intent[0];
+
+                if(firstIntent)
+                {
+                    var intentValue = firstIntent.value;
+
+                    if (intentValue)
+                    {
+                        switch(intentValue)
+                        {
+                            case WIT_INTENT.Wakeup.value:
+                                addActivityToCanvasTileData(TILE_CODES.Wakeup, currentTimeInAmPmFormat);
+
+                                // TODO: Need to get the response text also from the Wit.ai API
+                                responseText = "Good Morning... Have a great day!!!";
+                        }
+                    }
+                }
+            }
+        }
+        return responseText;
     }
 
     /* Built-in Command Interpreter */
