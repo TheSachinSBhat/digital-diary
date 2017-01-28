@@ -1299,7 +1299,7 @@
         IBMWatson: { }
     };
 
-    var currentCommandInterpretationMethod = COMMAND_INTERPRETATION_METHOD.Native;
+    var currentCommandInterpretationMethod = COMMAND_INTERPRETATION_METHOD.WitApi;
 
     var interpretCommand = function (command, agentContext) {
 
@@ -1308,12 +1308,33 @@
             case COMMAND_INTERPRETATION_METHOD.Native:
                 return nativeCommandInterpreter(command, agentContext);
                 break;
+            case COMMAND_INTERPRETATION_METHOD.WitApi:
+                return witCommandInterpreter(command, agentContext);
+                break;
             default:
                 return nativeCommandInterpreter(command, agentContext);
                 break;
         }
     }
 
+    /* Wit.ai based command interpreter */
+    var witCommandInterpreter = function (command, agentContext)
+    {
+        $.ajax({
+            url: 'https://api.wit.ai/message',
+            data: {
+                'q': command,
+                'access_token': 'QDY6TXTZUGM7QXCHYRMVTZS756ULBIC2'
+            },
+            dataType: 'jsonp',
+            method: 'GET',
+            success: function (response) {
+                console.log("success!", response);
+            }
+        });
+    }
+
+    /* Built-in Command Interpreter */
     var nativeCommandInterpreter = function (command, agentContext) {
         var responseText = "I did not understand, could you repeat?";
 
