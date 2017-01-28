@@ -1292,8 +1292,27 @@
     }
 
     /* Agent Language Interpretation Methods */
+    var COMMAND_INTERPRETATION_METHOD = {
+        Native: { },
+        WitApi: { },
+        Athena: {  },
+        IBMWatson: { }
+    };
+
+    var currentCommandInterpretationMethod = COMMAND_INTERPRETATION_METHOD.Native;
 
     var interpretCommand = function (command, agentContext) {
+
+        switch (currentCommandInterpretationMethod)
+        {
+            case COMMAND_INTERPRETATION_METHOD.Native:
+                nativeCommandInterpreter(command, agentContext);
+            default:
+                nativeCommandInterpreter(command, agentContext);
+        }
+    }
+
+    var nativeCommandInterpreter = function (command, agentContext) {
         var responseText = "I did not understand, could you repeat?";
 
         /* Convert all characters from command to lower case to ensure detection is correct at all times */
