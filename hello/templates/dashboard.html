@@ -1306,10 +1306,10 @@
         switch (currentCommandInterpretationMethod)
         {
             case COMMAND_INTERPRETATION_METHOD.Native:
-                nativeCommandInterpreter(command, agentContext);
+                return nativeCommandInterpreter(command, agentContext);
                 break;
             default:
-                nativeCommandInterpreter(command, agentContext);
+                return nativeCommandInterpreter(command, agentContext);
                 break;
         }
     }
