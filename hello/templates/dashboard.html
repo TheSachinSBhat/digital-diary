@@ -1334,7 +1334,7 @@
                         // TODO: Inject Contacts content into the Page Content Div
                         return interpretWitCommandResponse(data);
                     })
-                    .fail(function (error, status) {
+                    .fail(function (error, status, errorThrown) {
                         console.log("sendRequestToWit: error");
                     })
                     .always(function () {
@@ -1362,12 +1362,16 @@
             data: {
                 'session_id': sessionId,
                 'q': command,
-                'access_token': 'QDY6TXTZUGM7QXCHYRMVTZS756ULBIC2'
             },
+            beforeSend: setWitRequestHeader,
             dataType: 'json',
             method: 'POST'
         });
         return promise;
+    }
+
+    var setWitRequestHeader = function(xhr) {
+        xhr.setRequestHeader('Authorization', 'Bearer QDY6TXTZUGM7QXCHYRMVTZS756ULBIC2');
     }
 
     var interpretWitCommandResponse = function (response)
