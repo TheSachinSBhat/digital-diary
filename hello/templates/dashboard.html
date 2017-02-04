@@ -1328,18 +1328,20 @@
     var witCommandInterpreter = function (command, agentContext)
     {
         var sessionId = 1;
-        converseWithWit(command, sessionId)
-                    .done(function (data) {
-                        console.log("sendRequestToWit: success");
-                        // TODO: Inject Contacts content into the Page Content Div
-                        return interpretWitCommandResponse(data);
-                    })
-                    .fail(function (error, status, errorThrown) {
-                        console.log("sendRequestToWit: error");
-                    })
-                    .always(function () {
-                        console.log("sendRequestToWit: complete");
-                    });
+        //converseWithWit(command, sessionId)
+        //            .done(function (data) {
+        //                console.log("sendRequestToWit: success");
+        //                // TODO: Inject Contacts content into the Page Content Div
+        //                return interpretWitCommandResponse(data);
+        //            })
+        //            .fail(function (error, status, errorThrown) {
+        //                console.log("sendRequestToWit: error");
+        //            })
+        //            .always(function () {
+        //                console.log("sendRequestToWit: complete");
+        //            });
+
+        converseWithWit_2(command, sessionId);
     }
 
     var sendMessageToWit = function (command)
@@ -1372,6 +1374,42 @@
 
     var setWitRequestHeader = function(xhr) {
         xhr.setRequestHeader('Authorization', 'Bearer QDY6TXTZUGM7QXCHYRMVTZS756ULBIC2');
+    }
+
+    var converseWithWit_2 = function (command, sessionId)
+    {
+        var url = "https://api.wit.ai/converse";
+        var data = {
+            'session_id': sessionId,
+            'q': command,
+        };
+        var token = "QDY6TXTZUGM7QXCHYRMVTZS756ULBIC2";
+        ajaxPostWithAuthorizationHeader(url, data, token);
+
+    }
+
+    var ajaxPostWithAuthorizationHeader = function (url, data, token)
+    {
+        $.ajax({
+            url: url,
+            method: "POST",
+            dataType: "json",
+            crossDomain: true,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(data),
+            cache: false,
+            beforeSend: function (xhr) {
+                /* Authorization header */
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+                xhr.setRequestHeader("X-Mobile", "false");
+            },
+            success: function (data) {
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+            }
+        });
     }
 
     var interpretWitCommandResponse = function (response)
