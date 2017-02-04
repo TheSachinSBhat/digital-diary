@@ -910,6 +910,9 @@
                         console.log("getDataFromKB: complete");
                     });
                 break;
+            case "holidays":
+                /* Obtain Holidays List */
+                break;
         }
     }
 
@@ -1324,21 +1327,22 @@
     /* Wit.ai based command interpreter */
     var witCommandInterpreter = function (command, agentContext)
     {
-        sendRequestToWit(command)
+        var sessionId = 1;
+        converseWithWit(command, sessionId)
                     .done(function (data) {
-                        console.log("getDataFromKB: success");
+                        console.log("sendRequestToWit: success");
                         // TODO: Inject Contacts content into the Page Content Div
                         return interpretWitCommandResponse(data);
                     })
                     .fail(function (error, status) {
-                        console.log("getDataFromKB: error");
+                        console.log("sendRequestToWit: error");
                     })
                     .always(function () {
-                        console.log("getDataFromKB: complete");
+                        console.log("sendRequestToWit: complete");
                     });
     }
 
-    var sendRequestToWit = function (command)
+    var sendMessageToWit = function (command)
     {
         var promise = $.ajax({
             url: 'https://api.wit.ai/message',
@@ -1348,6 +1352,20 @@
             },
             dataType: 'jsonp',
             method: 'GET'
+        });
+        return promise;
+    }
+
+    var converseWithWit = function (command, sessionId) {
+        var promise = $.ajax({
+            url: 'https://api.wit.ai/converse',
+            data: {
+                'session_id': sessionId,
+                'q': command,
+                'access_token': 'QDY6TXTZUGM7QXCHYRMVTZS756ULBIC2'
+            },
+            dataType: 'jsonp',
+            method: 'POST'
         });
         return promise;
     }
