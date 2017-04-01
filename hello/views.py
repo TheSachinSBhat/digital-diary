@@ -12,6 +12,10 @@ def dashboard(request):
     # return HttpResponse('Hello from Python!')
     return render(request, 'dashboard.html')
 
+def ideas(request):
+    # return HttpResponse('Hello from Python!')
+    return render(request, 'ideas.html')
+
 def db(request):
 
     greeting = Greeting()
