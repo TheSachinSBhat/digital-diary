@@ -7,18 +7,42 @@
 	.idea-container {
 		height: 222px;
 		width: 293px;
-		border: 2px solid blue;
+		border: 2px solid grey;
 		margin: 12px;
 		position: relative;
 		float: left;
 	}
+
+		.idea-container .idea-header .idea-icon {
+			float: left;
+			margin: 10px;
+		}
+
+			.idea-container .idea-header .idea-icon img {
+			}
+
+		.idea-container .idea-header .idea-header-text {
+			float: left;
+			margin: 10px;
+			/* Clip the Header Text Beyond 198px width */
+			width: 198px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: clip;
+		}
+
+			.idea-container .idea-header .idea-header-text span {
+				font-size: 27px;
+				font-weight: 600;
+				font-family: Segoe UI Light;
+			}
 </style>
 
 <div class="container">
 	<hr>
 	<div class="row">
 		<div class="col-md-6">
-			<h3><span class="glyphicon glyphicon-info-sign"></span> Ideas </h3>
+			<h3><span class="glyphicon glyphicon-send"></span> Ideas </h3>
 			<!-- TODO: Add awesome code here! -->
 		</div>
 	</div> <!-- row -->
@@ -27,6 +51,14 @@
 	<div class="idea-main-container">
 		<div class="idea-row">
 			<div class="idea-container">
+				<div class="idea-header">
+					<div class="idea-icon">
+						<img src="/static/activities/wake-up.png"/>
+					</div>
+					<div class="idea-header-text">
+						<span>SABI</span>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
