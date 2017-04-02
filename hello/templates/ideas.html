@@ -15,13 +15,13 @@
 
 		.idea-container .idea-header .idea-icon {
 			float: left;
-            margin: 10px 5px;
+			margin: 10px 5px;
 		}
 
-            .idea-container .idea-header .idea-icon img {
-                height: 45px;
-                width: 45px;
-            }
+			.idea-container .idea-header .idea-icon img {
+				height: 45px;
+				width: 45px;
+			}
 
 		.idea-container .idea-header .idea-header-text {
 			float: left;
@@ -31,12 +31,32 @@
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: clip;
+			/* Display Pointer on Mouse Hover */
+			cursor: pointer;
 		}
 
 			.idea-container .idea-header .idea-header-text span {
 				font-size: 27px;
 				font-weight: 600;
 				font-family: Segoe UI Light;
+			}
+
+		.idea-container .idea-sub-header .idea-sub-header-text {
+			margin: 0px 5px;
+		}
+
+			.idea-container .idea-sub-header .idea-sub-header-text span {
+				margin: 0px 5px;
+				float: left;
+				/* Font Specification */
+				font-size: 14px;
+				font-weight: 400;
+				font-family: Segoe UI;
+				/* Restrict Height to 2 lines */
+				overflow: hidden;
+				text-overflow: ellipsis;
+				line-height: 20px;
+				max-height: calc(2*20px);
 			}
 </style>
 
@@ -58,10 +78,12 @@
 						<img src="/static/activities/wake-up.png"/>
 					</div>
 					<div class="idea-header-text">
-						<span>SABI</span>
+						<span title="SABI">SABI</span>
 					</div>
 				</div>
-				<div class="idea-sub-header"></div>
+				<div class="idea-sub-header">
+					<div class="idea-sub-header-text"></div>
+				</div>
 			</div>
 		</div>
 	</div>
