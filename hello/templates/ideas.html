@@ -123,7 +123,7 @@
 	}
 	
 	.idea-modal-container .idea-sub-header {
-		height: 60px;	
+		height: 40px;	
 	}
 	
 	.idea-modal-container .idea-sub-header .idea-sub-header-text {
@@ -142,6 +142,31 @@
     		max-height: calc(2*20px);	
 	}
 	
+	.idea-modal-container .idea-conceptualized-by {
+		height: 40px;	
+	}
+	
+	.idea-modal-container .idea-conceptualized-by .label-container,
+	.idea-modal-container .idea-conceptualized-by .name-container {
+		margin: 10px 5px;
+    		float: left;	
+	}
+	
+	.idea-modal-container .idea-conceptualized-by .name-container span {
+		/* Display Blue Color For the Name*/
+		color: blue;
+		/* Make it look like a Name Link */
+    		font-size: 16px;
+    		font-weight: 700;
+    		font-family: Segoe UI;
+		/* Display Ellipsis on text overflow beyond 2 lines */
+    		overflow: hidden;
+    		text-overflow: ellipsis;
+    		line-height: 20px;
+    		max-height: calc(2*20px);
+		/* Display Pointer on Mouse Hover */
+    		cursor: pointer;
+	}
 </style>
 
 <div class="container">
@@ -202,6 +227,14 @@
 						<span title="The Global Conglomerate that controls the world">The Global Conglomerate that controls the world</span>
 					</div>
 				</div>
+				<div class="idea-conceptualized-by">
+					<div class="label-container">
+						<label>Conceptualized By</label>
+					</div>
+					<div class="name-container">
+						<span title="Sachin Bhat">Sachin Bhat</span>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -242,7 +275,7 @@
         	});
 				
 		/* Create JQuery UI based Modal Dialog for Idea */
-		$("#ideaModalDialog").dialog({modal:true, minWidth:900, minHeight: 540});
+		$("#ideaModalDialog").dialog({modal:true, minWidth:900, minHeight: 450});
 		/* Keep the Dialog Closed by default */
 		$("#ideaModalDialog").dialog('close');
 	});
