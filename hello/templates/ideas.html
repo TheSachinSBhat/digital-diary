@@ -77,6 +77,14 @@
 				line-height: 20px;
 				max-height: calc(2*20px);
 			}
+	
+		#ideaModal .modal-content {
+			position: fixed;
+    			top: 36%;
+    			left: 36%;
+    			height: 200px;
+    			width: 400px;	
+		}
 </style>
 
 <div class="container">
@@ -122,6 +130,13 @@
 				</div>
 			</div>
 		</div>
+		<div id="ideaModal" class="modal" style="display: block;">
+			<!-- Modal content -->
+  			<div class="modal-content">
+    				<span class="close">×</span>
+    				<p class="idea-modal-text"></p>
+  			</div>
+		</div>
 	</div>
 </div>
 <script type="text/javascript">
@@ -141,6 +156,7 @@
 		
 	/* Page load handler to initialize data */
 	$(document).ready(function () {
+		/* Click Handler for Idea Container */
 		$(".idea-container").click(function (e) {
 			/*Fetch Idea Container Id */
         		var id = $(e.currentTarget)[0].id;
@@ -148,9 +164,18 @@
 			var currentIdea = ideasCollection[id];
 			if(currentIdea)
 			{
-				alert(currentIdea.ideaHeaderText);
+				/* Update the Idea Modal Fields */
+				$(".idea-modal-text").text(currentIdea.ideaHeaderText);
+				
+				/* Display the Modal Window */
+				$("#ideaModal").show();
 			}
         	});
+		/* Click Handler for Modal Close Button */
+		$(".idea-modal-close").click(function (e) {
+			/* Hide the Modal Window */
+			$("#ideaModal").hide();
+		});
 	});
 </script>
 
