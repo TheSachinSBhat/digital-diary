@@ -60,7 +60,7 @@
 		.idea-container .idea-sub-header {
 			height: 60px;	
 		}
-	
+
 		.idea-container .idea-sub-header .idea-sub-header-text {
 			margin: 0px 5px;
 		}
@@ -78,108 +78,108 @@
 				line-height: 20px;
 				max-height: calc(2*20px);
 			}
-	
+
 		#ideaModal .modal-content {
 			position: fixed;
-    			top: 36%;
-    			left: 36%;
-    			height: 200px;
-    			width: 400px;	
+				top: 36%;
+				left: 36%;
+				height: 200px;
+				width: 400px;	
 		}
-	
+
 	/* CSS for Idea Modal Container */
 	.idea-modal-container {
 		margin: 5px;	
 	}
-	
+
 	.idea-modal-container .idea-header {
 		background-color: rgba(127,255,0,0.85);
-    		height: 60px;	
+			height: 60px;	
 	}
-	
+
 	.idea-modal-container .idea-header .idea-icon {
 		float: left;
-    		margin: 10px 5px 5px 5px;	
+			margin: 10px 5px 5px 5px;	
 	}
-	
+
 	.idea-modal-container .idea-header .idea-icon img {
 		height: 45px;
-    		width: 45px;	
+			width: 45px;	
 	}
-	
+
 	.idea-modal-container .idea-header .idea-header-text {
 		float: left;
-    		margin: 10px 5px;
-    		width: 231px;
-    		white-space: nowrap;
-    		overflow: hidden;
-    		text-overflow: clip;	
+			margin: 10px 5px;
+			width: 231px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: clip;	
 	}
-	
+
 	.idea-modal-container .idea-header .idea-header-text span {
 		font-size: 27px;
-    		font-weight: 600;
-    		font-family: Segoe UI Light;	
+			font-weight: 600;
+			font-family: Segoe UI Light;	
 	}
-	
+
 	.idea-modal-container .idea-sub-header {
 		height: 40px;	
 	}
-	
+
 	.idea-modal-container .idea-sub-header .idea-sub-header-text {
 		margin: 0px 5px;	
 	}
-	
+
 	.idea-modal-container .idea-sub-header .idea-sub-header-text span {
 		margin: 10px 5px;
-    		float: left;
-    		font-size: 14px;
-    		font-weight: 400;
-    		font-family: Segoe UI;
-    		overflow: hidden;
-    		text-overflow: ellipsis;
-    		line-height: 20px;
-    		max-height: calc(2*20px);	
+			float: left;
+			font-size: 14px;
+			font-weight: 400;
+			font-family: Segoe UI;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			line-height: 20px;
+			max-height: calc(2*20px);	
 	}
-	
+
 	.idea-modal-container .idea-conceptualized-by {
 		height: 40px;	
 	}
-	
+
 	.idea-modal-container .idea-conceptualized-by .label-container,
 	.idea-modal-container .idea-conceptualized-by .name-container {
 		margin: 10px 5px;
-    		float: left;	
+			float: left;	
 	}
-	
+
 	.idea-modal-container .idea-conceptualized-by .name-container span {
 		/* Display Blue Color For the Name*/
 		color: blue;
 		/* Make it look like a Name Link */
-    		font-size: 16px;
-    		font-weight: 700;
-    		font-family: Segoe UI;
+			font-size: 16px;
+			font-weight: 700;
+			font-family: Segoe UI;
 		/* Display Ellipsis on text overflow beyond 2 lines */
-    		overflow: hidden;
-    		text-overflow: ellipsis;
-    		line-height: 20px;
-    		max-height: calc(2*20px);
+			overflow: hidden;
+			text-overflow: ellipsis;
+			line-height: 20px;
+			max-height: calc(2*20px);
 		/* Display Pointer on Mouse Hover */
-    		cursor: pointer;
+			cursor: pointer;
 	}
-	
+
 	.idea-modal-container .idea-description {
 		height: 90px;	
 	}
-	
+
 	.idea-modal-container .idea-description .label-container {
 		margin: 10px 5px 5px 5px;	
 	}
-	
+
 	.idea-modal-container .idea-description .description-container {
 		margin: 0px 5px;	
 	}
-		
+
 </style>
 
 <div class="container">
@@ -261,29 +261,28 @@
 	</div>
 </div>
 <script type="text/javascript">
-	
+
 	var ideasCollection = [];
-	
+
 	/* Add SABI Idea to the collection */
 	var sabiIdea = {
-            	"ideaId": "1",
-            	"ideaIconRef": "/static/activities/wake-up.png",
-            	"ideaHeaderText": "SABI",
-	    	"ideaSubHeaderText": "The Global Conglomerate that controls the world"
-        };
-	    
+				"ideaId": "1",
+				"ideaIconRef": "/static/activities/wake-up.png",
+				"ideaHeaderText": "SABI",
+			"ideaSubHeaderText": "The Global Conglomerate that controls the world"
+		};
+
 	/* Append the new Activity to the Canvas Tile Data */
-        ideasCollection["1"] = sabiIdea;
-	
-	
-		
+		ideasCollection["1"] = sabiIdea;
+
+
 	/* Page load handler to initialize data */
 	$(document).ready(function () {
 		/* Click Handler for Idea Container */
 		$(".idea-container").click(function (e) {
 			/*Fetch Idea Container Id */
-        		var id = $(e.currentTarget)[0].id;
-			
+				var id = $(e.currentTarget)[0].id;
+
 			var currentIdea = ideasCollection[id];
 			if(currentIdea)
 			{
@@ -293,8 +292,8 @@
 				/* Display JQuery UI based Modal Dialog */
 				$("#ideaModalDialog").dialog('open');
 			}
-        	});
-				
+			});
+
 		/* Create JQuery UI based Modal Dialog for Idea */
 		$("#ideaModalDialog").dialog({modal:true, minWidth:900, minHeight: 450});
 		/* Keep the Dialog Closed by default */
