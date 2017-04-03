@@ -91,7 +91,7 @@
 <div class="container">
 	<div class="idea-main-container">
 		<div class="idea-row">
-			<div class="idea-container">
+			<div id="1" class="idea-container">
 				<div class="idea-header">
 					<div class="idea-icon">
 						<img src="/static/activities/wake-up.png"/>
@@ -106,7 +106,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="idea-container">
+			<div id="2" class="idea-container">
 				<div class="idea-header">
 					<div class="idea-icon">
 						<img src="/static/activities/wake-up.png" />
@@ -125,11 +125,31 @@
 	</div>
 </div>
 <script type="text/javascript">
+	
+	var ideasCollection = [];
+	
+	/* Add SABI Idea to the collection */
+	var sabiIdea = {
+            	"ideaId": "1",
+            	"ideaIconRef": "/static/activities/wake-up.png",
+            	"ideaHeaderText": "SABI",
+	    	"ideaSubHeaderText": "The Global Conglomerate that controls the world"
+        };
+	    
+	/* Append the new Activity to the Canvas Tile Data */
+        ideasCollection["1"] = sabiIdea;
+		
 	/* Page load handler to initialize data */
 	$(document).ready(function () {
 		$(".idea-container").click(function (e) {
-        		alert("Idea Container Clicked!");    
-			alert(e);
+			/*Fetch Idea Container Id */
+        		var id = $(e.currentTarget)[0].id;
+			
+			var currentIdea = ideasCollection[id];
+			if(currentIdea)
+			{
+				alert(currentIdea.ideaHeaderText);
+			}
         	});
 	});
 </script>
