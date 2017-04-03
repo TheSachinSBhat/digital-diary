@@ -4,6 +4,7 @@
 {% block content %}
 
 <style>
+	/* CSS for Idea Container */
 	.idea-container {
 		/* height: 222px; */
 		/* Ensure Height is auto-adjusted as per elements in the Idea Container */
@@ -85,6 +86,62 @@
     			height: 200px;
     			width: 400px;	
 		}
+	
+	/* CSS for Idea Modal Container */
+	.idea-modal-container {
+		margin: 5px;	
+	}
+	
+	.idea-modal-container .idea-header {
+		background-color: rgba(127,255,0,0.85);
+    		height: 60px;	
+	}
+	
+	.idea-modal-container .idea-header .idea-icon {
+		float: left;
+    		margin: 10px 5px 5px 5px;	
+	}
+	
+	.idea-modal-container .idea-header .idea-icon img {
+		height: 45px;
+    		width: 45px;	
+	}
+	
+	.idea-modal-container .idea-header .idea-header-text {
+		float: left;
+    		margin: 10px 5px;
+    		width: 231px;
+    		white-space: nowrap;
+    		overflow: hidden;
+    		text-overflow: clip;	
+	}
+	
+	.idea-modal-container .idea-header .idea-header-text span {
+		font-size: 27px;
+    		font-weight: 600;
+    		font-family: Segoe UI Light;	
+	}
+	
+	.idea-modal-container .idea-sub-header {
+		height: 60px;	
+	}
+	
+	.idea-modal-container .idea-sub-header .idea-sub-header-text {
+		margin: 0px 5px;	
+	}
+	
+	.idea-modal-container .idea-sub-header .idea-sub-header-text span {
+		margin: 10px 5px;
+    		float: left;
+    		font-size: 14px;
+    		font-weight: 400;
+    		font-family: Segoe UI;
+    		overflow: hidden;
+    		text-overflow: ellipsis;
+    		line-height: 20px;
+    		max-height: calc(2*20px);	
+	}
+	
 </style>
 
 <div class="container">
@@ -138,8 +195,21 @@
   			</div>
 		</div>
 		<div id="ideaModalDialog" title="Idea Details">
-			<p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
-			<div class="idea-modal-container"></div>
+			<div class="idea-modal-container">
+				<div class="idea-header">
+					<div class="idea-icon">
+						<img src="/static/activities/wake-up.png"/>
+					</div>
+					<div class="idea-header-text">
+						<span title="SABI">SABI</span>
+					</div>
+				</div>
+				<div class="idea-sub-header">
+					<div class="idea-sub-header-text">
+						<span title="The Global Conglomerate that controls the world">The Global Conglomerate that controls the world</span>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
