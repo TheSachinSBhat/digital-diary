@@ -139,6 +139,7 @@
 		</div>
 		<div id="ideaModalDialog" title="Idea Details">
 			<p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+			<div class="idea-modal-container"></div>
 		</div>
 	</div>
 </div>
@@ -189,7 +190,7 @@
 		});
 		
 		/* Create JQuery UI based Modal Dialog for Idea */
-		$("#ideaModalDialog").dialog({modal:true});
+		$("#ideaModalDialog").dialog({modal:true, minWidth:900, minHeight: 540});
 		/* Keep the Dialog Closed by default */
 		$("#ideaModalDialog").dialog('close');
 	});
