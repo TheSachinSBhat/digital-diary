@@ -130,10 +130,10 @@
 				</div>
 			</div>
 		</div>
-		<div id="ideaModal" class="modal" style="display: block;">
+		<div id="ideaModal" class="modal">
 			<!-- Modal content -->
   			<div class="modal-content">
-    				<span class="close">×</span>
+    				<div id="idea-modal-close" class="close">×</div>
     				<p class="idea-modal-text"></p>
   			</div>
 		</div>
@@ -172,7 +172,7 @@
 			}
         	});
 		/* Click Handler for Modal Close Button */
-		$(".idea-modal-close").click(function (e) {
+		$("#idea-modal-close").click(function (e) {
 			/* Hide the Modal Window */
 			$("#ideaModal").hide();
 		});
