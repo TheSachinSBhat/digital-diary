@@ -187,13 +187,6 @@
 				</div>
 			</div>
 		</div>
-		<div id="ideaModal" class="modal">
-			<!-- Modal content -->
-  			<div class="modal-content">
-    				<div id="idea-modal-close" class="close">×</div>
-    				<p class="idea-modal-text"></p>
-  			</div>
-		</div>
 		<div id="ideaModalDialog" title="Idea Details">
 			<div class="idea-modal-container">
 				<div class="idea-header">
@@ -240,25 +233,14 @@
 			var currentIdea = ideasCollection[id];
 			if(currentIdea)
 			{
-				/* Update the Idea Modal Fields */
-				//$(".idea-modal-text").text(currentIdea.ideaHeaderText);
-				
 				/* Update the fields of JQuery Modal Dialog */
 				//TODO
-				
-				/* Display the Modal Window */
-				//$("#ideaModal").show();
-				
+								
 				/* Display JQuery UI based Modal Dialog */
 				$("#ideaModalDialog").dialog('open');
 			}
         	});
-		/* Click Handler for Modal Close Button */
-		$("#idea-modal-close").click(function (e) {
-			/* Hide the Modal Window */
-			$("#ideaModal").hide();
-		});
-		
+				
 		/* Create JQuery UI based Modal Dialog for Idea */
 		$("#ideaModalDialog").dialog({modal:true, minWidth:900, minHeight: 540});
 		/* Keep the Dialog Closed by default */
