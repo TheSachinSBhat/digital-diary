@@ -7,44 +7,52 @@
 	.idea-container {
 		height: 222px;
 		width: 300px;
-		border: 2px solid grey;
 		margin: 12px;
 		position: relative;
 		float: left;
+		/* Border for Idea Container */
+		border: 2px solid;
+		border-color: rgba(127,255,0,1);
 	}
 
-	idea-container:hover{
-		/* Display Pointer on Mouse Hover */
-		cursor: pointer;
-		/* Display Bluish Background Color */
-		background-color: rgba(153,50,204,.1);
-	}
-
-		.idea-container .idea-header .idea-icon {
-			float: left;
-			margin: 10px 5px;
+		.idea-container:hover {
+			/* Display Pointer on Mouse Hover */
+			cursor: pointer;
+			/* Display Bluish Background Color */
+			background-color: rgba(153,50,204,.1);
 		}
 
-			.idea-container .idea-header .idea-icon img {
-				height: 45px;
-				width: 45px;
-			}
-
-		.idea-container .idea-header .idea-header-text {
-			float: left;
-			margin: 10px 5px;
-			/* Clip the Header Text Beyond 198px width */
-			width: 231px;
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: clip;
+		.idea-container .idea-header {
+			/* Green Color For Idea Container Header */
+			background-color: rgba(127,255,0,0.85);
+			height: 60px;
 		}
 
-			.idea-container .idea-header .idea-header-text span {
-				font-size: 27px;
-				font-weight: 600;
-				font-family: Segoe UI Light;
+			.idea-container .idea-header .idea-icon {
+				float: left;
+				margin: 10px 5px;
 			}
+
+				.idea-container .idea-header .idea-icon img {
+					height: 45px;
+					width: 45px;
+				}
+
+			.idea-container .idea-header .idea-header-text {
+				float: left;
+				margin: 10px 5px;
+				/* Clip the Header Text Beyond 198px width */
+				width: 231px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: clip;
+			}
+
+				.idea-container .idea-header .idea-header-text span {
+					font-size: 27px;
+					font-weight: 600;
+					font-family: Segoe UI Light;
+				}
 
 		.idea-container .idea-sub-header .idea-sub-header-text {
 			margin: 0px 5px;
