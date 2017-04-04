@@ -206,7 +206,7 @@
 <!-- Idea Tile Template -->
 <script id="ideaTileTemplate" type="text/x-jsrender">
     {% verbatim %}
-    			<div id="{{:ideaId}}" class="idea-container">
+    			<div id="{{:collectionId}}" class="idea-container">
 				<div class="idea-header">
 					<div class="idea-icon">
 						<img src="{{:ideaIconRef}}" />
@@ -358,7 +358,7 @@
 		$.each(ideasCollection, function (index, data) {
             		
 			/* Add collectionId attribute to the current idea data item */
-			// data["collectionId"] = index;
+			data["collectionId"] = index;
 			
 			/* Push each Idea Item from ideasCollection to the ideasTemplateCollection */
             		ideasTemplateCollection.push(data);
@@ -393,7 +393,7 @@
 			/*Fetch Idea Container Id */
 			var id = $(e.currentTarget)[0].id;
 
-			var currentIdea = ideasCollection[id];
+			var currentIdea = ideasTemplateCollection[id];
 			if (currentIdea) {
 				/* Update the fields of JQuery Modal Dialog */
 				//TODO
