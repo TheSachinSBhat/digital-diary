@@ -230,15 +230,15 @@
 {% verbatim %}
 				<div class="idea-header">
 					<div class="idea-icon">
-						<img src="/static/activities/wake-up.png" />
+						<img src="{{:ideaIconRef}}" />
 					</div>
 					<div class="idea-header-text">
-						<span title="SABI">SABI</span>
+						<span title="{{:ideaHeaderText}}">{{:ideaHeaderText}}</span>
 					</div>
 				</div>
 				<div class="idea-sub-header">
 					<div class="idea-sub-header-text">
-						<span title="The Global Conglomerate that controls the world">The Global Conglomerate that controls the world</span>
+						<span title="{{:ideaSubHeaderText}}">{{:ideaSubHeaderText}}</span>
 					</div>
 				</div>
 				<div class="idea-conceptualized-by">
@@ -338,7 +338,64 @@
 		</div>
 		<div id="ideaModalDialog" title="Idea Details">
 			<div class="idea-modal-container">
-				
+				<!--
+				<div class="idea-header">
+					<div class="idea-icon">
+						<img src="/static/activities/wake-up.png" />
+					</div>
+					<div class="idea-header-text">
+						<span title="SABI">SABI</span>
+					</div>
+				</div>
+				<div class="idea-sub-header">
+					<div class="idea-sub-header-text">
+						<span title="The Global Conglomerate that controls the world">The Global Conglomerate that controls the world</span>
+					</div>
+				</div>
+				<div class="idea-conceptualized-by">
+					<div class="label-container">
+						<label>Conceptualized By</label>
+					</div>
+					<div class="name-container">
+						<span title="Sachin Bhat">Sachin Bhat</span>
+					</div>
+				</div>
+				<div class="idea-description">
+					<div class="label-container">
+						<label>What's it about?</label>
+					</div>
+					<div class="description-container">
+						<span title="SABI is a global conglomerate that would hold several companies and other conglomerates in it. It will exist for millenia and would take care of mother earth and humanity.">SABI is a global conglomerate that would hold several companies and other conglomerates in it. It will exist for millenia and would take care of mother earth and humanity.</span>
+					</div>
+				</div>
+				<div class="idea-tags">
+					<div class="label-container">
+						<label>Tags</label>
+					</div>
+					<div class="tags-container">
+						<div class="idea-tag">
+							<div class="idea-tag-text">
+								<div>Top Secret</div>
+							</div>
+						</div>
+						<div class="idea-tag">
+							<div class="idea-tag-text">
+								<div>Conglomerate</div>
+							</div>
+						</div>
+						<div class="idea-tag">
+							<div class="idea-tag-text">
+								<div>Organization</div>
+							</div>
+						</div>
+						<div class="idea-tag">
+							<div class="idea-tag-text">
+								<div>Tech Giant</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				-->
 			</div>
 		</div>
 	</div>
@@ -396,6 +453,9 @@
 		/* Idea Modal Container where we need to inject our Fields related to Ideas */
 		var ideaModalContainer = $(".idea-modal-container");
 		var ideaModalDialogTemplate = $("#ideaModalDialogTemplate");
+		
+		/* Clear out the existing fields from Idea Modal Container */
+		ideaModalContainer.empty();
 		
 		if(currentIdea) {
 			/* Render Modal Fields for Idea inside the ideaModalContainer */
