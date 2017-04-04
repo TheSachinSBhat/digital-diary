@@ -201,6 +201,7 @@
 					}
 </style>
 
+
 <div class="container">
 	<hr>
 	<div class="row">
@@ -306,6 +307,37 @@
 		</div>
 	</div>
 </div>
+
+
+<!-- Templates used for Idea Page -->
+
+<!-- Idea Tile Template -->
+<script id="ideaTileTemplate" type="text/x-jsrender">
+    {% verbatim %}
+    			<div id="{{:ideaId}}" class="idea-container">
+				<div class="idea-header">
+					<div class="idea-icon">
+						<img src="{{:ideaIconRef}}" />
+					</div>
+					<div class="idea-header-text">
+						<span title="{{:ideaHeaderText}}">{{:ideaHeaderText}}</span>
+					</div>
+				</div>
+				<div class="idea-sub-header">
+					<div class="idea-sub-header-text">
+						<span title="{{:ideaSubHeaderText}}">{{:ideaSubHeaderText}}</span>
+					</div>
+				</div>
+			</div>
+    {% endverbatim %}
+</script>
+<!-- End of Idea Tile Template -->
+
+
+<!-- End of Templates used for Idea Page -->
+
+<!-- Page Event Handlers -->
+
 <script type="text/javascript">
 
 	var ideasCollection = [];
@@ -320,10 +352,27 @@
 
 	/* Append the new Activity to the Canvas Tile Data */
 	ideasCollection["1"] = sabiIdea;
+	
+	/* Render tiles on Canvas */
+    	var renderIdeaTiles = function () {
+		
+		var ideaTileContainerDiv = $(".idea-tile-container");
+		
+		var ideaTileTemplate = $.templates("#ideaTileTemplate");
+		
+		if (ideasCollection) {
+            		var htmlOutput = ideaTileTemplate.render(ideasCollection);
+            		ideaTileContainerDiv.append(htmlOutput);
+		}
+	}
 
 
 	/* Page load handler to initialize data */
 	$(document).ready(function () {
+		
+		/* Initialize Idea tiles on Main Page */
+        	renderIdeaTiles();
+				
 		/* Click Handler for Idea Container */
 		$(".idea-container").click(function (e) {
 			/*Fetch Idea Container Id */
@@ -345,5 +394,7 @@
 		$("#ideaModalDialog").dialog('close');
 	});
 </script>
+
+<!-- End of Page Event Handlers -->
 
 {% endblock %}
