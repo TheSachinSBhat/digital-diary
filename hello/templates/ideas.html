@@ -391,19 +391,16 @@
 		}
 	}
 	
-	/* Update Idea Modal Dialog Fields based on the current Idea Id selected by the user */
-	var updateIdeaModalDialogFields = function(currentIdeaId) {
+	/* Update Idea Modal Dialog Fields based on the current Idea selected by the user */
+	var updateIdeaModalDialogFields = function(currentIdea) {
 		/* Idea Modal Container where we need to inject our Fields related to Ideas */
 		var ideaModalContainer = $(".idea-modal-container");
 		var ideaModalDialogTemplate = $("#ideaModalDialogTemplate");
 		
-		if(ideasTemplateCollection) {
-			var currentIdea = ideasTemplateCollection[currentIdeaId];
-			if(currentIdea) {
-				/* Render Modal Fields for Idea inside the ideaModalContainer */
-            			var ideaModalDialogTemplateHtmlOutput = ideaModalDialogTemplate.render(ideasTemplateCollection);
-            			ideaModalContainer.append(ideaModalDialogTemplateHtmlOutput);
-			}
+		if(currentIdea) {
+			/* Render Modal Fields for Idea inside the ideaModalContainer */
+       			var ideaModalDialogTemplateHtmlOutput = ideaModalDialogTemplate.render(currentIdea);
+       			ideaModalContainer.append(ideaModalDialogTemplateHtmlOutput);
 		}
 	}
 
@@ -418,10 +415,10 @@
 			/*Fetch Idea Container Id */
 			var id = $(e.currentTarget)[0].id;
 
-			var currentIdeaId = ideasTemplateCollection[id];
-			if (currentIdeaId) {
+			var currentIdea = ideasTemplateCollection[id];
+			if (currentIdea) {
 				/* Update the fields of JQuery Modal Dialog */
-				updateIdeaModalDialogFields(currentIdeaId);
+				updateIdeaModalDialogFields(currentIdea);
 
 				/* Display JQuery UI based Modal Dialog */
 				$("#ideaModalDialog").dialog('open');
