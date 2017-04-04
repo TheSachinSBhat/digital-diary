@@ -284,6 +284,21 @@
 						</div>
 					</div>
 				</div>
+				{{if ideaTags.length}}
+					<div class="idea-tags">
+						<div class="label-container">
+							<label>Tags</label>
+						</div>
+						<div class="tags-container">
+  						{{for ideaTags}}
+							<div class="idea-tag">
+								<div class="idea-tag-text">
+									<div id="{{:tagId}}">{{:tagName}}</div>
+								</div>
+							</div>
+  						{{/for}}
+					</div>	
+				{{/if}}
 {% endverbatim %}
 </script>
 <!-- End of Idea Modal Dialog Template -->
@@ -414,7 +429,13 @@
 		"ideaHeaderText": "SABI",
 		"ideaSubHeaderText": "The Global Conglomerate that controls the world",
 		"conceptualizedBy": "Sachin Bhat",
-		"ideaDescription": "SABI is a global conglomerate that would hold several companies and other conglomerates in it. It will exist for millenia and would take care of mother earth and humanity."
+		"ideaDescription": "SABI is a global conglomerate that would hold several companies and other conglomerates in it. It will exist for millenia and would take care of mother earth and humanity.",
+		"ideaTags": [
+			{"tagId": "10", "tagName": "Top Secret"},
+			{"tagId": "11", "tagName": "Conglomerate"},
+			{"tagId": "12", "tagName": "Organization"},
+			{"tagId": "13", "tagName": "Tech Giant"}
+		]
 	};
 
 	ideasCollection.push(sabiIdea);
