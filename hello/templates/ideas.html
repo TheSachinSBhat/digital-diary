@@ -225,56 +225,9 @@
 </script>
 <!-- End of Idea Tile Template -->
 
-<!-- End of Templates used for Idea Page -->
-
-
-<div class="container">
-	<hr>
-	<div class="row">
-		<div class="col-md-6">
-			<h3><span class="glyphicon glyphicon-send"></span> Ideas </h3>
-			<!-- TODO: Add awesome code here! -->
-		</div>
-	</div> <!-- row -->
-</div>
-<div class="container">
-	<div class="idea-main-container">
-		<div class="idea-tile-container">
-			<!--
-			<div id="1" class="idea-container">
-				<div class="idea-header">
-					<div class="idea-icon">
-						<img src="/static/activities/wake-up.png" />
-					</div>
-					<div class="idea-header-text">
-						<span title="SABI">SABI</span>
-					</div>
-				</div>
-				<div class="idea-sub-header">
-					<div class="idea-sub-header-text">
-						<span title="The Global Conglomerate that controls the world">The Global Conglomerate that controls the world</span>
-					</div>
-				</div>
-			</div>
-			<div id="2" class="idea-container">
-				<div class="idea-header">
-					<div class="idea-icon">
-						<img src="/static/activities/wake-up.png" />
-					</div>
-					<div class="idea-header-text">
-						<span title="NIK">NIK</span>
-					</div>
-				</div>
-				<div class="idea-sub-header">
-					<div class="idea-sub-header-text">
-						<span title="Natural Intermediate Knowledge">Natural Intermediate Knowledge</span>
-					</div>
-				</div>
-			</div>
-			-->
-		</div>
-		<div id="ideaModalDialog" title="Idea Details">
-			<div class="idea-modal-container">
+<!-- Idea Modal Dialog Template -->
+<script id="ideaModalDialogTemplate" type="text/x-jsrender">
+{% verbatim %}
 				<div class="idea-header">
 					<div class="idea-icon">
 						<img src="/static/activities/wake-up.png" />
@@ -331,6 +284,61 @@
 						</div>
 					</div>
 				</div>
+{% endverbatim %}
+</script>
+<!-- End of Idea Modal Dialog Template -->
+
+<!-- End of Templates used for Idea Page -->
+
+
+<div class="container">
+	<hr>
+	<div class="row">
+		<div class="col-md-6">
+			<h3><span class="glyphicon glyphicon-send"></span> Ideas </h3>
+			<!-- TODO: Add awesome code here! -->
+		</div>
+	</div> <!-- row -->
+</div>
+<div class="container">
+	<div class="idea-main-container">
+		<div class="idea-tile-container">
+			<!--
+			<div id="1" class="idea-container">
+				<div class="idea-header">
+					<div class="idea-icon">
+						<img src="/static/activities/wake-up.png" />
+					</div>
+					<div class="idea-header-text">
+						<span title="SABI">SABI</span>
+					</div>
+				</div>
+				<div class="idea-sub-header">
+					<div class="idea-sub-header-text">
+						<span title="The Global Conglomerate that controls the world">The Global Conglomerate that controls the world</span>
+					</div>
+				</div>
+			</div>
+			<div id="2" class="idea-container">
+				<div class="idea-header">
+					<div class="idea-icon">
+						<img src="/static/activities/wake-up.png" />
+					</div>
+					<div class="idea-header-text">
+						<span title="NIK">NIK</span>
+					</div>
+				</div>
+				<div class="idea-sub-header">
+					<div class="idea-sub-header-text">
+						<span title="Natural Intermediate Knowledge">Natural Intermediate Knowledge</span>
+					</div>
+				</div>
+			</div>
+			-->
+		</div>
+		<div id="ideaModalDialog" title="Idea Details">
+			<div class="idea-modal-container">
+				
 			</div>
 		</div>
 	</div>
@@ -378,11 +386,26 @@
 		
 		if (ideasTemplateCollection) {
 			/* Render Idea Tiles inside the ideaTileContainerDiv */
-            		var htmlOutput = ideaTileTemplate.render(ideasTemplateCollection);
-            		ideaTileContainerDiv.append(htmlOutput);
+            		var ideaTileTemplateHtmlOutput = ideaTileTemplate.render(ideasTemplateCollection);
+            		ideaTileContainerDiv.append(ideaTileTemplateHtmlOutput);
 		}
 	}
-
+	
+	/* Update Idea Modal Dialog Fields based on the current Idea Id selected by the user */
+	var updateIdeaModalDialogFields = function(currentIdeaId) {
+		/* Idea Modal Container where we need to inject our Fields related to Ideas */
+		var ideaModalContainer = $(".idea-modal-container");
+		var ideaModalDialogTemplate = $("#ideaModalDialogTemplate");
+		
+		if(ideasTemplateCollection) {
+			var currentIdea = ideasTemplateCollection[currentIdeaId];
+			if(currentIdea) {
+				/* Render Modal Fields for Idea inside the ideaModalContainer */
+            			var ideaModalDialogTemplateHtmlOutput = ideaModalDialogTemplate.render(ideasTemplateCollection);
+            			ideaModalContainer.append(ideaModalDialogTemplateHtmlOutput);
+			}
+		}
+	}
 
 	/* Page load handler to initialize data */
 	$(document).ready(function () {
@@ -395,10 +418,10 @@
 			/*Fetch Idea Container Id */
 			var id = $(e.currentTarget)[0].id;
 
-			var currentIdea = ideasTemplateCollection[id];
-			if (currentIdea) {
+			var currentIdeaId = ideasTemplateCollection[id];
+			if (currentIdeaId) {
 				/* Update the fields of JQuery Modal Dialog */
-				//TODO
+				updateIdeaModalDialogFields(currentIdeaId);
 
 				/* Display JQuery UI based Modal Dialog */
 				$("#ideaModalDialog").dialog('open');
