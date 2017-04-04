@@ -342,24 +342,41 @@
 
 	/* Add SABI Idea to the collection */
 	var sabiIdea = {
-		"ideaId": "1",
+		"ideaId": "123",
 		"ideaIconRef": "/static/activities/wake-up.png",
 		"ideaHeaderText": "SABI",
 		"ideaSubHeaderText": "The Global Conglomerate that controls the world"
 	};
 
-	/* Append the new Activity to the Canvas Tile Data */
-	ideasCollection["1"] = sabiIdea;
+	/* Add the new Activity to the Canvas Tile Data */
+	ideasCollection.push(sabiIdea);
+	
+	var ideasTemplateCollection = [];
+	
+	var populateIdeaTemplateFiles = function() {
+		/* Iterate over each idea from the ideasCollection */
+		$.each(ideasCollection, function (index, data) {
+            		
+			/* Add collectionId attribute to the current idea data item */
+			// data["collectionId"] = index;
+			
+			/* Push each Idea Item from ideasCollection to the ideasTemplateCollection */
+            		ideasTemplateCollection.push(data);
+        	});
+	}
 	
 	/* Render tiles on Canvas */
     	var renderIdeaTiles = function () {
 		
-		var ideaTileContainerDiv = $(".idea-tile-container");
+		/* Populate ideasCollection into ideasTemplateCollection */
+		populateIdeaTemplateFiles();
 		
+		var ideaTileContainerDiv = $(".idea-tile-container");
 		var ideaTileTemplate = $.templates("#ideaTileTemplate");
 		
-		if (ideasCollection) {
-            		var htmlOutput = ideaTileTemplate.render(ideasCollection);
+		if (ideasTemplateCollection) {
+			/* Render Idea Tiles inside the ideaTileContainerDiv */
+            		var htmlOutput = ideaTileTemplate.render(ideasTemplateCollection);
             		ideaTileContainerDiv.append(htmlOutput);
 		}
 	}
