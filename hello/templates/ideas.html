@@ -93,7 +93,21 @@
 				/* Show the Idea Footer on hover */
 				display: block;	
 			}
+	
+			.idea-container .sub-ideas-container {
+				/* Make positioning similar to other Idea Tile Containers */
+				position: relative;
+    				float: left;
+    				width: 948px;
+				/* Keep margin consistent with other Idea Tile Containers */
+    				margin: 12px;
+				/* Keep height as 100px for now, can be made as auto later on, as per need */
+    				height: 100px;
+				/* Currently set to red, change to appropriate color as needed */
+    				background-color: red;
+			}	
 
+	/* TODO: Remove the below stray class '#ideaModal .modal-content' if not needed */
 	#ideaModal .modal-content {
 		position: fixed;
 		top: 36%;
@@ -509,6 +523,32 @@
        			ideaModalContainer.append(ideaModalDialogTemplateHtmlOutput);
 		}
 	}
+	
+	/* Add Sub Ideas Container for given Idea Tile whose Footer has been clicked */
+	var addSubIdeasContainer = function(e) {
+			/* Create a Sub Ideas Container */
+			var subIdeasContainer = 
+				$('<div/>', {
+    					"class": "sub-ideas-container",
+    					"mouseout": function(e) {
+      						$(this).remove();
+						e.stopPropagation();
+    					}
+				});
+			
+			/* Compute the exact Idea Tile below which the Sub Ideas Container should be injected */
+			/* Initialize tile variables to the current tile clicked */
+			var clickedIdeaTile, currentIdeaTile, nextIdeaTile = clickedIdeaTile = currentIdeaTile = $(e.currentTarget.parentElement);
+			
+			/* Determine the last Idea Tile [currentIdeaTile] in the current row where the clickedIdeaTile is located */
+			while(nextIdeaTile && (nextIdeaTile.length === 1) && (clickedIdeaTile.position().top === nextIdeaTile.position().top)) {
+				currentIdeaTile = nextIdeaTile;
+				var nextIdeaTile = $(nextIdeaTile).next();
+			}
+			
+			/* Inject Sub Ideas Container after the Current i.e the Last Idea Tile of the Current Row */
+			currentIdeaTile.after(subIdeasContainer);
+	}
 
 	/* Page load handler to initialize data, controls and event handlers */
 	$(document).ready(function () {
@@ -546,10 +586,13 @@
 		
 		/* Click Handler for Idea Footer */
 		$(".idea-container .idea-footer").click(function(e) {
+			/* Add Sub Ideas Container for given Idea Tile whose Footer has been clicked */
+			addSubIdeasContainer(e);
+			
 			e.stopPropagation();
 		});
 		/* End of Click Handler for Idea Footer */
-
+		
 		/* End Click Handlers Block */
 	});
 </script>
