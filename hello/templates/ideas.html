@@ -78,6 +78,22 @@
 					line-height: 20px;
 					max-height: calc(2*20px);
 				}
+	
+			.idea-container .idea-sub-header .idea-footer {
+				/* Keep it to the Tile Bottom */
+				position: relative;
+    				top: 40px;
+				height: 20px;
+				/* Display Greyish Background color */
+    				background-color: #8B8989;
+    				/* Keep it hidden by default */
+    				display: none;	
+			}
+			
+			.idea-container:hover .idea-sub-header .idea-footer {
+				/* Show the Idea Footer on hover */
+				display: block;	
+			}
 
 	#ideaModal .modal-content {
 		position: fixed;
@@ -218,6 +234,8 @@
 				<div class="idea-sub-header">
 					<div class="idea-sub-header-text">
 						<span title="{{:ideaSubHeaderText}}">{{:ideaSubHeaderText}}</span>
+					</div>
+					<div class="idea-footer">
 					</div>
 				</div>
 			</div>
