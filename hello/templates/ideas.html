@@ -587,9 +587,13 @@
 		
 		/* Click Handler for Idea Footer */
 		$(".idea-container .idea-footer").click(function(e) {
-			/* Add Sub Ideas Container for given Idea Tile whose Footer has been clicked */
-			addSubIdeasContainer(e);
 			
+			/* Add Sub Ideas Container for given Idea Tile whose Footer has been clicked, only if it does not exist */
+			var subIdeasContainer = $(".sub-ideas-container");
+			if(subIdeasContainer.length === 0) {
+				addSubIdeasContainer(e);
+			}
+				
 			e.stopPropagation();
 		});
 		/* End of Click Handler for Idea Footer */
