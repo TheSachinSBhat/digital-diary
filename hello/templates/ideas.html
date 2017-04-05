@@ -511,12 +511,24 @@
 		}
 	}
 
-	/* Page load handler to initialize data */
+	/* Page load handler to initialize data, controls and event handlers */
 	$(document).ready(function () {
+		
+		/* Controls Initialization */
 		
 		/* Initialize Idea tiles on Main Page */
         	renderIdeaTiles();
-				
+		
+		/* Create JQuery UI based Modal Dialog for Idea */
+		$("#ideaModalDialog").dialog({ modal: true, minWidth: 900, minHeight: 450 });
+		/* Keep the Dialog Closed by default */
+		$("#ideaModalDialog").dialog('close');
+		
+		/* End Controls Initialization */
+		
+		
+		/* Click Handlers Block */
+		
 		/* Click Handler for Idea Container */
 		$(".idea-container").click(function (e) {
 			/*Fetch Idea Container Id */
@@ -532,10 +544,7 @@
 			}
 		});
 
-		/* Create JQuery UI based Modal Dialog for Idea */
-		$("#ideaModalDialog").dialog({ modal: true, minWidth: 900, minHeight: 450 });
-		/* Keep the Dialog Closed by default */
-		$("#ideaModalDialog").dialog('close');
+		/* End Click Handlers Block */
 	});
 </script>
 
