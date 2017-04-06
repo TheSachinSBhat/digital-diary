@@ -78,35 +78,35 @@
 					line-height: 20px;
 					max-height: calc(2*20px);
 				}
-	
-			.idea-container .idea-footer {
-				/* Keep it to the Tile Bottom */
-    				top: 40px;
-				height: 21px;
-				/* Display Greyish Background color */
-    				background-color: #8B8989;
-    				/* Keep it hidden by default */
-    				display: none;	
-			}
-			
-			.idea-container:hover .idea-footer {
-				/* Show the Idea Footer on hover */
-				display: block;	
-			}
-	
+
+		.idea-container .idea-footer {
+			/* Keep it to the Tile Bottom */
+			top: 40px;
+			height: 21px;
+			/* Display Greyish Background color */
+			background-color: #8B8989;
+			/* Keep it hidden by default */
+			display: none;
+		}
+
+		.idea-container:hover .idea-footer {
+			/* Show the Idea Footer on hover */
+			display: block;
+		}
+
 	/* CSS for Sub Ideas Container */
 	.idea-main-container .idea-tile-container .sub-ideas-container {
-				/* Make positioning similar to other Idea Tile Containers */
-				position: relative;
-    				float: left;
-    				width: 948px;
-				/* Keep margin consistent with other Idea Tile Containers */
-    				margin: 12px;
-				/* Keep height as 100px for now, can be made as auto later on, as per need */
-    				height: 100px;
-				/* Currently set to red, change to appropriate color as needed */
-    				background-color: red;
-	}	
+		/* Make positioning similar to other Idea Tile Containers */
+		position: relative;
+		float: left;
+		width: 948px;
+		/* Keep margin consistent with other Idea Tile Containers */
+		margin: 12px;
+		/* Keep height as 100px for now, can be made as auto later on, as per need */
+		height: 100px;
+		/* Currently set to red, change to appropriate color as needed */
+		background-color: red;
+	}
 
 	/* TODO: Remove the below stray class '#ideaModal .modal-content' if not needed */
 	#ideaModal .modal-content {
@@ -232,82 +232,80 @@
 </style>
 
 <!-- Templates used for Idea Page -->
-
 <!-- Idea Tile Template -->
 <script id="ideaTileTemplate" type="text/x-jsrender">
-    {% verbatim %}
-    			<div id="{{:collectionId}}" class="idea-container">
-				<div class="idea-header">
-					<div class="idea-icon">
-						<img src="{{:ideaIconRef}}" />
-					</div>
-					<div class="idea-header-text">
-						<span title="{{:ideaHeaderText}}">{{:ideaHeaderText}}</span>
-					</div>
-				</div>
-				<div class="idea-sub-header">
-					<div class="idea-sub-header-text">
-						<span title="{{:ideaSubHeaderText}}">{{:ideaSubHeaderText}}</span>
-					</div>
-				</div>
-				<div class="idea-footer">
-				</div>
+	{% verbatim %}
+	<div id="{{:collectionId}}" class="idea-container">
+		<div class="idea-header">
+			<div class="idea-icon">
+				<img src="{{:ideaIconRef}}" />
 			</div>
-    {% endverbatim %}
+			<div class="idea-header-text">
+				<span title="{{:ideaHeaderText}}">{{:ideaHeaderText}}</span>
+			</div>
+		</div>
+		<div class="idea-sub-header">
+			<div class="idea-sub-header-text">
+				<span title="{{:ideaSubHeaderText}}">{{:ideaSubHeaderText}}</span>
+			</div>
+		</div>
+		<div class="idea-footer">
+		</div>
+	</div>
+	{% endverbatim %}
 </script>
 <!-- End of Idea Tile Template -->
-
 <!-- Idea Modal Dialog Template -->
 <script id="ideaModalDialogTemplate" type="text/x-jsrender">
-{% verbatim %}
-				<div class="idea-header">
-					<div class="idea-icon">
-						<img src="{{:ideaIconRef}}" />
-					</div>
-					<div class="idea-header-text">
-						<span title="{{:ideaHeaderText}}">{{:ideaHeaderText}}</span>
-					</div>
+	{% verbatim %}
+	<div class="idea-header">
+		<div class="idea-icon">
+			<img src="{{:ideaIconRef}}" />
+		</div>
+		<div class="idea-header-text">
+			<span title="{{:ideaHeaderText}}">{{:ideaHeaderText}}</span>
+		</div>
+	</div>
+	<div class="idea-sub-header">
+		<div class="idea-sub-header-text">
+			<span title="{{:ideaSubHeaderText}}">{{:ideaSubHeaderText}}</span>
+		</div>
+	</div>
+	<div class="idea-conceptualized-by">
+		<div class="label-container">
+			<label>Conceptualized By</label>
+		</div>
+		<div class="name-container">
+			<span title="Sachin Bhat">{{:conceptualizedBy}}</span>
+		</div>
+	</div>
+	<div class="idea-description">
+		<div class="label-container">
+			<label>What's it about?</label>
+		</div>
+		<div class="description-container">
+			<span title="{{:ideaDescription}}">{{:ideaDescription}}</span>
+		</div>
+	</div>
+	{{if ideaTags.length}}
+	<div class="idea-tags">
+		<div class="label-container">
+			<label>Tags</label>
+		</div>
+		<div class="tags-container">
+			{{for ideaTags}}
+			<div class="idea-tag">
+				<div class="idea-tag-text">
+					<div id="{{:tagId}}">{{:tagName}}</div>
 				</div>
-				<div class="idea-sub-header">
-					<div class="idea-sub-header-text">
-						<span title="{{:ideaSubHeaderText}}">{{:ideaSubHeaderText}}</span>
-					</div>
-				</div>
-				<div class="idea-conceptualized-by">
-					<div class="label-container">
-						<label>Conceptualized By</label>
-					</div>
-					<div class="name-container">
-						<span title="Sachin Bhat">{{:conceptualizedBy}}</span>
-					</div>
-				</div>
-				<div class="idea-description">
-					<div class="label-container">
-						<label>What's it about?</label>
-					</div>
-					<div class="description-container">
-						<span title="{{:ideaDescription}}">{{:ideaDescription}}</span>
-					</div>
-				</div>
-				{{if ideaTags.length}}
-					<div class="idea-tags">
-						<div class="label-container">
-							<label>Tags</label>
-						</div>
-						<div class="tags-container">
-  						{{for ideaTags}}
-							<div class="idea-tag">
-								<div class="idea-tag-text">
-									<div id="{{:tagId}}">{{:tagName}}</div>
-								</div>
-							</div>
-  						{{/for}}
-					</div>	
-				{{/if}}
-{% endverbatim %}
+			</div>
+			{{/for}}
+		</div>
+	</div>
+	{{/if}}
+	{% endverbatim %}
 </script>
 <!-- End of Idea Modal Dialog Template -->
-
 <!-- End of Templates used for Idea Page -->
 
 
@@ -436,15 +434,15 @@
 		"conceptualizedBy": "Sachin Bhat",
 		"ideaDescription": "SABI is a global conglomerate that would hold several companies and other conglomerates in it. It will exist for millenia and would take care of mother earth and humanity.",
 		"ideaTags": [
-			{"tagId": "10", "tagName": "Top Secret"},
-			{"tagId": "11", "tagName": "Conglomerate"},
-			{"tagId": "12", "tagName": "Organization"},
-			{"tagId": "13", "tagName": "Tech Giant"}
+			{ "tagId": "10", "tagName": "Top Secret" },
+			{ "tagId": "11", "tagName": "Conglomerate" },
+			{ "tagId": "12", "tagName": "Organization" },
+			{ "tagId": "13", "tagName": "Tech Giant" }
 		]
 	};
 
 	ideasCollection.push(sabiIdea);
-	
+
 	/* Add NIK Idea to the collection */
 	var nikIdea = {
 		"ideaId": "124",
@@ -454,13 +452,13 @@
 		"conceptualizedBy": "Sachin Bhat",
 		"ideaDescription": "It is a framework that would enable cross human-machine-divine-animate communication. It will result into the dissolution of linguistic barriers and will ensure consistency in communication.",
 		"ideaTags": [
-			{"tagId": "20", "tagName": "Software Framework"},
-			{"tagId": "21", "tagName": "Multi Lingual"}
+			{ "tagId": "20", "tagName": "Software Framework" },
+			{ "tagId": "21", "tagName": "Multi Lingual" }
 		]
 	};
 
 	ideasCollection.push(nikIdea);
-	
+
 	/* Add KB Idea to the collection */
 	var kbIdea = {
 		"ideaId": "125",
@@ -470,105 +468,105 @@
 		"conceptualizedBy": "Sachin Bhat",
 		"ideaDescription": "It is a knowledge base that would store everything that has happened in this universe. It will stay for millenia and will be a data repository for the future human races.",
 		"ideaTags": [
-			{"tagId": "30", "tagName": "Knowledge Base"},
-			{"tagId": "31", "tagName": "Data Repository"}
+			{ "tagId": "30", "tagName": "Knowledge Base" },
+			{ "tagId": "31", "tagName": "Data Repository" }
 		]
 	};
 
 	ideasCollection.push(kbIdea);
-	
-	
-	
+
+
+
 	var ideasTemplateCollection = [];
-	
-	var populateIdeaTemplateFiles = function() {
+
+	var populateIdeaTemplateFiles = function () {
 		/* Iterate over each idea from the ideasCollection */
 		$.each(ideasCollection, function (index, data) {
-            		
+
 			/* Add collectionId attribute to the current idea data item */
 			data["collectionId"] = index;
-			
+
 			/* Push each Idea Item from ideasCollection to the ideasTemplateCollection */
-            		ideasTemplateCollection.push(data);
-        	});
+			ideasTemplateCollection.push(data);
+		});
 	}
-	
+
 	/* Render tiles on Canvas */
-    	var renderIdeaTiles = function () {
-		
+	var renderIdeaTiles = function () {
+
 		/* Populate ideasCollection into ideasTemplateCollection */
 		populateIdeaTemplateFiles();
-		
+
 		var ideaTileContainerDiv = $(".idea-tile-container");
 		var ideaTileTemplate = $.templates("#ideaTileTemplate");
-		
+
 		if (ideasTemplateCollection) {
 			/* Render Idea Tiles inside the ideaTileContainerDiv */
-            		var ideaTileTemplateHtmlOutput = ideaTileTemplate.render(ideasTemplateCollection);
-            		ideaTileContainerDiv.append(ideaTileTemplateHtmlOutput);
+			var ideaTileTemplateHtmlOutput = ideaTileTemplate.render(ideasTemplateCollection);
+			ideaTileContainerDiv.append(ideaTileTemplateHtmlOutput);
 		}
 	}
-	
+
 	/* Update Idea Modal Dialog Fields based on the current Idea selected by the user */
-	var updateIdeaModalDialogFields = function(currentIdea) {
+	var updateIdeaModalDialogFields = function (currentIdea) {
 		/* Idea Modal Container where we need to inject our Fields related to Ideas */
 		var ideaModalContainer = $(".idea-modal-container");
 		var ideaModalDialogTemplate = $("#ideaModalDialogTemplate");
-		
+
 		/* Clear out the existing fields from Idea Modal Container */
 		ideaModalContainer.empty();
-		
-		if(currentIdea) {
+
+		if (currentIdea) {
 			/* Render Modal Fields for Idea inside the ideaModalContainer */
-       			var ideaModalDialogTemplateHtmlOutput = ideaModalDialogTemplate.render(currentIdea);
-       			ideaModalContainer.append(ideaModalDialogTemplateHtmlOutput);
+			var ideaModalDialogTemplateHtmlOutput = ideaModalDialogTemplate.render(currentIdea);
+			ideaModalContainer.append(ideaModalDialogTemplateHtmlOutput);
 		}
 	}
-	
+
 	/* Add Sub Ideas Container for given Idea Tile whose Footer has been clicked */
-	var addSubIdeasContainer = function(e) {
-			/* Create a Sub Ideas Container */
-			var subIdeasContainer = 
-				$('<div/>', {
-    					"class": "sub-ideas-container",
-    					"mouseout": function(e) {
-      						$(this).remove();
-						e.stopPropagation();
-    					}
-				});
-			
-			/* Compute the exact Idea Tile below which the Sub Ideas Container should be injected */
-			/* Initialize tile variables to the current tile clicked */
-			var clickedIdeaTile, currentIdeaTile, nextIdeaTile = clickedIdeaTile = currentIdeaTile = $(e.currentTarget.parentElement);
-			
-			/* Determine the last Idea Tile [currentIdeaTile] in the current row where the clickedIdeaTile is located */
-			while(nextIdeaTile && (nextIdeaTile.length === 1) && (clickedIdeaTile.position().top === nextIdeaTile.position().top)) {
-				currentIdeaTile = nextIdeaTile;
-				var nextIdeaTile = $(nextIdeaTile).next();
-			}
-			
-			/* Inject Sub Ideas Container after the Current i.e the Last Idea Tile of the Current Row */
-			currentIdeaTile.after(subIdeasContainer);
+	var addSubIdeasContainer = function (e) {
+		/* Create a Sub Ideas Container */
+		var subIdeasContainer =
+			$('<div/>', {
+				"class": "sub-ideas-container",
+				"mouseout": function (e) {
+					$(this).remove();
+					e.stopPropagation();
+				}
+			});
+
+		/* Compute the exact Idea Tile below which the Sub Ideas Container should be injected */
+		/* Initialize tile variables to the current tile clicked */
+		var clickedIdeaTile, currentIdeaTile, nextIdeaTile = clickedIdeaTile = currentIdeaTile = $(e.currentTarget.parentElement);
+
+		/* Determine the last Idea Tile [currentIdeaTile] in the current row where the clickedIdeaTile is located */
+		while (nextIdeaTile && (nextIdeaTile.length === 1) && (clickedIdeaTile.position().top === nextIdeaTile.position().top)) {
+			currentIdeaTile = nextIdeaTile;
+			var nextIdeaTile = $(nextIdeaTile).next();
+		}
+
+		/* Inject Sub Ideas Container after the Current i.e the Last Idea Tile of the Current Row */
+		currentIdeaTile.after(subIdeasContainer);
 	}
 
 	/* Page load handler to initialize data, controls and event handlers */
 	$(document).ready(function () {
-		
+
 		/* Controls Initialization */
-		
+
 		/* Initialize Idea tiles on Main Page */
-        	renderIdeaTiles();
-		
+		renderIdeaTiles();
+
 		/* Create JQuery UI based Modal Dialog for Idea */
 		$("#ideaModalDialog").dialog({ modal: true, minWidth: 900, minHeight: 450 });
 		/* Keep the Dialog Closed by default */
 		$("#ideaModalDialog").dialog('close');
-		
+
 		/* End Controls Initialization */
-		
-		
+
+
 		/* Click Handlers Block */
-		
+
 		/* Click Handler for Idea Container */
 		$(".idea-container").click(function (e) {
 			/*Fetch Idea Container Id */
@@ -584,24 +582,23 @@
 			}
 		});
 		/* End of Click Handler for Idea Container */
-		
+
 		/* Click Handler for Idea Footer */
-		$(".idea-container .idea-footer").click(function(e) {
-			
+		$(".idea-container .idea-footer").click(function (e) {
+
 			/* Add Sub Ideas Container for given Idea Tile whose Footer has been clicked, only if it does not exist */
 			var subIdeasContainer = $(".sub-ideas-container");
-			if(subIdeasContainer.length === 0) {
+			if (subIdeasContainer.length === 0) {
 				addSubIdeasContainer(e);
 			}
-				
+
 			e.stopPropagation();
 		});
 		/* End of Click Handler for Idea Footer */
-		
+
 		/* End Click Handlers Block */
 	});
 </script>
 
 <!-- End of Page Event Handlers -->
-
 {% endblock %}
